@@ -7,6 +7,7 @@ from __future__ import print_function
 import argparse
 from icecream import ic
 import sys
+
 ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
 ic.configureOutput(prefix='> ')
 
@@ -30,5 +31,16 @@ if __name__ == '__main__':
     if list != type(args.file):
         args.file = [args.file]
 
+    import os
+
+    os.system('figlet -f smblock rnahub')
     for f in args.file:
-        print(f)
+        fh = open(f)
+        h = fh.readline().strip()
+        seq = fh.readline().strip()
+        print(h)
+        print(seq)
+        cmd = 'blastn -db /home/rnahub/rnahub/db/pdbnt -query ' + f
+        print(cmd)
+        os.system(cmd)
+
