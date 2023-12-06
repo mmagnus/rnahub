@@ -21,10 +21,10 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 
-    parser.add_argument('--blast', help="[pdb, refseq, nt]", default="pdb")
+    parser.add_argument('--blast', help="[pdbnt, refseq, nt]", default="pdb")
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
-    parser.add_argument("file", help="", default="") # nargs='+')
+    parser.add_argument("file", help="a fast file with one sequence", default="") # nargs='+')
     return parser
 
 def process_blast_output(blast_output_file):
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         print(seq)
         if args.blast == 'nt':
             pass
-        if args.blast == 'pdb':
+        if args.blast == 'pdbnt':
             # db = '/home/rnahub/mnt/pdb/pdbnt'
             db = '/home/rnahub/rnahub/db/pdbnt/pdbnt'
         if args.blast == 'refseq':
@@ -97,4 +97,3 @@ if __name__ == '__main__':
         os.system(cmd)
         process_blast_output(blast_output_file)
         ic(blast_output_file)
-
