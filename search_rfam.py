@@ -1,5 +1,12 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 File to get rfam data via local cmscan search
+
+require:
+
+- pip install attrs
+
 """
 
 
@@ -213,6 +220,7 @@ def find_alignment_from_seed(cmscan_hits:Dict[str, CmscanResult], seed_path:str,
                     
             # print('got line', line)    
     return cmscan_hits
+
 
 def get_parser():
     parser = argparse.ArgumentParser(
