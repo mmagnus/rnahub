@@ -62,7 +62,6 @@ if __name__ == '__main__':
 
     import os
 
-    os.system('figlet -f smblock rnahub')
     for f in args.file:
         ## from Bio import SeqIO
         ## seq_record = next(SeqIO.parse(open(f),'fasta'))
