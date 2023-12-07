@@ -21,7 +21,7 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 
-    parser.add_argument('--blast', help="[pdbnt, refseq, nt]", default="pdb")
+    parser.add_argument('--db', help="[pdbnt, refseq, nt]", default="pdb")
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
     parser.add_argument("file", help="a fast file with one sequence", default="") # nargs='+')
@@ -75,12 +75,11 @@ if __name__ == '__main__':
         seq = fh.readline().strip()
         print(h)
         print(seq)
-        if args.blast == 'nt':
-            pass
-        if args.blast == 'pdbnt':
-            # db = '/home/rnahub/mnt/pdb/pdbnt'
+        if args.db == 'nt':
+            db = '/home/rnahub/mnt/nt/nt'
+        if args.db == 'pdbnt':
             db = '/home/rnahub/rnahub/db/pdbnt/pdbnt'
-        if args.blast == 'refseq':
+        if args.db == 'refseq':
             db = '/home/rnahub/rnahub/db/refseq_rna/refseq_rna'
         #db = '/home/rnahub/mnts/harvard/RoseTTAFold2NA/RNA/nt'
         #  -outfmt=5  # xml
