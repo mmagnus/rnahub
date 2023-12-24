@@ -233,6 +233,7 @@ def get_parser():
     parser.add_argument("--rfam", required=True, type=Path, help="Path to the rfam.com file")
     parser.add_argument("--fasta", required=True, type=Path, help="Path to the fasta file with sequence under investigation")
     parser.add_argument("--seed", required=True, type=Path, help="Path to the rfam alignments seed file")
+    parser.add_argument("--dst", required=True, type=Path, help="Path to save the alignment results file to")
     # parser.add_argument("file", help="", default="") # nargs='+')
     return parser
 
@@ -247,12 +248,14 @@ if __name__ == '__main__':
                              cmscan_hits=results)
 
     alignment_keys:List[str] = seed_resutls.keys()
-    print(f'Rfam Hit Count = {len(alignment_keys)}')
-    print(f'Rfam Hits and Aligments:')
-    print()
-    for name in list(seed_resutls.keys()):
-        print(f'Hit Name = {name}')
-        print("Alignments")
-        for item in seed_resutls[name].seed_alignemnt_dict:
-            print (f'name = {item}, Alignment = {seed_resutls[name].seed_alignemnt_dict[item]}')
-        print()
+    with open(args.dst, 'w') as file:
+        file.write(f'Rfam Hit Count = {len(alignment_keys)}\n')
+        file.write(f'Rfam Hits and Aligments:\n')
+        file.write('\n')
+        
+        for name in list(seed_resutls.keys()):
+            file.write(f'Hit Name = {name}\n')
+            file.write("Alignments\n")
+            for item in seed_resutls[name].seed_alignemnt_dict:
+                file.write(f'name = {item}, Alignment = {seed_resutls[name].seed_alignemnt_dict[item]}\n')
+            file.write('\n')
