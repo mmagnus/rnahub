@@ -1,9 +1,10 @@
-rule bwa_map:
+
+rule check_rfam:
     input:
         rfam="/home/rnahub/rnahub/db/rfam/Rfam.cm",
         fasta="/home/pearljen/repo/ncbi_database_calls/src/rfam_calls/scripts/example/example.fa",
         seed="/home/rnahub/rnahub/db/rfam/Rfam.seed.gz"
     output:
-        "/home/pearljen/test/search_works.txt"
+        "/home/pearljen/test/search_works9.txt"
     shell:
-        "python3 /home/pearljen/repo/rnahub/search_rfam.py --rfam {input.rfam} --fasta {input.fasta} --seed {input.seed} --dst {output}"
+        "python3 /home/pearljen/repo/rnahub/search_rfam.py --rfam {input.rfam} --fasta {input.fasta} --seed {input.seed} > {output}"

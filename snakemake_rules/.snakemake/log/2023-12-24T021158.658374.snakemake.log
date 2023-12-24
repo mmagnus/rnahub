@@ -1,0 +1,25 @@
+Building DAG of jobs...
+Retrieving input from storage.
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job        count
+-------  -------
+bwa_map        1
+total          1
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Dec 24 02:11:58 2023]
+localrule bwa_map:
+    input: /home/rnahub/rnahub/db/rfam/Rfam.cm, /home/pearljen/repo/ncbi_database_calls/src/rfam_calls/scripts/example/example.fa, /home/rnahub/rnahub/db/rfam/Rfam.seed.gz, /home/pearljen/test/search_works3.txt
+    jobid: 0
+    reason: Rules with a run or shell declaration but no output are always executed.
+    resources: tmpdir=/tmp
+
+[Sun Dec 24 02:11:59 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2023-12-24T021158.658374.snakemake.log
