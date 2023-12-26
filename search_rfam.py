@@ -11,6 +11,7 @@ require:
 
 
 import argparse
+import pickle
 from pathlib import Path
 import os
 import sys
@@ -18,6 +19,7 @@ import gzip
 from typing import List, Dict
 # from dataclasses import dataclass, field
 from attr import define
+import io
 
 
 @define(kw_only=True)
@@ -248,16 +250,20 @@ if __name__ == '__main__':
     seed_resutls:Dict[str, CmscanResult] = find_alignment_from_seed(seed_path=args.seed,
                              cmscan_hits=results)
     
-    sys.stdout.write("seed_resutls") 
-    # alignment_keys:List[str] = seed_resutls.keys()
-    # with open(args.dst, 'w') as file:
-    #     file.write(f'Rfam Hit Count = {len(alignment_keys)}\n')
-    #     file.write(f'Rfam Hits and Aligments:\n')
-    #     file.write('\n')
-        
-    #     for name in list(seed_resutls.keys()):
-    #         file.write(f'Hit Name = {name}\n')
-    #         file.write("Alignments\n")
-    #         for item in seed_resutls[name].seed_alignemnt_dict:
-    #             file.write(f'name = {item}, Alignment = {seed_resutls[name].seed_alignemnt_dict[item]}\n')
-    #         file.write('\n')
+    
+
+    rfam_result_list_stdout:List[str] = []
+    alignment_keys:List[str] = seed_resutls.keys()
+
+    rfam_result_list_stdout.append(f'Rfam Hit Count = {len(alignment_keys)}\n')
+    rfam_result_list_stdout.append(f'Rfam Hits and Aligments:\n')
+    rfam_result_list_stdout.append('\n')
+    
+    for name in list(seed_resutls.keys()):
+        rfam_result_list_stdout.append(f'Hit Name = {name}\n')
+        rfam_result_list_stdout.append("Alignments\n")
+        for item in seed_resutls[name].seed_alignemnt_dict:
+            rfam_result_list_stdout.append(f'name = {item}, Alignment = {seed_resutls[name].seed_alignemnt_dict[item]}\n')
+        rfam_result_list_stdout.append('\n')
+    rfam_result_string:str = ''.join(rfam_result_list_stdout)
+    sys.stdout.write(rfam_result_string) 

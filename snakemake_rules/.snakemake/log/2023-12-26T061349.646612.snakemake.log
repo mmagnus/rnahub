@@ -1,0 +1,27 @@
+Building DAG of jobs...
+Retrieving input from storage.
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+check_rfam        1
+total             1
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Dec 26 06:13:49 2023]
+localrule check_rfam:
+    input: /home/rnahub/rnahub/db/rfam/Rfam.cm, /home/pearljen/repo/rnahub/example/example.fa, /home/rnahub/rnahub/db/rfam/Rfam.seed.gz
+    output: /home/pearljen/test/rfam_result.txt
+    jobid: 0
+    reason: Missing output files: /home/pearljen/test/rfam_result.txt
+    resources: tmpdir=/tmp
+
+[Tue Dec 26 06:13:52 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Removing temporary output /home/pearljen/test/rfam_result.txt.
+Complete log: .snakemake/log/2023-12-26T061349.646612.snakemake.log
