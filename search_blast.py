@@ -11,6 +11,7 @@ from Bio.Blast import NCBIXML
 from Bio.Blast.Applications import NcbiblastnCommandline
 from Bio import SearchIO
 from io import StringIO
+from typing import List
 
 from icecream import ic
 import sys
@@ -91,7 +92,21 @@ if __name__ == '__main__':
             pass
         cmd = 'time blastn -num_threads 6 -db ' + db + ' -query ' + f + ' -outfmt=5 -out ' + blast_output_file
 
+        """
+        Need to change the bellow to make the output be sent to the stdout
+        vs a file in order to make work correctly with snakemake - JMP
+        """
+        
         print(cmd)
         os.system(cmd)
+        
+        #for now send blast file to stout so that snakemake will have a rule to process the output
+        #as it has its own logic and without a output it does not think this should be ran
+        blast_results_text:List[str] = []
+        with open(blast_output_file, 'r') as file:
+            blast_results_text = file.readlines()
+            
+        blast_result_string:str = ''.join(blast_results_text)        
         process_blast_output(blast_output_file)
         ic(blast_output_file)
+        sys.stdout.write(blast_result_string) 

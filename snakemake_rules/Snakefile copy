@@ -1,9 +1,0 @@
-rule bwa_map:
-    input:
-        rfam="/home/rnahub/rnahub/db/rfam/Rfam.cm",
-        fasta="/home/pearljen/repo/ncbi_database_calls/src/rfam_calls/scripts/example/example.fa",
-        seed="/home/rnahub/rnahub/db/rfam/Rfam.seed.gz"
-    output:
-        "/home/pearljen/test/saved.txt"
-    script:
-        "search_rfam.py --rfam {input} --fasta {input} --seed {input}"

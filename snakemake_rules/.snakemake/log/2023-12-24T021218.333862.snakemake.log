@@ -1,5 +1,0 @@
-Building DAG of jobs...
-MissingInputException in rule bwa_map in file /home/pearljen/repo/rnahub/snakemake_rules/Snakefile, line 1:
-Missing input files for rule bwa_map:
-    affected files:
-        /home/pearljen/test/search_works5.txt
