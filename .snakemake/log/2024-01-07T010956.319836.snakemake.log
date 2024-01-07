@@ -1,0 +1,40 @@
+Building DAG of jobs...
+Retrieving input from storage.
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+all               1
+check_rfam        1
+total             2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Jan  7 01:09:56 2024]
+localrule check_rfam:
+    input: /home/rnahub/rnahub/db/rfam/Rfam.cm, /home/pearljen/repo/rnahub/example/example.fa, /home/rnahub/rnahub/db/rfam/Rfam.seed.gz
+    output: results/rfam_result.txt
+    jobid: 1
+    reason: Missing output files: results/rfam_result.txt
+    resources: tmpdir=/tmp
+
+[Sun Jan  7 01:10:04 2024]
+Finished job 1.
+1 of 2 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Jan  7 01:10:04 2024]
+localrule all:
+    input: results/rfam_result.txt, results/blast_result.txt
+    jobid: 0
+    reason: Input files updated by another job: results/rfam_result.txt
+    resources: tmpdir=/tmp
+
+[Sun Jan  7 01:10:04 2024]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: .snakemake/log/2024-01-07T010956.319836.snakemake.log

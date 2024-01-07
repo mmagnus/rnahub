@@ -9,10 +9,10 @@ before running next search in snakemake
 class SnakemakeSearchRules():
     
     def __init__(self) -> None:
-        pass
+       pass
     
-    def check_rfam_results(self):
-        pass
+    def do_blast_run(self):
+        return True
     
-    def check_blast_results(self):
-        pass
+    def do_rfam_run(self):
+        return False

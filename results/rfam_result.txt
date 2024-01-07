@@ -1,0 +1,2 @@
+RFAM not ran
+Found good results in BLAST search.

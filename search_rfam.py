@@ -20,6 +20,7 @@ from typing import List, Dict
 # from dataclasses import dataclass, field
 from attr import define
 import io
+from search_rules import SnakemakeSearchRules
 
 
 @define(kw_only=True)
@@ -244,26 +245,33 @@ if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
     
-    results:CmscanResult = run_cmscan(db_path=args.rfam,
-                                    fasta_path=args.fasta)
-
-    seed_resutls:Dict[str, CmscanResult] = find_alignment_from_seed(seed_path=args.seed,
-                             cmscan_hits=results)
+    search_rules:SnakemakeSearchRules = SnakemakeSearchRules()
+    run_rfam_search:bool = search_rules.do_rfam_run()
     
-    
+    rfam_result_string:str = ''
+    if run_rfam_search is True:
+        results:CmscanResult = run_cmscan(db_path=args.rfam,
+                                        fasta_path=args.fasta)
 
-    rfam_result_list_stdout:List[str] = []
-    alignment_keys:List[str] = seed_resutls.keys()
+        seed_resutls:Dict[str, CmscanResult] = find_alignment_from_seed(seed_path=args.seed,
+                                cmscan_hits=results)
+        
+        
 
-    rfam_result_list_stdout.append(f'Rfam Hit Count = {len(alignment_keys)}\n')
-    rfam_result_list_stdout.append(f'Rfam Hits and Aligments:\n')
-    rfam_result_list_stdout.append('\n')
-    
-    for name in list(seed_resutls.keys()):
-        rfam_result_list_stdout.append(f'Hit Name = {name}\n')
-        rfam_result_list_stdout.append("Alignments\n")
-        for item in seed_resutls[name].seed_alignemnt_dict:
-            rfam_result_list_stdout.append(f'name = {item}, Alignment = {seed_resutls[name].seed_alignemnt_dict[item]}\n')
+        rfam_result_list_stdout:List[str] = []
+        alignment_keys:List[str] = seed_resutls.keys()
+
+        rfam_result_list_stdout.append(f'Rfam Hit Count = {len(alignment_keys)}\n')
+        rfam_result_list_stdout.append(f'Rfam Hits and Aligments:\n')
         rfam_result_list_stdout.append('\n')
-    rfam_result_string:str = ''.join(rfam_result_list_stdout)
+        
+        for name in list(seed_resutls.keys()):
+            rfam_result_list_stdout.append(f'Hit Name = {name}\n')
+            rfam_result_list_stdout.append("Alignments\n")
+            for item in seed_resutls[name].seed_alignemnt_dict:
+                rfam_result_list_stdout.append(f'name = {item}, Alignment = {seed_resutls[name].seed_alignemnt_dict[item]}\n')
+            rfam_result_list_stdout.append('\n')
+        rfam_result_string = ''.join(rfam_result_list_stdout)
+    else:
+        rfam_result_string = f'RFAM not ran\nFound good results in BLAST search.\n'
     sys.stdout.write(rfam_result_string) 
