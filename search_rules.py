@@ -15,4 +15,4 @@ class SnakemakeSearchRules():
         return True
     
     def do_rfam_run(self):
-        return False
+        return True
