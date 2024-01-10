@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -9,6 +10,9 @@ require:
 
 """
 
+import argparse
+
+
 
 import argparse
 from pathlib import Path
@@ -17,7 +21,6 @@ import gzip
 from typing import List, Dict
 # from dataclasses import dataclass, field
 from attr import define
-
 
 @define(kw_only=True)
 class CmscanResult():
@@ -30,6 +33,13 @@ class CmscanResult():
     
 
 def run_cmscan(db_path:str, fasta_path:str)-> List[CmscanResult]:
+    """Run cmscan and return alignment_hits
+    
+    This function runs a command line utility called `cmscan` (used in bioinformatics for sequence alignment and analysis). The `cmscan` command is run with input parameters `db_path` and `fasta_path` that are given to the function. 
+
+    The function then parses the output of the `cmscan` command and extracts the names and scores of the hits found. If there is a discrepancy between the hit count reported by the `cmscan` command and the number of hits the function has collected, it raises an exception. Otherwise, it returns a dictionary in which each key is a model's name (hit_name), and the corresponding value is an instance of the CmscanResult class with information about the hit, including its name, score, comments and a boolean indicating if any errors occurred while fetching the score. 
+
+    """
     command:str = f'cmscan --noali {db_path} {fasta_path}'
     result = os.popen(cmd=command)
     raw_result:str = result.read()

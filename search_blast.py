@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
 """
-from __future__ import print_function
 import argparse
 from icecream import ic
 import sys
@@ -11,6 +9,7 @@ from Bio.Blast import NCBIXML
 from Bio.Blast.Applications import NcbiblastnCommandline
 from Bio import SearchIO
 from io import StringIO
+
 
 from icecream import ic
 import sys
