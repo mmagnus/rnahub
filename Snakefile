@@ -30,10 +30,8 @@ rule run_rfam:
     output:
         "results/rfam_result.txt"
     shell:
-        """
-        python3 ./search_rfam.py --rfam {input.rfam} --fasta {input.fasta} --seed {input.seed} > {output}
-        head {output}
-        """
+        "python3 ./search_rfam.py --rfam {input.rfam} --fasta {input.fasta} --seed {input.seed} > {output};"
+        "head {output}"
 
 
 
