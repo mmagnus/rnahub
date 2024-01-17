@@ -12,7 +12,7 @@ rule check_blast:
     output:
         "results/blast_result.txt"
     shell:
-        'python3 /home/pearljen/repo/rnahub/search_blast.py {input.fasta} --db pdbnt -v > {output}'
+        'python3 ./search_blast.py {input.fasta} --db pdbnt -v > {output}'
 
 rule check_rfam:
     input:
@@ -22,5 +22,5 @@ rule check_rfam:
     output:
         "results/rfam_result.txt"
     shell:
-        'python3 /home/pearljen/repo/rnahub/search_rfam.py --rfam {input.rfam} --fasta {input.fasta} --seed {input.seed} > {output}'
+        'python3 ./search_rfam.py --rfam {input.rfam} --fasta {input.fasta} --seed {input.seed} > {output}'
 
