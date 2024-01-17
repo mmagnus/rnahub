@@ -25,6 +25,8 @@ from typing import List, Dict
 from attr import define
 import io
 from search_rules import SnakemakeSearchRules
+import os
+
 
 @define(kw_only=True)
 class CmscanResult():
@@ -254,6 +256,10 @@ def get_parser():
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
+
+    #if args.fasta == Path('dummy_file.txt'):
+    #    print('done - no rfam')
+    #    sys.exit(0)
     
     search_rules:SnakemakeSearchRules = SnakemakeSearchRules()
     run_rfam_search:bool = search_rules.do_rfam_run()

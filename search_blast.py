@@ -39,9 +39,11 @@ def process_blast_output(blast_output_file):
             
             query_id = blast_record.query_id
             query_length = blast_record.query_length
-            ic(blast_record.query)
             # Iterate over each alignment and get the relevant information
-
+            if not (blast_record.alignments):
+                print('No hits found')
+                return
+            
             for alignment in blast_record.alignments:
                 subject_id = alignment.title
                 ic(subject_id)
