@@ -1,1 +1,3 @@
 opt/
+.snakemake/log/
+.nextflow*
