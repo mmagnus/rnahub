@@ -1,5 +1,5 @@
-./nextflow rnahub.nf
-exit
+# ./nextflow rnahub.nf
+# exit
 
 eval "$(/home/rnahub/miniconda3/bin/conda shell.bash hook)"
 conda activate RF2NA
