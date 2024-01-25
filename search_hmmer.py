@@ -57,7 +57,7 @@ if __name__ == '__main__':
         db = '/home/rnahub/rnahub/db/refseq_rna/refseq_rna'
 
     # Construct the nhmmer command
-    command = f'/usr/local/bin/nhmmer -E 0.005 --cpu 5 {input_file} {db}' # -E 0.001 
+    command = f'/usr/local/bin/nhmmer "--tblout" {output_file} -E 0.005 --cpu 5 {input_file} {db} ' # -E 0.001 
 
     # Run the command
     ic(command)
@@ -68,4 +68,24 @@ if __name__ == '__main__':
         print("Error running nhmmer:")
         print(stderr)
     else:
-        print("nhmmer ran successfully. Output saved in", stdout)
+        print("nhmmer ran successfully. Output saved in", output_file)
+
+    from Bio import SearchIO
+
+    # Replace 'hmmer_output_file.txt' with the path to your HMMER output file
+    hmmer_output_file = 'nhmmer_output.txt'
+
+    # Parse the HMMER output file
+    query_results = SearchIO.parse(hmmer_output_file, 'hmmer3-text')
+
+    # Iterate over each QueryResult
+    ic([x for x in query_results]) 
+    for query in query_results:
+        print(f"Query: {query.id}")
+        for hit in query.hits:
+            print(f"  Hit: {hit.id}, E-value: {hit.evalue}")
+
+            # Iterate over each HSP (high-scoring pair)
+            for hsp in hit.hsps:
+                print(f"    HSP, E-value: {hsp.evalue}")
+        
