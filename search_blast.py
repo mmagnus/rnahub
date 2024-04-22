@@ -11,7 +11,7 @@ from Bio import SearchIO
 from io import StringIO
 from typing import List
 from search_rules import SnakemakeSearchRules
-
+import config
 
 from icecream import ic
 import sys
@@ -83,7 +83,7 @@ if __name__ == '__main__':
             print(h)
             print(seq)
             if args.db == 'nt':
-                db = '/home/rnahub/mnt/nt/nt'
+                db = config.BLAST_NT
             if args.db == 'pdbnt':
                 db = '/home/rnahub/rnahub/db/pdbnt/pdbnt'
             if args.db == 'refseq':

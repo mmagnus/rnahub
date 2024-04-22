@@ -1,3 +1,4 @@
 opt/
 .snakemake/log/
 .nextflow*
+/config_local.py
