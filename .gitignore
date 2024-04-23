@@ -2,3 +2,4 @@ opt/
 .snakemake/log/
 .nextflow*
 /config_local.py
+__pycache__/*
