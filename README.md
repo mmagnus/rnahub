@@ -14,3 +14,6 @@
 - `nr ff`
 - `rfam`  
 - `wgao`
+
+Gao, W., Jones, T. A. & Rivas, E. Discovery of 17 conserved structural RNAs in fungi. Nucleic Acids Res 49, gkab355- (2021).  
+https://academic.oup.com/nar/article/49/11/6128/6292099
