@@ -82,7 +82,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     db = args.db
     evalue = args.evalue
-    
     if list != type(args.file):
         args.file = [args.file]
 
@@ -97,7 +96,6 @@ if __name__ == '__main__':
             os.mkdir(f'{j}')
         except FileExistsError:
             pass
-
         #scriptsdir = "/n/eddy_lab/users/erivas/projects/SKennedy/2024_conserved_introns/shscripts/unflanked_scripts"
         # Clean up previous output files
         #clean()
