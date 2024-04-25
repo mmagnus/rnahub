@@ -40,7 +40,7 @@ def get_parser():
     parser.add_argument('--job-name', default="", help="by default is input file name (wihout extension)")
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
-    parser.add_argument("-evalue", default="1e-5", help="e-value threshold")
+    parser.add_argument("--evalue", default="1e-5", help="e-value threshold")
     parser.add_argument("file", help="", default="", nargs='+')
     return parser
 
