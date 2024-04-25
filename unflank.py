@@ -41,6 +41,8 @@ def get_parser():
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
     parser.add_argument("--evalue", default="1e-5", help="e-value threshold")
+    parser.add_argument("--rscape", help="rscape only",
+                        action="store_true")
     parser.add_argument("file", help="", default="", nargs='+')
     return parser
 
@@ -102,7 +104,8 @@ if __name__ == '__main__':
         # Clean up previous output files
         #clean()
         # Perform nhmmer iterations
-        search()
+        if not args.rscape:
+            search()
         # Remove duplicate copies of genomes
         #remove_multicopies()
         # Module load (if necessary in your environment; may require a system-specific approach)
