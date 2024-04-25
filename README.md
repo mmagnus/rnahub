@@ -20,6 +20,7 @@ options:
 # db
 
 - `1409_Acomycota_genomes-may19.fa` - Gao, W., Jones, T. A. & Rivas, E. Discovery of 17 conserved structural RNAs in fungi. Nucleic Acids Res 49, gkab355- (2021).
+- [for testing] `1409_Acomycota_genomes-may19_HEAD_G1.fa` - head -c 1G of 1409_Acomycota_genomes-may19.fa
 - `nt.fa` - blast nt in fasta format
 - `nt` - blast nt in blast format
 - `bacteria_archaea.fa  `
