@@ -1,5 +1,22 @@
 # rnahub
 
+```
+/unflank.py -h
+usage: unflank.py [-h] [--job-name JOB_NAME] [-v] [--evalue EVALUE] [--iteractions ITERACTIONS] [--rscape] db file [file ...]
+
+positional arguments:
+  db
+  file
+
+options:
+  -h, --help            show this help message and exit
+  --job-name JOB_NAME   by default is input file name (wihout extension)
+  -v, --verbose         be verbose
+  --evalue EVALUE       e-value threshold
+  --iteractions ITERACTIONS
+                        number of iterations
+  --rscape              rscape only
+```
 # db
 
 - `1409_Acomycota_genomes-may19.fa` - Gao, W., Jones, T. A. & Rivas, E. Discovery of 17 conserved structural RNAs in fungi. Nucleic Acids Res 49, gkab355- (2021).
