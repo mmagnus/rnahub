@@ -9,7 +9,7 @@ from icecream import ic
 import sys
 ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
 ic.configureOutput(prefix='> ')
-
+import shutil
 import subprocess
 import sys
 import os
@@ -96,6 +96,8 @@ if __name__ == '__main__':
             os.mkdir(f'{j}')
         except FileExistsError:
             pass
+        shutil.copy(f, j)
+
         #scriptsdir = "/n/eddy_lab/users/erivas/projects/SKennedy/2024_conserved_introns/shscripts/unflanked_scripts"
         # Clean up previous output files
         #clean()
