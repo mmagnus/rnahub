@@ -13,12 +13,10 @@ import shutil
 import subprocess
 import sys
 import os
-from config import *
+from config import RSCAPE_PATH, nhmmer
 # SLURM directives are not directly used in Python scripts.
 # Instead, configure your job submission script or environment accordingly.
 
-
-RSCAPE_PATH = '/n/home06/mmagnus//m/opt/rscape_v2.0.4.b/bin/R-scape'
 
 def exe(command, dry=False):
     """Execute a shell command."""
@@ -41,6 +39,7 @@ def get_parser():
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
     parser.add_argument("--evalue", default="1e-5", help="e-value threshold")
+    parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
     parser.add_argument("file", help="", default="", nargs='+')
@@ -52,7 +51,8 @@ def clean():
             exe(f'rm -f {pattern}')
 
 def search():
-    for i in range(1, 4):  # you can play with this one, starting from 1
+    """Return the last sto file generated"""
+    for i in range(1, nofinteractions + 1):  # you can play with this one, starting from 1
             sto_file = f'v{i}.sto'
             output_file = f'v{i}.out'
             input_file = query if i == 1 else f'{j}/v{i-1}.sto'
@@ -77,13 +77,15 @@ def rscape():
     except FileExistsError:
        pass
     #exe(f"{RSCAPE_PATH} --outdir {job_folder}/rscape_output --cacofold --outtree rm_v3.sto > rscape_results.txt")
-    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/v3.sto > {j}/rscape_results.txt")
+    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/v{nofinteractions}.sto | tee {j}/rscape_results.txt")
 
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
     db = args.db
     evalue = args.evalue
+    nofinteractions = args.iteractions
+
     if list != type(args.file):
         args.file = [args.file]
 
@@ -93,7 +95,7 @@ if __name__ == '__main__':
             j = 'jobs/' + args.job_name
         else:
             j = 'jobs/' + os.path.basename(f).replace('.fa', '')
-
+            
         try:
             os.mkdir(f'{j}')
         except FileExistsError:
