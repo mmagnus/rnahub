@@ -1,8 +1,8 @@
 # rnahub
 
 ```
-/unflank.py -h
-usage: unflank.py [-h] [--job-name JOB_NAME] [-v] [--evalue EVALUE] [--iteractions ITERACTIONS] [--rscape] db file [file ...]
+./rnahub.py  -h
+usage: rnahub.py [-h] [--job-name JOB_NAME] [-v] [--evalue EVALUE] [--iteractions ITERACTIONS] [--rscape] db file [file ...]
 
 positional arguments:
   db
