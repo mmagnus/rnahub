@@ -40,11 +40,13 @@ def get_parser():
     parser.add_argument('--job-name', default="", help="by default is input file name (wihout extension)")
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
+    parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
     parser.add_argument("--evalue", default="1e-5", help="e-value threshold")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
     parser.add_argument("file", help="", default="", nargs='+')
+    
     return parser
 
 
@@ -81,6 +83,28 @@ def rscape():
     #exe(f"{RSCAPE_PATH} --outdir {job_folder}/rscape_output --cacofold --outtree rm_v3.sto > rscape_results.txt")
     exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/v{nofinteractions}.sto | tee {j}/rscape_results.txt")
 
+def save_to_slurm():
+        t = f"""#!/bin/bash
+
+#SBATCH -n 2 # Number of cores requested
+#SBATCH -N 1 # Ensure that all cores are on one machine
+#SBATCH -t 0 # Runtime in minutes
+#SBATCH -p eddy # Partition to submit to
+#SBATCH --mem=50000 # Memory per cpu in MB (see also --mem-per-cpu)
+#SBATCH --open-mode=append
+#SBATCH -o %j.out # Standard out goes to this file
+#SBATCH -e %j.err # Standard err goes to this filehostname
+
+# Runs a command on all FASTA files in current directory
+python {' '.join(sys.argv[:]).replace('--slurm', '')}
+        """
+        name = f'{dbbase}X{fbase}'
+        with open(f'{j}/{name}.slurm', 'w') as fi:
+            fi.write(t)
+        print(f'slurm: {j}/{name}.slurm')
+        os.chmod(f'{j}/{name}.slurm', 0o755) #mode=stat.S_IXUSR)
+
+
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
@@ -93,16 +117,23 @@ if __name__ == '__main__':
 
     for f in args.file:
         query = f
+        fbase = os.path.basename(f).replace('.fa', '')
+        dbbase = os.path.basename(db).replace('.fa', '')
         if args.job_name:
             j = 'jobs/' + args.job_name
         else:
-            j = 'jobs/' + os.path.basename(f).replace('.fa', '')
+            j = 'jobs/' + fbase
             
         try:
             os.mkdir(f'{j}')
         except FileExistsError:
             pass
         shutil.copy(f, j)
+
+
+        if args.slurm:
+            save_to_slurm()
+            exit()
 
         import logging
         # ic(f'{j}/log.log')
