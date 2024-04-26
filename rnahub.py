@@ -14,6 +14,8 @@ import subprocess
 import sys
 import os
 from config import RSCAPE_PATH, nhmmer
+import logging
+
 # SLURM directives are not directly used in Python scripts.
 # Instead, configure your job submission script or environment accordingly.
 
@@ -102,6 +104,29 @@ if __name__ == '__main__':
             pass
         shutil.copy(f, j)
 
+        import logging
+        # ic(f'{j}/log.log')
+        # logging.basicConfig(filename=f'{j}/log.log', filemode='w',
+        #                     encoding='utf-8', level=logging.INFO,
+        #                     format='%(asctime)s - %(levelname)s - %(name)s: %(message)s')
+        # logging.info(str(args))
+        # logger = logging.getLogger(__name__)
+        # with open(f'{j}/log2.log', 'w') as f:
+        #     f.write(str(args))
+        # create logger with 'spam_application'
+        logger = logging.getLogger('rnahub')
+        logger.setLevel(logging.DEBUG)
+        # create file handler which logs even debug messages
+        fh = logging.FileHandler(f'{j}/log.log')
+        fh.setLevel(logging.DEBUG)
+
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        fh.setFormatter(formatter)
+
+        logger.addHandler(fh)
+        logger.info(str(args))
+
+
         #scriptsdir = "/n/eddy_lab/users/erivas/projects/SKennedy/2024_conserved_introns/shscripts/unflanked_scripts"
         # Clean up previous output files
         #clean()
@@ -114,3 +139,5 @@ if __name__ == '__main__':
         #exe('module load Anaconda2/2019.10-fasrc01')
         #esl_aliminip()
         rscape()
+        logging.info('done')
+        logger.info('done')
