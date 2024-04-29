@@ -136,6 +136,9 @@ if __name__ == '__main__':
         shutil.copy(f, j)
 
 
+        with open(f'{j}/cmd.sh', 'w') as fi:
+            fi.write(' '.join(sys.argv))
+        
         if args.slurm:
             save_to_slurm()
             exit()
