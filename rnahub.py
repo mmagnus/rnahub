@@ -23,7 +23,9 @@ import logging
 def exe(command, dry=False):
     """Execute a shell command."""
     print(command)
-    if not dry: os.system(command)
+    if not dry:
+        os.system(command)
+        logging.info(command)
     return
     try:
         subprocess.run(command, check=True, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -43,6 +45,7 @@ def get_parser():
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
     parser.add_argument("--evalue", default="1e-5", help="e-value threshold")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
+    parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
     parser.add_argument("file", help="", default="", nargs='+')
@@ -52,7 +55,7 @@ def get_parser():
 
 def clean():
         for pattern in ['v1*', 'v2*', 'v3*', 'rm_v3.sto']:#, './*.txt', './*/']:
-            exe(f'rm -f {pattern}')
+            exe(f'rm -f {pattern}', dry)
 
 def search():
     """Return the last sto file generated"""
@@ -61,16 +64,16 @@ def search():
             output_file = f'v{i}.out'
             input_file = query if i == 1 else f'{j}/v{i-1}.sto'
             command = f"{nhmmer} --cpu 2 --incE {evalue} -A {j}/{sto_file} {input_file} {db} > {j}/{output_file}"
-            exe(command)
+            exe(command, dry)
 
 def remove_multicopies():
         scriptsdir = './'
-        exe(f'python {scriptsdir}/remove_multicopies5.py')
+        exe(f'python {scriptsdir}/remove_multicopies5.py', dry)
         
 def esl_aliminip():
         # Run esl-alimanip
         eslalimanip = os.path.join(rscapedir, "lib/hmmer/easel/miniapps/esl-alimanip")
-        exe(f"{eslalimanip} --seq-k accessions_to_keep.txt v3.sto > rm_v3.sto")
+        exe(f"{eslalimanip} --seq-k accessions_to_keep.txt v3.sto > rm_v3.sto", dry)
 
 def rscape():
     # Set up for R-scape analysis
@@ -81,9 +84,10 @@ def rscape():
     except FileExistsError:
        pass
     #exe(f"{RSCAPE_PATH} --outdir {job_folder}/rscape_output --cacofold --outtree rm_v3.sto > rscape_results.txt")
-    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/v{nofinteractions}.sto | tee {j}/rscape_results.txt")
+    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/v{nofinteractions}.sto | tee {j}/rscape_results.txt", dry)
 
 def save_to_slurm():
+        name = f'{dbbase}X{fbase}'
         t = f"""#!/bin/bash
 
 #SBATCH -n 2 # Number of cores requested
@@ -111,7 +115,8 @@ if __name__ == '__main__':
     db = args.db
     evalue = args.evalue
     nofinteractions = args.iteractions
-
+    dry = args.dry
+    
     if list != type(args.file):
         args.file = [args.file]
 
