@@ -1,17 +1,18 @@
 # rnahub
 
 ```
-./rnahub.py  -h
-usage: rnahub.py [-h] [--job-name JOB_NAME] [-v] [--evalue EVALUE] [--iteractions ITERACTIONS] [--rscape] db file [file ...]
+ ./rnahub.py -h
+usage: rnahub.py [-h] [--job-name JOB_NAME] [-v] [--slurm] [--evalue EVALUE] [--iteractions ITERACTIONS] [--rscape] db file [file ...]
 
 positional arguments:
   db
   file
 
-options:
+optional arguments:
   -h, --help            show this help message and exit
   --job-name JOB_NAME   by default is input file name (wihout extension)
   -v, --verbose         be verbose
+  --slurm               send it to slumrm
   --evalue EVALUE       e-value threshold
   --iteractions ITERACTIONS
                         number of iterations
