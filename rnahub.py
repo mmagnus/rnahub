@@ -164,9 +164,8 @@ if __name__ == '__main__':
         fh.setFormatter(formatter)
 
         logger.addHandler(fh)
+        logger.info('start')
         logger.info(str(args))
-
-
         #scriptsdir = "/n/eddy_lab/users/erivas/projects/SKennedy/2024_conserved_introns/shscripts/unflanked_scripts"
         # Clean up previous output files
         #clean()
