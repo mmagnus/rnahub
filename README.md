@@ -1,14 +1,14 @@
 # rnahub
 
 ```
- ./rnahub.py -h
-usage: rnahub.py [-h] [--job-name JOB_NAME] [-v] [--slurm] [--evalue EVALUE] [--iteractions ITERACTIONS] [--rscape] db file [file ...]
+./rnahub.py -h
+usage: rnahub.py [-h] [--job-name JOB_NAME] [-v] [--slurm] [--evalue EVALUE] [--iteractions ITERACTIONS] [--dry] [--rscape] db file [file ...]
 
 positional arguments:
   db
   file
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --job-name JOB_NAME   by default is input file name (wihout extension)
   -v, --verbose         be verbose
@@ -16,6 +16,7 @@ optional arguments:
   --evalue EVALUE       e-value threshold
   --iteractions ITERACTIONS
                         number of iterations
+  --dry                 show all cmds, dont run them
   --rscape              rscape only
 ```
 # db
