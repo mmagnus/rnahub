@@ -102,11 +102,11 @@ def save_to_slurm():
 # Runs a command on all FASTA files in current directory
 python {' '.join(sys.argv[:]).replace('--slurm', '')}
         """
-        name = f'{dbbase}X{fbase}'
-        with open(f'{j}/{name}.slurm', 'w') as fi:
+
+        with open(f'{j}/run.slurm', 'w') as fi:
             fi.write(t)
-        print(f'slurm: {j}/{name}.slurm')
-        os.chmod(f'{j}/{name}.slurm', 0o755) #mode=stat.S_IXUSR)
+        print(f'sbatch {j}/run.slurm')
+        os.chmod(f'{j}/run.slurm', 0o755) #mode=stat.S_IXUSR)
 
 
 if __name__ == '__main__':
