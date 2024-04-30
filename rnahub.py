@@ -22,7 +22,7 @@ import logging
 
 def exe(command, dry=False):
     """Execute a shell command."""
-    print(command)
+    print(command, flush=True)
     if not dry:
         os.system(command)
         logging.info(command)
@@ -135,6 +135,7 @@ if __name__ == '__main__':
             pass
         shutil.copy(f, j)
 
+        print(args, flush=True)
 
         with open(f'{j}/cmd.sh', 'w') as fi:
             fi.write(' '.join(sys.argv))
@@ -180,3 +181,6 @@ if __name__ == '__main__':
         rscape()
         logging.info('done')
         logger.info('done')
+        print('done', flush=True)
+
+        
