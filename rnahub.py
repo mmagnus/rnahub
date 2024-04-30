@@ -96,8 +96,8 @@ def save_to_slurm():
 #SBATCH -p eddy # Partition to submit to
 #SBATCH --mem=50000 # Memory per cpu in MB (see also --mem-per-cpu)
 #SBATCH --open-mode=append
-#SBATCH -o %j.out # Standard out goes to this file
-#SBATCH -e %j.err # Standard err goes to this filehostname
+#SBATCH -o {j}/%j.out # Standard out goes to this file
+#SBATCH -e {j}/%j.err # Standard err goes to this filehostname
 
 # Runs a command on all FASTA files in current directory
 python {' '.join(sys.argv[:]).replace('--slurm', '')}
