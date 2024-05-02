@@ -20,6 +20,11 @@ options:
   --rscape              rscape only
 ```
 # Workflow
+
+Pre-workflow: run Blast on NR to narrow the searches with nhmmer to e.g., fungi gnomes* OR ask the user.
+
+*we need pre-compiled gnomes
+
 ![gkab355fig2](https://github.com/mmagnus/rnahub/assets/118740/f52da725-41f8-4224-aed4-7a393fe6432f)
 Gao, W., Jones, T. A. & Rivas, E. Discovery of 17 conserved structural RNAs in fungi. Nucleic Acids Res 49, gkab355- (2021).
 https://academic.oup.com/nar/article/49/11/6128/6292099
