@@ -15,7 +15,7 @@ options:
   --slurm               send it to slumrm
   -f, --flanked         run flanked mode (create extra v0)
   --evalue EVALUE       e-value threshold
-  --iteractions ITERACTIONS
+  --iteration ITERATIONS
                         number of iterations
   --dry                 show all cmds, dont run them
   --rscape              rscape only
