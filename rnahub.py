@@ -43,6 +43,7 @@ def get_parser():
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
+    parser.add_argument("-f", "--flanked",  action="store_true", help="run flanked mode (create extra v0)")
     parser.add_argument("--evalue", default="1e-5", help="e-value threshold")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
@@ -54,11 +55,15 @@ def get_parser():
 
 
 def clean():
-        for pattern in ['v1*', 'v2*', 'v3*', 'rm_v3.sto']:#, './*.txt', './*/']:
+        for pattern in ['v0*', 'v1*', 'v2*', 'v3*', 'rm_v3.sto']:#, './*.txt', './*/']:
             exe(f'rm -f {pattern}', dry)
 
 def search():
     """Return the last sto file generated"""
+    if args.flanked:
+        command = f"{nhmmer} --cpu 2 --incE 1e-10 -A v0.sto {query} {db} > {f}/v0.out"
+        exe(command, dry)
+        
     for i in range(1, nofinteractions + 1):  # you can play with this one, starting from 1
             sto_file = f'v{i}.sto'
             output_file = f'v{i}.out'
@@ -160,10 +165,16 @@ if __name__ == '__main__':
         fh = logging.FileHandler(f'{j}/log.log')
         fh.setLevel(logging.DEBUG)
 
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.INFO)  # You can adjust this as needed
+
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         fh.setFormatter(formatter)
-
+        ch.setFormatter(formatter)
+        
         logger.addHandler(fh)
+        logger.addHandler(ch)
+        
         logger.info('start')
         logger.info(str(args))
         #scriptsdir = "/n/eddy_lab/users/erivas/projects/SKennedy/2024_conserved_introns/shscripts/unflanked_scripts"

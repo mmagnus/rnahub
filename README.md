@@ -13,7 +13,7 @@ options:
   --job-name JOB_NAME   by default is input file name (wihout extension)
   -v, --verbose         be verbose
   --slurm               send it to slumrm
-  -f, --flanked         send it to slumrm
+  -f, --flanked         run flanked mode (create extra v0)
   --evalue EVALUE       e-value threshold
   --iteractions ITERACTIONS
                         number of iterations
