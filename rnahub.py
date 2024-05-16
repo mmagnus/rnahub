@@ -112,7 +112,8 @@ python {' '.join(sys.argv[:]).replace('--slurm', '')}
             fi.write(t)
         print(f'sbatch {j}/run.slurm')
         os.chmod(f'{j}/run.slurm', 0o755) #mode=stat.S_IXUSR)
-
+        os.system(f'sbatch {j}/run.slurm')
+        
 
 if __name__ == '__main__':
     parser = get_parser()
