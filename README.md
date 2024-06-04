@@ -15,15 +15,18 @@ options:
   --slurm               send it to slumrm
   -f, --flanked         run flanked mode (create extra v0)
   --evalue EVALUE       e-value threshold
-  --iteractions ITERACTIONS
+  --iteration ITERATIONS
                         number of iterations
   --dry                 show all cmds, dont run them
   --rscape              rscape only
 ```
 # Workflow
 
-Pre-workflow: run Blast on NR to narrow the searches with nhmmer to e.g., fungi gnomes* OR ask the user.
+Pre-workflow: 
 
+- run Blast on NR to narrow the searches with nhmmer to e.g., fungi gnomes* OR ask the user.
+- add flanks!
+  
 *we need pre-compiled gnomes
 
 ![gkab355fig2](https://github.com/mmagnus/rnahub/assets/118740/f52da725-41f8-4224-aed4-7a393fe6432f)
