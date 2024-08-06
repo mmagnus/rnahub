@@ -1,0 +1,951 @@
+# STOCKHOLM 1.0
+#=GF ID 03_HACA_snoRNA_Pezizomycotina
+#=GF AU Infernal 1.1.2
+
+#=GS CM000175.1/1017260-1017427/1-168     DE Aspergillus fumigatus Af293 chromosome 7, whole genome shotgun sequence
+#=GS QDFW01000125.1/656814-656647/1-168   DE Aspergillus neoellipticus strain NRRL 5109 Scaffold4283, whole genome shotgun sequence
+#=GS DS027695.1/286414-286581/1-168       DE Neosartorya fischeri NRRL 181 1099437636263 genomic scaffold, whole genome shotgun sequence
+#=GS BCLY01000005.1/1105902-1106069/1-168 DE Aspergillus lentulus DNA, contig: Alt05, strain: IFM 54703, whole genome shotgun sequence
+#=GS MSZS01000007.1/802408-802243/1-166   DE Aspergillus novofumigatus IBT 16806 P174scaffold_7, whole genome shotgun sequence
+#=GS NKHU02000004.1/135649-135816/1-168   DE Aspergillus thermomutatus strain HMR AF 39 NODE_3, whole genome shotgun sequence
+#=GS BBXM01000095.1/553299-553132/1-168   DE Neosartorya udagawae DNA, contig:Aud0095, strain: IFM 46973, whole genome shotgun sequence
+#=GS SIHR01000252.1/171362-171195/1-168   DE Aspergillus viridinutans strain FRR 0576 EO229Contig_252, whole genome shotgun sequence
+#=GS NKHV02000040.1/147013-147176/1-164   DE Aspergillus turcosus strain HMR AF 23 NODE_39, whole genome shotgun sequence
+#=GS KZ826321.1/580016-580178/1-161       DE Aspergillus sclerotiicarbonarius CBS 121057 unplaced genomic scaffold BO78scaffold_7, whole genome shotgun sequence
+#=GS KV907503.1/240037-240199/1-163       DE Aspergillus carbonarius ITEM 5010 unplaced genomic scaffold ASPCAscaffold_11, whole genome shotgun sequence
+#=GS KV907503.1/525339-525501/1-163       DE Aspergillus carbonarius ITEM 5010 unplaced genomic scaffold ASPCAscaffold_11, whole genome shotgun sequence
+#=GS AM270992.1/246305-246470/1-166       DE Aspergillus niger supercontig An13
+#=GS KZ821341.1/1178540-1178375/1-166     DE Aspergillus lacticoffeatus CBS 101883 unplaced genomic scaffold BO96scaffold_4, whole genome shotgun sequence
+#=GS KZ851858.1/771358-771193/1-166       DE Aspergillus phoenicis ATCC 13157 unplaced genomic scaffold M752scaffold_15, whole genome shotgun sequence
+#=GS BDHI01000028.1/4084893-4085058/1-166 DE Aspergillus awamori DNA, contig: Aawm28, strain: IFM 58123, whole genome shotgun sequence
+#=GS LKBE01000001.1/1713357-1713196/1-162 DE Aspergillus westerdijkiae strain CBS 112803 scaffold1, whole genome shotgun sequence
+#=GS SSOS01000002.1/1806046-1805885/1-162 DE Aspergillus ochraceus strain fc-1 Scaffold_Scf_2, whole genome shotgun sequence
+#=GS KZ824445.1/313391-313229/1-157       DE Aspergillus ibericus CBS 121593 unplaced genomic scaffold BO80scaffold_27, whole genome shotgun sequence
+#=GS KV878697.1/263307-263472/1-166       DE Aspergillus brasiliensis CBS 101740 unplaced genomic scaffold ASPBRscaffold_19, whole genome shotgun sequence
+#=GS MSFK01000026.1/289461-289624/1-162   DE Aspergillus sclerotioniger CBS 115572 BO94scaffold_26, whole genome shotgun sequence
+#=GS KZ852076.1/260226-260391/1-166       DE Aspergillus welwitschiae strain CBS 139.54b unplaced genomic scaffold BDQ94scaffold_45, whole genome shotgun sequence
+#=GS KZ825567.1/4203-4366/1-164           DE Aspergillus indologenus CBS 114.80 unplaced genomic scaffold BP00scaffold_105, whole genome shotgun sequence
+#=GS KV878253.1/356303-356138/1-166       DE Aspergillus foetidus CBS 106.47 unplaced genomic scaffold ASPFOscaffold_18, whole genome shotgun sequence
+#=GS DF126469.1/258535-258700/1-166       DE Aspergillus kawachii IFO 4308 DNA, contig: scaffold00023, whole genome shotgun sequence
+#=GS KZ825892.1/19891-19727/1-161         DE Aspergillus ellipticus CBS 707.79 unplaced genomic scaffold BO71scaffold_96, whole genome shotgun sequence
+#=GS KZ821617.1/242446-242611/1-166       DE Aspergillus vadensis CBS 113365 unplaced genomic scaffold BO88scaffold_4, whole genome shotgun sequence
+#=GS KV878182.1/289012-288847/1-166       DE Aspergillus tubingensis CBS 134.48 unplaced genomic scaffold ASPTUscaffold_15, whole genome shotgun sequence
+#=GS KZ825055.1/2592754-2592589/1-166     DE Aspergillus piperis CBS 112811 unplaced genomic scaffold BO85scaffold_2, whole genome shotgun sequence
+#=GS KZ559648.1/48142-47980/1-158         DE Aspergillus taichungensis strain IBT 19404 unplaced genomic scaffold BDW42scaffold_153, whole genome shotgun sequence
+#=GS KZ821724.1/122464-122627/1-164       DE Aspergillus uvarum CBS 121591 unplaced genomic scaffold BO82scaffold_51, whole genome shotgun sequence
+#=GS KZ821485.1/220489-220324/1-166       DE Aspergillus neoniger CBS 115656 unplaced genomic scaffold BO87scaffold_41, whole genome shotgun sequence
+#=GS MSFU01000021.1/294754-294919/1-166   DE Aspergillus eucalypticola CBS 122712 BO83scaffold_21, whole genome shotgun sequence
+#=GS KZ824553.1/344949-344784/1-166       DE Aspergillus costaricaensis CBS 115574 unplaced genomic scaffold BO79scaffold_19, whole genome shotgun sequence
+#=GS KZ559149.1/91558-91395/1-164         DE Aspergillus candidus strain CBS 102.13 unplaced genomic scaffold BDW47scaffold_33, whole genome shotgun sequence
+#=GS QAGJ01000334.1/39907-39742/1-166     DE Aspergillus sp. MA 6041 contig00334, whole genome shotgun sequence
+#=GS SMSW01000007.1/527012-526847/1-164   DE Aspergillus cejpii strain FS110 scaffold7, whole genome shotgun sequence
+#=GS JSYV01000857.1/29496-29659/1-164     DE [Talaromyces] leycettanus strain CBS 398.68 contig857, whole genome shotgun sequence
+#=GS CBWZ010000244.1/2811-2648/1-164      DE Aspergillus sclerotiorum WGS project CBWZ000000000 data, contig 244, strain HBR18, whole genome shotgun sequence
+#=GS MSFO01000001.1/1773037-1772876/1-161 DE Aspergillus steynii IBT 23096 P170scaffold_1, whole genome shotgun sequence
+#=GS MVGC01000005.1/68794-68629/1-165     DE Aspergillus sclerotialis strain CBS 366.77 Contig00005, whole genome shotgun sequence
+#=GS MSFL01000033.1/162872-162709/1-160   DE Aspergillus heteromorphus CBS 117.55 BO70scaffold_33, whole genome shotgun sequence
+#=GS KZ825311.1/228071-228233/1-162       DE Aspergillus brunneoviolaceus CBS 621.78 unplaced genomic scaffold BO95scaffold_2, whole genome shotgun sequence
+#=GS MSFM01000012.1/732818-732654/1-165   DE Aspergillus campestris IBT 28561 P168scaffold_12, whole genome shotgun sequence
+#=GS KV878970.1/3488157-3487993/1-165     DE Aspergillus aculeatus ATCC 16872 unplaced genomic scaffold ASPACscaffold_1, whole genome shotgun sequence
+#=GS KZ824963.1/183471-183309/1-162       DE Aspergillus aculeatinus CBS 121060 unplaced genomic scaffold BO66scaffold_31, whole genome shotgun sequence
+#=GS KZ824652.1/364618-364780/1-162       DE Aspergillus fijiensis CBS 313.89 unplaced genomic scaffold BO72scaffold_32, whole genome shotgun sequence
+#=GS NGZO01000005.1/1830937-1831100/1-164 DE Aspergillus persii strain NIBRFGC000004109 scaffold5, whole genome shotgun sequence
+#=GS CH476599.1/237370-237533/1-162       DE Aspergillus terreus NIH2624 scaffold_6 genomic scaffold, whole genome shotgun sequence
+#=GS QUQM01000008.1/1267467-1267305/1-161 DE Aspergillus tanneri strain NIH1004 AapTan_8_pilon_pilon_pilon, whole genome shotgun sequence
+#=GS LYCR01000040.1/168085-167920/1-165   DE Aspergillus bombycis strain NRRL26010 contig00040, whole genome shotgun sequence
+#=GS KZ825124.1/227536-227375/1-153       DE Aspergillus violaceofuscus CBS 115571 unplaced genomic scaffold BO99scaffold_24, whole genome shotgun sequence
+#=GS KZ824771.1/1146972-1147133/1-153     DE Aspergillus japonicus CBS 114.51 unplaced genomic scaffold BO86scaffold_2, whole genome shotgun sequence
+#=GS JNOM01000620.1/5848-5683/1-161       DE Aspergillus nomius NRRL 13137 contig00620, whole genome shotgun sequence
+#=GS RHLO01000759.1/9578-9740/1-163       DE Aspergillus sp. SC-2018a strain NRRL 66783 66783_66783_S3_L001_R1_001_single_contig_759, whole genome shotgun sequence
+#=GS MSJE01000298.1/412250-412087/1-162   DE Aspergillus aff. floccosus IMV 01167 jcf7180000027606, whole genome shotgun sequence
+#=GS BA000049.1/6088843-6088679/1-165     DE Aspergillus oryzae RIB40 DNA, chromosome 1
+#=GS EQ963472.1/395939-396103/1-165       DE Aspergillus flavus NRRL3357 scf_1106286418772 genomic scaffold, whole genome shotgun sequence
+#=GS NEXV01000360.1/123483-123647/1-165   DE Aspergillus arachidicola strain CBS 117610 contig_11, whole genome shotgun sequence
+#=GS PIJX01000013.1/289188-289351/1-162   DE Aspergillus pseudoterreus strain ATCC 32359 a_pseudoterreus_ATCC32359_contig_13, whole genome shotgun sequence
+#=GS BCIE01000006.1/1100238-1100402/1-163 DE Aspergillus chevalieri DNA, scaffold: scaffold_5, strain: JCM 23047, whole genome shotgun sequence
+#=GS HG793156.1/282978-282822/1-155       DE Penicillium camemberti str. FM013, whole genome shotgun sequence
+#=GS HG813602.1/97207-97363/1-155         DE Penicillium biforme FM169 genomic scaffold, PbifFM169S002, whole genome shotgun sequence
+#=GS KZ824271.1/919184-919022/1-163       DE Aspergillus homomorphus CBS 101889 unplaced genomic scaffold BO97scaffold_5, whole genome shotgun sequence
+#=GS PQMF01000069.1/52331-52496/1-166     DE Eurotiomycetes sp. MA 6039 contig00069, whole genome shotgun sequence
+#=GS KV878211.1/1598599-1598759/1-159     DE Aspergillus wentii DTO 134E9 unplaced genomic scaffold ASPWEscaffold_3, whole genome shotgun sequence
+#=GS DF093573.1/4194183-4194018/1-166     DE Aspergillus sojae NBRC 4239 DNA, scaffold: 00036, whole genome shotgun sequence
+#=GS CDHK01000003.1/1537683-1537843/1-159 DE Penicillium brasilianum genome assembly Pbras_Allpaths-LG, scaffold SCAF3, whole genome shotgun sequence
+#=GS PQME02000006.1/44843-44679/1-165     DE Eurotiomycetes sp. MA 6038 contig00006, whole genome shotgun sequence
+#=GS MAQV01000007.1/428809-428645/1-163   DE Aspergillus cristatus strain YKY807 scaffold7, whole genome shotgun sequence
+#=GS LASV01000156.1/57774-57610/1-165     DE Rasamsonia emersonii CBS 393.64 ctg1118621760086, whole genome shotgun sequence
+#=GS KZ821244.1/194608-194445/1-160       DE Aspergillus saccharolyticus JOP 1030-1 unplaced genomic scaffold BP01scaffold_27, whole genome shotgun sequence
+#=GS JZEE01000665.1/6799-6634/1-166       DE Aspergillus parasiticus SU-1 682, whole genome shotgun sequence
+#=GS RHLP01000352.1/46999-46832/1-168     DE Aspergillus sp. SS-2018a strain NRRL 66825 AV1_AV1_S5_L001_R1_001_single_contig_352, whole genome shotgun sequence
+#=GS NPFE01001614.1/64110-63949/1-162     DE Penicillium janthinellum strain NCIM1366 ctg7180000015227, whole genome shotgun sequence
+#=GS CDMC01000006.1/2136053-2136219/1-166 DE Aspergillus calidoustus genome assembly Acal_Allpaths_LG, scaffold SCAF6, whole genome shotgun sequence
+#=GS KB644408.1/2344798-2344638/5-146     DE Penicillium oxalicum 114-2 unplaced genomic scaffold scaffold_1, whole genome shotgun sequence
+#=GS MDYL01000004.1/86173-86333/1-157     DE Penicillium decumbens strain IBT 11843 PENDEC_contig004, whole genome shotgun sequence
+#=GS MNBE01000719.1/721874-722034/1-160   DE Penicillium subrubescens strain CBS 132785 PENSUBscaffold_719, whole genome shotgun sequence
+#=GS KB644873.1/209888-210048/1-161       DE Penicillium paxilli ATCC 26601 unplaced genomic scaffold scaffold354, whole genome shotgun sequence
+#=GS HG814388.1/15693-15537/1-157         DE Penicillium fuscoglaucum FM041 genomic scaffold, PfusFM041S206, whole genome shotgun sequence
+#=GS PUHX01000037.1/285745-285901/1-157   DE Penicillium sp. SPG-F15 NODE_37_length_288392_cov_91.812545, whole genome shotgun sequence
+#=GS KV784226.1/773183-773025/1-159       DE Penicillium sclerotiorum strain 113 unplaced genomic scaffold scaffold7, whole genome shotgun sequence
+#=GS KV878907.1/389505-389668/1-160       DE Aspergillus glaucus CBS 516.65 unplaced genomic scaffold ASPGLscaffold_20, whole genome shotgun sequence
+#=GS KK088432.1/57264-57101/1-164         DE Aspergillus ruber CBS 135680 unplaced genomic scaffold scaffold00022, whole genome shotgun sequence
+#=GS MBFL01000568.1/8488-8325/1-164       DE Aspergillus hancockii strain FRR 3425 Contig_568, whole genome shotgun sequence
+#=GS KZ118969.1/202256-202093/1-164       DE Mycosphaerella populi pn0402 unplaced genomic scaffold scaffold99, whole genome shotgun sequence
+#=GS LXJU01000008.1/212622-212778/1-157   DE Penicillium arizonense strain CBS 141311 PENARI_contig008, whole genome shotgun sequence
+#=GS JPLR01000014.1/1992487-1992331/1-157 DE Penicillium capsulatum strain LiaoWQ-2011 unitig_42, whole genome shotgun sequence
+#=GS BCKA01000001.1/3870779-3870617/1-161 DE Penicillium citrinum DNA, scaffold: scaffold_0, strain: JCM 22607, whole genome shotgun sequence
+#=GS QPHH01000017.1/342246-342083/1-162   DE Aspergillus spinulosporus strain NRRL 2395 NODE_17_length_609226_cov_42.6508_ID_2198821, whole genome shotgun sequence
+#=GS LAKW02000739.1/3958-3802/1-155       DE Penicillium verrucosum strain BFE808 Contig748, whole genome shotgun sequence
+#=GS CM002799.1/6798329-6798170/1-159     DE Penicillium chrysogenum strain P2niaD18 chromosome II, whole genome shotgun sequence
+#=GS AM920436.1/2074112-2073953/1-159     DE Penicillium chrysogenum Wisconsin 54-1255 complete genome, contig Pc00c21
+#=GS QAGI01000090.1/101700-101541/1-159   DE Penicillium sp. MA 6040 contig00090, whole genome shotgun sequence
+#=GS MUXA01000093.1/6301234-6301393/1-159 DE Penicillium sp. HKF2 Scaffold_95, whole genome shotgun sequence
+#=GS LDZW01000189.1/197149-196984/1-166   DE Aspergillus sp. Z5 contig201_scaffold38, whole genome shotgun sequence
+#=GS QAGH01000024.1/70683-70518/1-166     DE Aspergillus sp. MA 6037 contig00024, whole genome shotgun sequence
+#=GS CH236923.1/868820-868983/1-164       DE Aspergillus nidulans FGSC A4 chromosome II scaffold_4, whole genome shotgun sequence
+#=GS QAGJ01000001.1/12137-12302/1-166     DE Aspergillus sp. MA 6041 contig00001, whole genome shotgun sequence
+#=GS HG816185.1/2776-2618/1-157           DE Penicillium carneum LCP05634 genomic scaffold, PcarLCP05634S0157, whole genome shotgun sequence
+#=GS PVWQ01000001.1/4903679-4903513/1-165 DE Aspergillus mulundensis strain DSM 5745 scaffold_0, whole genome shotgun sequence
+#=GS JYNM02000007.1/2977649-2977492/1-156 DE Penicillium solitum strain RS1 unitig1, whole genome shotgun sequence
+#=GS HG792015.1/6520966-6520808/1-157     DE Penicillium roqueforti FM164 genomic scaffold, ProqFM164S01, whole genome shotgun sequence
+#=GS KQ434266.1/2479195-2479355/1-160     DE Talaromyces purpureogenus strain MYA-38 unplaced genomic scaffold PPV01_SCF00014, whole genome shotgun sequence
+#=GS KV878585.1/1257911-1258076/1-166     DE Aspergillus sydowii CBS 593.65 unplaced genomic scaffold ASPSYscaffold_4, whole genome shotgun sequence
+#=GS HG813315.1/254382-254538/1-155       DE Penicillium paneum FM227 genomic scaffold, PpanFM227S008, whole genome shotgun sequence
+#=GS RFFF01004146.1/3432-3588/1-155       DE UNVERIFIED_CONTAM: Penicillium sp. CF01 contig_4158, whole genome shotgun sequence
+#=GS MOOB01000023.1/235686-235842/1-155   DE Penicillium nalgiovense strain IBT 13039 PENNAL_contig0023, whole genome shotgun sequence
+#=GS PKQL01000052.1/67075-67231/1-155     DE Penicillium sp. CF05 scaffold_51, whole genome shotgun sequence
+#=GS CM012214.1/5468557-5468392/1-164     DE Byssochlamys spectabilis strain MTDF-01 chromosome 1, whole genome shotgun sequence
+#=GS RCNU01000001.1/3292864-3292699/1-164 DE Byssochlamys spectabilis strain CBS 101075 C8Q69scaffold_1, whole genome shotgun sequence
+#=GS BCIC01000004.1/1962356-1962188/1-169 DE Thermoascus crustaceus DNA, scaffold: scaffold_3, strain: JCM 12817, whole genome shotgun sequence
+#=GS MSJH02000800.1/203623-203458/1-164   DE Cladosporiaceae sp. IMV 00236 jcf7180000200619, whole genome shotgun sequence
+#=GS MDYN01000007.1/378845-379000/1-156   DE Penicillium antarcticum strain IBT 31811 PENANT_contig007, whole genome shotgun sequence
+#=GS LLXE01000046.1/5460-5303/1-156       DE Penicillium freii strain DAOM 242723 scaffold_46, whole genome shotgun sequence
+#=GS KV878129.1/1268395-1268230/1-166     DE Aspergillus versicolor CBS 583.65 unplaced genomic scaffold ASPVEscaffold_5, whole genome shotgun sequence
+#=GS QLOF01000019.1/58358-58191/1-166     DE Aspergillus unguis strain NII 08123 NODE_19_length_610150_cov_91.395, whole genome shotgun sequence
+#=GS JOMC01000030.1/386208-386373/1-164   DE Aspergillus ustus strain 3.3904 AUSC_30, whole genome shotgun sequence
+#=GS RAQS01000088.1/49192-49351/1-158     DE Phialosimplex sp. HF37 contig00088, whole genome shotgun sequence
+#=GS JNNR01000430.1/1665-1822/1-156       DE Penicillium nordicum strain UASWS BFE487 Contig430, whole genome shotgun sequence
+#=GS MLKD01000001.1/537738-537576/1-163   DE Penicillium steckii strain IBT 24891 PENSTE_contig001, whole genome shotgun sequence
+#=GS MLQL01000001.1/457637-457793/1-155   DE Penicillium flavigenum strain IBT 14082 PENFLA_contig001, whole genome shotgun sequence
+#=GS QPIC01000007.1/1429177-1429334/1-156 DE Penicillium polonicum strain hy4 scaffold_6, whole genome shotgun sequence
+#=GS MDYP01000004.1/833842-833684/1-157   DE Penicillium vulpinum strain IBT 29486 PENVUL_contig004, whole genome shotgun sequence
+#=GS RFFF01001027.1/45391-45231/1-161     DE UNVERIFIED_CONTAM: Penicillium sp. CF01 contig_1028, whole genome shotgun sequence
+#=GS PUXE01000206.1/2686-2530/1-155       DE Penicillium sp. SPG-F1 NODE_206_length_22274_cov_90.556246, whole genome shotgun sequence
+#=GS QBDR01000015.1/35704-35869/1-160     DE Thermoascaceae sp. COH1141 Aspergillus_niger_strain_COH1141_contaminant-1111, whole genome shotgun sequence
+#=GS QAGG01000026.1/41349-41509/1-161     DE Penicillium sp. MA 6036 contig00026, whole genome shotgun sequence
+#=GS JQFZ01000161.1/102553-102397/1-155   DE Penicillium expansum strain MD-8 contig261, whole genome shotgun sequence
+#=GS PNEM01000004.1/3615670-3615505/1-165 DE Byssochlamys sp. AF001 NODE_4_length_4599218_cov_41.8296, whole genome shotgun sequence
+#=GS QEIL01000105.1/110783-110949/1-165   DE Byssochlamys nivea strain Cornell orchards no. 7 scaffold_104, whole genome shotgun sequence
+#=GS LHQR01000065.1/266698-266855/1-154   DE Penicillium griseofulvum strain PG3 contig_80, whole genome shotgun sequence
+#=GS KN846956.1/285761-285922/1-162       DE Capronia semiimmersa strain CBS 27337 unplaced genomic scaffold supercont1.1, whole genome shotgun sequence
+#=GS LWEC01000368.1/376136-375979/1-158   DE Penicillium italicum strain GL-Gan1 contig_368, whole genome shotgun sequence
+#=GS DS027051.1/253455-253601/1-147       DE Aspergillus clavatus NRRL 1 1099423829797 genomic scaffold, whole genome shotgun sequence
+#=GS BCHZ01000003.1/6864909-6865072/1-155 DE Exophiala calicioides DNA, scaffold: scaffold_2, strain: JCM 6030, whole genome shotgun sequence
+#=GS ANHP01000283.1/32261-32421/1-161     DE Thermomyces lanuginosus SSBP contig00314, whole genome shotgun sequence
+#=GS MSED01000003.1/379171-379332/1-162   DE Phialophora verrucosa strain BMU07605 tig00000003, whole genome shotgun sequence
+#=GS KN847521.1/701972-702131/1-158       DE Exophiala mesophila strain CBS 40295 unplaced genomic scaffold supercont1.2, whole genome shotgun sequence
+#=GS KV878355.1/121728-121564/1-165       DE Aspergillus zonatus CBS 506.65 unplaced genomic scaffold ASPZOscaffold_22, whole genome shotgun sequence
+#=GS KN847336.1/1953855-1954016/1-162     DE Exophiala oligosperma strain CBS 72588 unplaced genomic scaffold supercont1.5, whole genome shotgun sequence
+#=GS KN847322.1/2045347-2045507/1-160     DE Exophiala xenobiotica strain CBS 118157 unplaced genomic scaffold supercont1.6, whole genome shotgun sequence
+#=GS KN847494.1/3256707-3256546/1-159     DE Exophiala spinifera strain CBS 89968 unplaced genomic scaffold supercont1.3, whole genome shotgun sequence
+#=GS KV407454.1/2741789-2741623/1-167     DE Xylona heveae TC161 unplaced genomic scaffold L228scaffold_1, whole genome shotgun sequence
+#=GS AMGX01000040.1/165763-165923/1-161   DE Cladophialophora psammophila CBS 110553 aczJe-supercont1.40, whole genome shotgun sequence
+#=GS BCIG01000031.1/264934-264773/1-162   DE Symbiotaphrina buchneri DNA, scaffold: scaffold_30, strain: JCM 9740, whole genome shotgun sequence
+#=GS CM009903.1/677953-678120/1-168       DE Monascus purpureus strain YY-1 chromosome VI, whole genome shotgun sequence
+#=GS MSFN02000013.1/136100-136279/1-178   DE Aspergillus ochraceoroseus IBT 24754 P175scaffold_13, whole genome shotgun sequence
+#=GS ACFW01000035.1/909162-909325/1-164   DE Coccidioides posadasii C735 delta SOWgp gcontig_1105601051753, whole genome shotgun sequence
+#=GS JZBS01002706.1/42093-41915/1-179     DE Aspergillus rambellii strain SRRC1468 contig00087, whole genome shotgun sequence
+#=GS PSNO01000009.1/530802-530635/1-168   DE Monascus ruber strain FWB13 Scaffold9, whole genome shotgun sequence
+#=GS JH993674.1/1038830-1038980/1-149     DE Penicillium digitatum Pd1 unplaced genomic scaffold Scaffold_41, whole genome shotgun sequence
+#=GS KB822699.1/101951-102112/1-162       DE Cladophialophora carrionii CBS 160.54 unplaced genomic scaffold supercont1.12, whole genome shotgun sequence
+#=GS CH476619.1/2006458-2006623/1-166     DE Uncinocarpus reesii 1704 scaffold_5 genomic scaffold, whole genome shotgun sequence
+#=GS QGQJ01001354.1/22185-22022/1-161     DE Blastomyces sp. MA-2018 strain MRL_BACNE1992 CNE-1-9-92_contig_1357, whole genome shotgun sequence
+#=GS AMWN01000001.1/3907565-3907403/1-161 DE Capronia coronata CBS 617.96 acBCG-supercont1.1, whole genome shotgun sequence
+#=GS QWDQ01000017.1/393067-393232/1-164   DE Pseudophaeomoniella oleicola strain M24 NODE_17, whole genome shotgun sequence
+#=GS PDNC01000173.1/18400-18237/1-149     DE Blastomyces parvus strain UAMH130 supercont1.173, whole genome shotgun sequence
+#=GS AMGY01000008.1/795842-796004/5-147   DE Capronia epimyces CBS 606.96 aczIQ-supercont1.8, whole genome shotgun sequence
+#=GS LVYI01000012.1/532651-532812/1-160   DE Fonsecaea erecta strain CBS 125763 Scaff12, whole genome shotgun sequence
+#=GS KN848073.1/795316-795480/1-162       DE Fonsecaea multimorphosa CBS 102226 unplaced genomic scaffold supercont1.12, whole genome shotgun sequence
+#=GS LJPJ01001247.1/13369-13207/1-163     DE Amauroascus mutatus isolate UAMH 3576 scaffold1227, whole genome shotgun sequence
+#=GS GG704913.1/3703156-3703320/1-165     DE Coccidioides immitis RS genomic scaffold supercont3.3, whole genome shotgun sequence
+#=GS PDND01000154.1/43908-43738/1-153     DE Emmonsia crescens strain UAMH4076 supercont1.154, whole genome shotgun sequence
+#=GS PDNB01000072.1/22815-22658/1-158     DE Helicocarpus griseus UAMH5409 supercont1.72, whole genome shotgun sequence
+#=GS EQ999979.1/3138132-3138296/1-149     DE Blastomyces dermatitidis ER-3 genomic scaffold supercont1.7, whole genome shotgun sequence
+#=GS GG657468.1/794777-794941/1-149       DE Blastomyces gilchristii SLH14081 genomic scaffold supercont1.21, whole genome shotgun sequence
+#=GS LVCJ01000039.1/172537-172378/1-158   DE Fonsecaea nubica strain CBS 269.64 Scaff39, whole genome shotgun sequence
+#=GS KN847477.1/4225855-4226018/1-160     DE Rhinocladiella mackenziei CBS 650.93 unplaced genomic scaffold supercont1.3, whole genome shotgun sequence
+#=GS JH226130.1/1134482-1134321/1-160     DE Exophiala dermatitidis NIH/UT8656 unplaced genomic scaffold supercont1.1, whole genome shotgun sequence
+#=GS KN846985.1/339809-339969/1-161       DE Cladophialophora bantiana CBS 173.52 unplaced genomic scaffold supercont1.6, whole genome shotgun sequence
+#=GS BCHY01000003.1/3192638-3192478/1-159 DE Exophiala alcalophila DNA, scaffold: scaffold_2, strain: JCM 1751, whole genome shotgun sequence
+#=GS AMYF01000091.1/214165-214007/1-159   DE Herpotrichiellaceae sp. UM238 contig96, whole genome shotgun sequence
+#=GS LJPI01000934.1/141448-141609/1-162   DE Chrysosporium queenslandicum isolate CBS 280.77 scaffold1000, whole genome shotgun sequence
+#=GS KN847044.1/4048401-4048566/5-150     DE Cladophialophora immunda strain CBS 83496 unplaced genomic scaffold supercont1.5, whole genome shotgun sequence
+#=GS KN846970.1/505674-505511/1-164       DE Fonsecaea pedrosoi CBS 271.37 unplaced genomic scaffold supercont1.2, whole genome shotgun sequence
+#=GS LVKK01000047.1/142734-142571/1-164   DE Fonsecaea monophora strain CBS 269.37 Scaff47, whole genome shotgun sequence
+#=GS CH476660.1/101666-101503/1-150       DE Ajellomyces capsulatus NAm1 scaffold_6 genomic scaffold, whole genome shotgun sequence
+#=GS NMUC01000095.1/53363-53524/1-161     DE Knufia petricola strain MA 5789 contig00095, whole genome shotgun sequence
+#=GS KN846954.1/3894589-3894750/1-160     DE Exophiala sideris strain CBS 121828 unplaced genomic scaffold supercont1.4, whole genome shotgun sequence
+#=GS PCFH01000019.1/152438-152277/1-161   DE Eurotiomycetes sp. isolate CG19_WC_8_21_14_NA_150_52_33 CG19_WC_8_21_14_NA_150_scaffold_19, whole genome shotgun sequence
+#=GS KK106983.1/4170125-4170290/1-164     DE Umbilicaria muehlenbergii strain KoLRI No. LF000956 unplaced genomic scaffold Scaffold_3, whole genome shotgun sequence
+#=GS LCWF01000016.1/40120-40287/1-152     DE Phaeomoniella chlamydospora isolate UCRPC4 PC4_UCR_scaffold_v01_16, whole genome shotgun sequence
+#=GS AMGW01000001.1/5081690-5081528/1-163 DE Cladophialophora yegresii CBS 114405 aczIN-supercont1.1, whole genome shotgun sequence
+#=GS AZGZ01000024.1/204852-205023/1-168   DE Ascosphaera apis ARSEF 7405 Scaffold_24, whole genome shotgun sequence
+#=GS KZ107833.1/281061-281197/1-107       DE Lasiodiplodia theobromae strain CSS-01s unplaced genomic scaffold scaffold_9, whole genome shotgun sequence
+#=GS LGUA01000070.1/12013-12177/1-148     DE Emmonsia sp. CAC-2015a strain CBS 136260 supercont2.70, whole genome shotgun sequence
+
+CM000175.1/1017260-1017427/1-168             CGACCUCCUGCAAUCUAAUAACCCGUU...G.U.UC.UCUAC......C.....GUCC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.U....AA....A....U....G....A.C....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR CM000175.1/1017260-1017427/1-168     PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+QDFW01000125.1/656814-656647/1-168           CGACCUCCUGCAAUCUAAUAACCCGUU...G.U.UC.UCUAC......C.....GUCC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.U....AA....A....U....G....A.C....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR QDFW01000125.1/656814-656647/1-168   PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+DS027695.1/286414-286581/1-168               CGACCUCCUGCAAUCUAAUAACCCGUU...G.U.UC.UCUAC......C.....GUCC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....U....G....A.C....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR DS027695.1/286414-286581/1-168       PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+BCLY01000005.1/1105902-1106069/1-168         CGACCUCCUGCGAUCUAAUAACCCGUU...G.U.CC.UCUAC......C.....GUCC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....U....G....A.C....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUG.C.C.A..CAA
+#=GR BCLY01000005.1/1105902-1106069/1-168 PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+MSZS01000007.1/802408-802243/1-166           CGACCUCCUGCAAUCUAAUAACCCGUU...G.U.UC.UUUAC......C.....AUCC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....U....G....G.C....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR MSZS01000007.1/802408-802243/1-166   PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+NKHU02000004.1/135649-135816/1-168           CGACCUCCUGCAAUCUAAUAACCCGUU...G.U.UC.UCUAC......C.....AUCC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAA.A.G....AA....A....U....G....A.C....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR NKHU02000004.1/135649-135816/1-168   PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+BBXM01000095.1/553299-553132/1-168           CAACCUCCUGCAAUCUAAUAACCCGUU...G.U.UC.UUUAC......C.....AUCC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....U....G....G.C....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR BBXM01000095.1/553299-553132/1-168   PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+SIHR01000252.1/171362-171195/1-168           CAACCUCUUGCAAUCUAAUAACCCAUU...G.U.UC.UUUAC......C.....AUCC.AU...................GG.ACAAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....U....G....G.C....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR SIHR01000252.1/171362-171195/1-168   PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+NKHV02000040.1/147013-147176/1-164           CGACCUCCUGCAAUCUAAUAACCCGUU...G.U.UC.--UAC......C.....AUCU.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....U....G....A.C....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR NKHV02000040.1/147013-147176/1-164   PP ***************************...*.*.**...69*......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ826321.1/580016-580178/1-161               UCACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUA-......-.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....CA....A....U....U....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ826321.1/580016-580178/1-161       PP ***************************...*.*.**.*998..............78*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KV907503.1/240037-240199/1-163               UCGCCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUU--......-.....GUCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....CA....A....U....U....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KV907503.1/240037-240199/1-163       PP ***************************...*.*.**.976..............89**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KV907503.1/525339-525501/1-163               UCGCCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUU--......-.....GUCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....CA....A....U....U....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KV907503.1/525339-525501/1-163       PP ***************************...*.*.**.976..............89**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+AM270992.1/246305-246470/1-166               UUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUAU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR AM270992.1/246305-246470/1-166       PP ***************************...*.*.**.***99......8......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ821341.1/1178540-1178375/1-166             UUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUAU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ821341.1/1178540-1178375/1-166     PP ***************************...*.*.**.***99......8......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ851858.1/771358-771193/1-166               UUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUAU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ851858.1/771358-771193/1-166       PP ***************************...*.*.**.***99......8......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+BDHI01000028.1/4084893-4085058/1-166         UUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUAU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR BDHI01000028.1/4084893-4085058/1-166 PP ***************************...*.*.**.***99......8......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+LKBE01000001.1/1713357-1713196/1-162         CUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUU-......-.....-ACC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....CG....A....U....U....G.G....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.-.-.UC.ACU.U.C.A..CAA
+#=GR LKBE01000001.1/1713357-1713196/1-162 PP ***************************...*.*.**.9986..............579.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****97.....69.999.*.*.*..***
+SSOS01000002.1/1806046-1805885/1-162         CUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUU-......-.....-ACC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....CG....A....U....U....G.G....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.-.-.UC.ACU.U.C.A..CAA
+#=GR SSOS01000002.1/1806046-1805885/1-162 PP ***************************...*.*.**.9986..............579.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****97.....69.999.*.*.*..***
+KZ824445.1/313391-313229/1-157               UCACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUU--......-.....GUCC.AU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.A.G....CA....A....U....U....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ824445.1/313391-313229/1-157       PP ***************************...*.*.**.976..............99**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KV878697.1/263307-263472/1-166               UUACCUCCUGCAAUCUAAUAACCCGUU...G.U.UC.UUUAU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAA.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KV878697.1/263307-263472/1-166       PP ***************************...*.*.**.****9......8......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+MSFK01000026.1/289461-289624/1-162           UCGCCUCCUGCAAUCUAACAACCCGUU...U.U.UC.UUU--......-.....GUCU.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.G....CA....A....U....U....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR MSFK01000026.1/289461-289624/1-162   PP ***************************...*.*.**.976..............899*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ852076.1/260226-260391/1-166               UUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUAU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ852076.1/260226-260391/1-166       PP ***************************...*.*.**.***99......8......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ825567.1/4203-4366/1-164                   CUACCUCCUGCAAUCUAAUAACCCAUU...G.U.CC.UUU--......C.....CUCA.GU...................GG.AUAAUGGGAUACAAGGCAGGAGAAG.A.A....AG....A....U....A....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR KZ825567.1/4203-4366/1-164           PP ***************************...*.*.**.987........5.....5899.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+KV878253.1/356303-356138/1-166               UCACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUUU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KV878253.1/356303-356138/1-166       PP ***************************...*.*.**.99877......6......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+DF126469.1/258535-258700/1-166               UCACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUUC......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR DF126469.1/258535-258700/1-166       PP ***************************...*.*.**.99977......6......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ825892.1/19891-19727/1-161                 CCACCUCCUGCAAUCUAAUAACCCAUU...G.U.UC.UUUUC......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGGAG.A.G....UG....A....C....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ825892.1/19891-19727/1-161         PP ***************************...*.*.**.99987......6......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ821617.1/242446-242611/1-166               UUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUAU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAU.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ821617.1/242446-242611/1-166       PP ***************************...*.*.**.***99......8......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KV878182.1/289012-288847/1-166               UCACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUUU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KV878182.1/289012-288847/1-166       PP ***************************...*.*.**.99877......6......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ825055.1/2592754-2592589/1-166             UCACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUUU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ825055.1/2592754-2592589/1-166     PP ***************************...*.*.**.99877......6......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ559648.1/48142-47980/1-158                 CCACCUCCUGCAAUCUAAUAACCCAUA...G.U.UC.UA---......C.....UUCC.AU...................GG.ACUAUGGGAUACAAGGCUGGAGAAG.A.G....CA....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ559648.1/48142-47980/1-158         PP ***************************...*.*.**.85.........7.....89**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ821724.1/122464-122627/1-164               CUACCUCCUGCAAUCUAAUAACCCAUU...U.U.CC.UUUC-......-.....CUCG.GU...................GG.AUAAUGGGAUACAAGGCAGGAGAAG.A.A....AG....A....U....A....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR KZ821724.1/122464-122627/1-164       PP ***************************...*.*.**.9875.............5899.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+KZ821485.1/220489-220324/1-166               UCACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUUU......C.....-UCC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ821485.1/220489-220324/1-166       PP ***************************...*.*.**.99877......6......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+MSFU01000021.1/294754-294919/1-166           UCACCUCCUGCAAUCUAAUAACCCGUU...C.U.UC.UUUUU......C.....-UCC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR MSFU01000021.1/294754-294919/1-166   PP ***************************...*.*.**.99877......6......89*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ824553.1/344949-344784/1-166               UCACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UUUUU......-.....UACC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ824553.1/344949-344784/1-166       PP ***************************...*.*.**.98865............5799.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ559149.1/91558-91395/1-164                 CCACCUCCUGCAAUCUAAUAACCUUUA...G.U.UC.UA---......C.....UUCC.AU...................GG.ACUAUGGGAUACAAUGCGGGAGAAG.A.G....CA....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR KZ559149.1/91558-91395/1-164         PP ***************************...*.*.**.85.........7.....89**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+QAGJ01000334.1/39907-39742/1-166             UGACCUCCUGCAGUCUAAUAACCCAUU...CaU.CC.UCUUU......C.....--AC.AU...................GG.AGUAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....G....C....G.C....C..AUUGUU..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR QAGJ01000334.1/39907-39742/1-166     PP ***************************...*66.66.77766......5.......69.9*...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+SMSW01000007.1/527012-526847/1-164           UUAUCUCCUGCAAUCAAACAACCCCAU...A.U.CC.UUUUC......U.....UCCC.GU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....CG....A....U....G....A.C....C..AUUGCG..G.AUU.A...UU.UC.CGCUUCA.U.A.CC.AUC.C.C.A..CAA
+#=GR SMSW01000007.1/527012-526847/1-164   PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+JSYV01000857.1/29496-29659/1-164             CGACCUCCUGCAAUCUAAUAGCCCAU-...-.-.UC.UCCUC......U.....UUCA.AU...................GG.ACCGUGGGAUACAAGGCAGGAGAAG.A.U....UG....A....U....U....A.U....C..ACCGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.AUC.C.C.A..CAA
+#=GR JSYV01000857.1/29496-29659/1-164     PP *************************5........66.66666......7.....7999.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+CBWZ010000244.1/2811-2648/1-164              CCACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.CU-GC......C.....--UC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.G....CG....A....U....U....G.G....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.-.G.UC.ACC.U.C.A..CAA
+#=GR CBWZ010000244.1/2811-2648/1-164      PP ***************************...*.*.*9.54.44......4.......58.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.******9...5.99.***.*.*.*..***
+MSFO01000001.1/1773037-1772876/1-161         CUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.UU--A......C.....CUCC.GU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.G....CG....A....U....U....G.G....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.-.-.UC.ACU.U.C.A..CAA
+#=GR MSFO01000001.1/1773037-1772876/1-161 PP ***************************...*.*.*9.75..4......5.....699*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****97.....69.999.*.*.*..***
+MVGC01000005.1/68794-68629/1-165             UUUCCUCCUGCAAUCUAAUAACCCGUU...U.U.UCcUUUUU......U.....UUCC.AU...................GA.AUGAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....U....G....U.U....C..ACCGUG..A.CUU.A...UU.UC.CGCUUCA.-.A.UC.ACU.U.C.A..CAA
+#=GR MVGC01000005.1/68794-68629/1-165     PP ***************************...*.*.*9456677......8.....89**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.******8...8.9*.***.*.*.*..***
+MSFL01000033.1/162872-162709/1-160           UCACCUCCUGCAAUCUAAUAACCCAUU...U.U.UC.UUU--......C.....CUCC.GU...................GG.AUUAUGGGAUACAAGGCGGGAGAAG.A.G....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.C.C.A..CAA
+#=GR MSFL01000033.1/162872-162709/1-160   PP ***************************...*.*.**.887........5.....69**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ825311.1/228071-228233/1-162               CUACCUCCUGCCAUCUAAUAACCCAUU...U.U.UU.UUUC-......-.....-UCA.AU...................GG.AUAAUGGGAUACAAGGCAGGAGAAG.A.A....AG....A....C....A....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.C.C.CC.UCU.A.C.A..UAA
+#=GR KZ825311.1/228071-228233/1-162       PP ***************************...9.9.99.9875..............789.9*...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+MSFM01000012.1/732818-732654/1-165           ACCACUCCUGCAAUCUAAUAACCUUUA...G.U.UC.UC---......C.....UUCC.AU...................GG.ACUAUGGGAUACAAUGCGGGAGAAG.A.G....CA....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR MSFM01000012.1/732818-732654/1-165   PP ***************************...*.*.**.85.........7.....89**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KV878970.1/3488157-3487993/1-165             CUACCUCCUGCCAUCUAAUAACCCAUU...U.U.U-.UCUUU......U.....CUCA.AU...................GG.AUAAUGGGAUACAAGGCAGGAGAAA.A.A....AG....A....U....A....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR KV878970.1/3488157-3487993/1-165     PP **************************9...5.5.5..57777......7.....89**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+KZ824963.1/183471-183309/1-162               CUACCUCCUGCCAUCUAAUAACCCAUU...U.U.U-.UCUUU......U.....CUCA.AU...................GG.AUAAUGGGAUACAAGGCAGGAGAAG.A.A....AG....A....C....A....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR KZ824963.1/183471-183309/1-162       PP **************************9...5.5.5..57777......7.....89**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+KZ824652.1/364618-364780/1-162               CUACCUCCUGCAAUCUAAUAACCCAUU...U.U.U-.UCUUU......U.....CUCA.AU...................GG.AUAAUGGGAUACAAGGCAGGAGAAG.A.A....AG....A....C....A....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR KZ824652.1/364618-364780/1-162       PP **************************9...5.5.5..57777......7.....89**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+NGZO01000005.1/1830937-1831100/1-164         CUACCUCCUGCAAUCUAAUAACCCGUU...U.U.UC.-CUAC......C.....--UC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGAAG.A.G....CG....A....U....U....G.G....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.-.G.UC.ACC.U.C.A..CAA
+#=GR NGZO01000005.1/1830937-1831100/1-164 PP ***************************...9.9.99..6777......6.......69.9*...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.******9...5.99.***.*.*.*..***
+CH476599.1/237370-237533/1-162               UCGCCUCCUGCAAUCUAAUAGCCCGUU...G.U.UC.UG--A......U.....UUCC.GU...................GG.ACCAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR CH476599.1/237370-237533/1-162       PP ***************************...*.*.**.75..5......7.....799*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+QUQM01000008.1/1267467-1267305/1-161         ACACCUCCUGCAAUCUAAUAACCCGUU...A.U.UC.UUUAU......C.....U-UC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAC.A.G....UG....A....A....G....G.-....C..AUUGCA..A.CUU.A...U-.UC.CGCUUCA.A.U.CA.CCU.U.C.A..CAA
+#=GR QUQM01000008.1/1267467-1267305/1-161 PP ***************************...*.*.**.****9......9.....5.57.9*...................**.*************************.*.9....99....9....8....7....7......7..******..*.***.9...7..68.9******.9.9.99.99*.*.*.*..***
+LYCR01000040.1/168085-167920/1-165           GCACCUCCUGCAAUCUAAUAACCCAUU...U.U.GC.-CUUC......A.....UUUC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.A....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAG
+#=GR LYCR01000040.1/168085-167920/1-165   PP ***************************...9.9.88..7789......9.....99**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+KZ825124.1/227536-227375/1-153               CUACCUCCUGCAAUCUAAUAACCCAUU...U.U.CC.UUU--......C.....CUCA.GU...................GG.AUAAUGGGAUACAAGGCAGGAGAAG.A.A....AG....A....U....A....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.-.-C.CCU.C.U.A..CAU
+#=GR KZ825124.1/227536-227375/1-153       PP ***************************...*.*.**.987........5.....5899.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+KZ824771.1/1146972-1147133/1-153             CUACCUCCUGCAAUCUAAUAACCCAUU...U.U.CC.UUU--......C.....CUCA.GU...................GG.AUAAUGGGAUACAAGGCAGGAGAAG.A.A....AG....A....U....A....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.U.-.-C.CCU.C.U.A..CAU
+#=GR KZ824771.1/1146972-1147133/1-153     PP ***************************...*.*.**.987........5.....5899.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+JNOM01000620.1/5848-5683/1-161               GCACCUCCUGCAAUCUAAUAACCCAUU...U.U.GC.-CUUC......A.....UUUC.AU...................GG.AUUAUGGGAUACAAGGCAGGAGAAG.A.A....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR JNOM01000620.1/5848-5683/1-161       PP ***************************...9.9.88..7789......9.....99**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+RHLO01000759.1/9578-9740/1-163               GCACCUCCUGCAAUCUAAUAACCCGUU...A.U.UC.UU--A......U.....AUCC.GU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.A.A....CG....A....A....U....G.G....C..ACUGUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR RHLO01000759.1/9578-9740/1-163       PP ***************************...*.*.**.76..4......6.....89**.**...................**.*************************.*.*....99....9....9....9....9.9....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+MSJE01000298.1/412250-412087/1-162           GAACCUCCUGCAAUCUAAUAGCCCGUU...G.U.UC.UG--A......U.....UUCC.GU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.A.A....AA....A....C....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR MSJE01000298.1/412250-412087/1-162   PP ***************************...*.*.**.75..5......7.....7999.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+BA000049.1/6088843-6088679/1-165             GCACCUCCUGCAAUCUAAUAACCCAUU...U.UgCC.UCUAC......-.....-UUC.AU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.A.A....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR BA000049.1/6088843-6088679/1-165     PP **************************9...9.9677.88887.............789.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+EQ963472.1/395939-396103/1-165               GCACCUCCUGCAAUCUAAUAACCCAUU...U.UgCC.UCUAC......-.....-UUC.AU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.A.A....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR EQ963472.1/395939-396103/1-165       PP **************************9...9.9677.88887.............789.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+NEXV01000360.1/123483-123647/1-165           GCACCUCCUGCAAUCUAAUAACCCAUU...U.UgCC.UCUAC......-.....-UUC.AU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.A.A....UG....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR NEXV01000360.1/123483-123647/1-165   PP **************************9...9.9677.88887.............789.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+PIJX01000013.1/289188-289351/1-162           UUGCCUCCUGCAAUCUAAUAGCCCGUU...G.U.UC.UG--A......U.....UUCC.GU...................GG.ACCAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.U.A..CAA
+#=GR PIJX01000013.1/289188-289351/1-162   PP ***************************...*.*.**.75..5......7.....799*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+BCIE01000006.1/1100238-1100402/1-163         CUACCUCCGCCAAUCUAAUAACCCAUU...C.U.CC.UUUG-......-.....UUUC.AU...................GG.AGUAUGGGAUACAAGGCAGGAGAAG.A.G....AG....A....A....C....G.C....C..AUUGUU..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCU.C.C.A..CAA
+#=GR BCIE01000006.1/1100238-1100402/1-163 PP ***************************...*.*.**.9986.............589*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+HG793156.1/282978-282822/1-155               AACCCUCCCGCAAUCUAAUAACCCAUA...G.U.UC.UUC--......-.....-UCU.AU...................AG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR HG793156.1/282978-282822/1-155       PP ***************************...*.*.98.754...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+HG813602.1/97207-97363/1-155                 AACCCUCCCGCAAUCUAAUAACCCAUA...G.U.UC.UUC--......-.....-UCU.AU...................AG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR HG813602.1/97207-97363/1-155         PP ***************************...*.*.98.754...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KZ824271.1/919184-919022/1-163               CCACCUCCUGCAAUCUAAUAACCCAUU...UuA.CC.UU--U......C.....CUCA.GU...................GG.UUAAUGGGAUACAAGGCAGGAGAAG.A.A....UG....A....C....U....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.A.U.A..CAA
+#=GR KZ824271.1/919184-919022/1-163       PP *************************97...614.55.44..4......5.....5888.89...................99.99***********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....5.567.8.8.9..***
+PQMF01000069.1/52331-52496/1-166             UGACCUCCUGCAGUCUAAUAACCCAUU...C.A.UC.CUCAU......C.....-CAC.AU...................GG.AGUAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....G....C....G.C....C..AUUGUU..A.CUU.A...UUuUC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR PQMF01000069.1/52331-52496/1-166     PP ***************************...*.7.66.55555......4......358.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...75278.9******.*.*.**.***.*.*.*..***
+KV878211.1/1598599-1598759/1-159             UCACCUCCUGCCAUCUAAUAACCCGUC...U.U.CC.GU---......-.....-UCC.GU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.A.G....CA....A....A....-....G.C....C..ACCGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.AUA.C.CuA..CAA
+#=GR KV878211.1/1598599-1598759/1-159     PP **************************9...9.9.99.64................577.88...................**.*************************.*.9....88....7....5.........9.*....*..******..*.***.*...**.**.*******.*.*.**.**8.7.549..***
+DF093573.1/4194183-4194018/1-166             GCACCUCCUGCAAUCUAAUAACCCAUU...U.UgCC.UCUAC......-.....-UUC.AU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.AaU....GA....U....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR DF093573.1/4194183-4194018/1-166     PP **************************9...9.9677.88887.............789.**...................**.************************9.725....67....7....8....8....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+CDHK01000003.1/1537683-1537843/1-159         AUCCCUCCUGCCAUCUAAUAACCCAUU...G.A.UC.UUUU-......U.....UUCC.AU...................GA.ACUAUGGGAUACAAGGCAGGAGGAG.A.G....CA....A....U....G....U.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.AUC.C.C.A..CAA
+#=GR CDHK01000003.1/1537683-1537843/1-159 PP ***************************...*.*.**.9875.......6.....79**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+PQME02000006.1/44843-44679/1-165             UGACCUCCUGCAGUCUAAUAACCCAUU...C.A.UC.CUCAU......C.....-CAC.AU...................GG.AGUAUGGGAUACAAGGCAGGAGAAG.A.G....AA....A....G....C....G.C....C..AUUGUU..A.CUU.A...UUuUC.CGCUUCA.U.A.UC.AUU.C.C.A..CAA
+#=GR PQME02000006.1/44843-44679/1-165     PP ***************************...*.7.66.55555......4......358.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...75278.9******.*.*.**.***.*.*.*..***
+MAQV01000007.1/428809-428645/1-163           CUACCUCCGCCAAUCUAAUAACUCAUU...C.U.UC.UUUG-......-.....UUUC.AU...................GG.AGUAUGGGAUACAAGGCAGGAGAAG.A.G....AG....A....A....C....G.C....C..AUUGUU..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCU.C.C.A..CAA
+#=GR MAQV01000007.1/428809-428645/1-163   PP ***************************...*.*.**.9986.............589*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+LASV01000156.1/57774-57610/1-165             CGACCUCUUGCUAUCUAAUAGCCCG-C...U.U.CC.UCUAC......U.....UUCC.-U...................GG.ACGAUGGGAUACAAAGCAGGAGGAG.A.U....CG....A....C....-....U.U....C..ACUGCG..A.CUU.A...UUuUC.CGCUUCA.-.-.CC.ACU.C.C.A..CAA
+#=GR LASV01000156.1/57774-57610/1-165     PP *************************.7...7.*.**.****9......8.....8776..7...................**.*************************.*.*....99....9....7.........8.9....*..******..*.***.9...76268.99*9996.....69.99*.*.*.*..***
+KZ821244.1/194608-194445/1-160               UCACCUCCUGCAAUCUAAUAACCCAUG...C.U.AC.CUUCU......C.....CUCA.GU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.A.A....UG....A....C....U....G.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR KZ821244.1/194608-194445/1-160       PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+JZEE01000665.1/6799-6634/1-166               GCACCUCCUGCAAUCUAAUAACCCAUU...U.UgCC.UCUAC......-.....-UUC.AU...................GG.AUCAUGGGAUACAAGGCAGGAGAAG.AaU....GA....U....U....U....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.CCC.U.C.A..CAA
+#=GR JZEE01000665.1/6799-6634/1-166       PP **************************9...9.9677.88887.............789.**...................**.************************9.725....67....7....8....8....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+RHLP01000352.1/46999-46832/1-168             UCACCUCCCGCAAUCUAAUAACCCAUA...U.U.UC.UU---......C.....AUCC.AU...................GG.CUUAUGGGAUACAAUGCGGGAGAAU.A.U....UG....G....AucccA....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.C.A..CAA
+#=GR RHLP01000352.1/46999-46832/1-168     PP ***************************...9.9.99.86.........6.....689*.**...................**.************************9.9.8....65....3....213338....9.9....*..******..*.***.*...**.**.*****97.5....6.779.*.*.*..***
+NPFE01001614.1/64110-63949/1-162             AUCCCUCCUGCCAUCUAAUAACCCAUU...G.A.CC.CGAUU......C.....UUCC.AU...................GG.ACUAUGGGAUACAAGGCAGGAGGAG.A.G....CA....A....U....A....U.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.AUC.C.C.A..CAA
+#=GR NPFE01001614.1/64110-63949/1-162     PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+CDMC01000006.1/2136053-2136219/1-166         CCACCUCCUGCAAUCUAAUAACCCAUU...C.U.UC.UCUA-......-.....-UCA.AU...................GG.AUUUUGGGAUACAAGGCGGGAGAAG.A.U....UG....AcuuuC....A....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR CDMC01000006.1/2136053-2136219/1-166 PP *************************99...9.9.99.9998..............678.99...................**.*************************.*.9....87....633335....8....9.9....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+KB644408.1/2344798-2344638/5-146             ----CUCUUGCCAUCUAAUAACCCACU...G.U.UU.UUCUU......C.....CUCU.GU...................GA.ACUUUGGGAUACAAGGCAGGAGGAG.A.G....CA....A....U....G....C.C....C..ACCGUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.AUC.C.C.A..CAA
+#=GR KB644408.1/2344798-2344638/5-146     PP ....***********************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+MDYL01000004.1/86173-86333/1-157             AUCCCUCCUGCCAUCUAAUAACCCUUG...A.A.CC.UCU--......C.....UUCC.AU...................GG.AUCACGGGAUACAAGGCAGGAGGAG.A.G....CA....A...uU....G....U.C....C..ACUUUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.AUC.C.C.A..CAA
+#=GR MDYL01000004.1/86173-86333/1-157     PP ***************************...*.*.**.997........7.....89**.**...................**.*************************.9.7....66....6...15....6....7.9....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+MNBE01000719.1/721874-722034/1-160           AACCCUCCUGCCAUCUAAUAACCCAUU...G.A.UU.CUUUU......U.....UCCC.AU...................GA.ACUAUGGGAUACAAGGCAGGAGGAG.A.G....CA....A....U....G....U.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.AUC.C.C.A..CAA
+#=GR MNBE01000719.1/721874-722034/1-160   PP ***************************...*.8.88.88889......9.....99**.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KB644873.1/209888-210048/1-161               AUCCCUCCCGCAAUCUAAUAACCCUUG...A.U.UC.CUU-U......G.....CUCC.AU...................GG.AUCAUGGGAUACAAUGCGGGAGGAG.A.U....CA....-....U....C....U.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CUC.C.C.A..CAA
+#=GR KB644873.1/209888-210048/1-161       PP ***************************...*.*.**.665.5......5.....69**.**...................**.*************************.*.9....86.........6....6....8.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+HG814388.1/15693-15537/1-157                 AACCCUCCCGCAAUCUAAUAACCCAUA...G.U.UC.UUC--......-.....-UCU.AU...................AG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR HG814388.1/15693-15537/1-157         PP ***************************...*.*.98.754...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+PUHX01000037.1/285745-285901/1-157           AACCCUCCCGCAAUCUAAUAACCCAUA...G.U.UC.UUC--......-.....-UCU.AU...................AG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR PUHX01000037.1/285745-285901/1-157   PP ***************************...*.*.98.754...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KV784226.1/773183-773025/1-159               AUCCCUCCUGCAAUCUAAUAACCCUUG...A.U.UC.UUUU-......U.....UUCC.AU...................GG.AUCAUGGGAUACAAGGCAGGAGGAG.A.G....C-....A....U....C....U.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.AUC.C.C.A..CAA
+#=GR KV784226.1/773183-773025/1-159       PP ***************************...*.*.**.9875.......6.....79**.**...................**.*************************.9.8....6.....5....7....7....8.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KV878907.1/389505-389668/1-160               CAACCUCCGCCAAUCUAAUAACCCGUU...C.U.UC.UUU--......-.....-UCA.AU...................GG.AGUAUGGGAUACAAGGCAGGAGAAG.A.G....AG....A....A....C....G.C....C..AUUGUU..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCU.C.C.A..CAA
+#=GR KV878907.1/389505-389668/1-160       PP ***************************...*.*.**.987...............678.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KK088432.1/57264-57101/1-164                 CAACCUCCGCCAAUCUAAUAACCCGUU...C.U.UC.UUU--......-.....-UCA.AU...................GG.AGUAUGGGAUACAAGGCAGGAGAAG.A.A....AG....A....A....C....G.C....C..AUUGUU..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCU.C.C.A..CAA
+#=GR KK088432.1/57264-57101/1-164         PP ***************************...*.*.**.987...............678.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+MBFL01000568.1/8488-8325/1-164               UCACCUCCUGCAAUCUAAUAACCCAUU...U.U.GC.CCUAU......-.....-UUC.AU...................GG.AUUAUGGGAUACAAGGCGGGAGAAG.A.G....AG....A....U....U....U.G....C..AUUGUG..A.CUU.A...U-.UC.CGCUUCA.-.A.UC.CCU.U.C.A..CAA
+#=GR MBFL01000568.1/8488-8325/1-164       PP ***************************...*.*.**.**996.............799.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...7..68.9****98...6.77.788.8.9.*..***
+KZ118969.1/202256-202093/1-164               AUCCCUCCUGUCAUCUAAUAACUCACG...G.U.GC.CUUUU......C.....CUCC.AU...................GG.GCCAUGGGAUACAAGACAGGAGGAG.A.G....CA....G...uU....G....U.C....C..ACUUUG..A.CUU.A...UU.UC.CGCUUCA.U.A.CC.AUC.C.C.A..CAA
+#=GR KZ118969.1/202256-202093/1-164       PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.9.8....66....5...16....7....7.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..***
+LXJU01000008.1/212622-212778/1-157           UACCCUCCCGCAAUCUAAUAACCCGUGaauG.U.UC.UUU--......-.....GCCC.AU...................GG.ACCACGGGAUACAAUGCGGGAGGAG.A.U....CA....A....U....A....A.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.C.A..CAA
+#=GR LXJU01000008.1/212622-212778/1-157   PP ***************************7677.7.77.765..............778*.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+JPLR01000014.1/1992487-1992331/1-157         UACCCUCCCGCAAUCUAAUAACCCGUGaauG.U.UC.UUUUC......-.....--CC.AU...................GG.ACCACGGGAUACAAUGCGGGAGGAG.A.U....CA....A....U....A....A.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.C.A..CAA
+#=GR JPLR01000014.1/1992487-1992331/1-157 PP ***************************8889.9.99.98876..............69.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+BCKA01000001.1/3870779-3870617/1-161         AUCCCUCCCACAAUCUAAUAACCCAUG...A.U.UC.UUUUG......C.....-CCC.AU...................GG.AUCAUGGGAUACAAUGUGGGAGGAG.A.U....CA....-....U....C....U.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.C.A..CAA
+#=GR BCKA01000001.1/3870779-3870617/1-161 PP ***************************...*.*.**.99877......6......689.**...................**.*************************.*.9....76.........6....6....8.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+QPHH01000017.1/342246-342083/1-162           UUACCUCCCGCAAUCUAAUAACCCAUA...U.C.UC.UUUUU......C.....G---.-U...................GG.UUUAUGGGAUACAAUGCGGGAGAAG.A.UuggaAC....U....C....A....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR QPHH01000017.1/342246-342083/1-162   PP ***************************...9.9.99.98877......6.....6.....5...................**.*************************.*.8554334....5....6....8....*.*....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+LAKW02000739.1/3958-3802/1-155               CACCCUCCCGCAAUCUAAUAACCCACC...G.U.UC.UUC--......-.....-UCU.AU...................AG.ACGAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....G....A.C....C..ACGUGG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.U.A..CAA
+#=GR LAKW02000739.1/3958-3802/1-155       PP ***************************...*.*.98.754...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+CM002799.1/6798329-6798170/1-159             AAACCUCCCGCAAUCUAAUAACCCAGA...G.U.UC.UAU--......-.....-UCU.AU...................GG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....C....A....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.U.A..CAA
+#=GR CM002799.1/6798329-6798170/1-159     PP ***************************...*.*.**.987...............678.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+AM920436.1/2074112-2073953/1-159             AAACCUCCCGCAAUCUAAUAACCCAGA...G.U.UC.UAU--......-.....-UCU.AU...................GG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....C....A....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.U.A..CAA
+#=GR AM920436.1/2074112-2073953/1-159     PP ***************************...*.*.**.987...............678.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+QAGI01000090.1/101700-101541/1-159           AAACCUCCCGCAAUCUAAUAACCCAGA...G.U.UC.UAU--......-.....-UCU.AU...................GG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....C....A....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.U.A..CAA
+#=GR QAGI01000090.1/101700-101541/1-159   PP ***************************...*.*.**.987...............678.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+MUXA01000093.1/6301234-6301393/1-159         AAACCUCCCGCAAUCUAAUAACCCAGA...G.U.UC.UAU--......-.....-UCU.AU...................GG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....C....A....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.U.A..CAA
+#=GR MUXA01000093.1/6301234-6301393/1-159 PP ***************************...*.*.**.987...............678.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+LDZW01000189.1/197149-196984/1-166           UCACCUCCUCCAAUCUAAUAACCCAUU...U.U.CC.UUU--......U.....GUCC.AU...................GG.CUUAUGGGAUACAAUGGGGGAGAAG.A.G....UG....G....AcgccA....G.A....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR LDZW01000189.1/197149-196984/1-166   PP ***************************...8.8.88.765........7.....****.**...................**.*************************.9.8....76....5....411115....6.6....7..9*****..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+QAGH01000024.1/70683-70518/1-166             UCACCUCCCCCAAUCUAAUAACCCAUU...U.U.CC.UUU--......U.....GUCC.AU...................GG.CUUGUGGGAUACAAUGGGGGAGAAG.A.U....UG....G....A....U....G.CcaggC..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR QAGH01000024.1/70683-70518/1-166     PP ***************************...8.8.88.765........7.....****.**...................**.*************************.*.9....87....6....6....5....5.522226..8*****..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+CH236923.1/868820-868983/1-164               UUACCUCCUGCAAUCUAAUAACCCAUA...U.C.UC.UUUUU......U.....G---.-U...................GG.UUUAUGGGAUACAAUGCGGGAGAAG.A.UuggaAG....U....C....A....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR CH236923.1/868820-868983/1-164       PP **************************9...8.8.88.88866......6.....6.....5...................**.*************************.*.8444334....5....6....7....9.9....9..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+QAGJ01000001.1/12137-12302/1-166             UCACCUCCCCCAAUCUAAUAACCCAUU...U.U.CC.UUU--......U.....GUCC.AU...................GG.CUUGUGGGAUACAAUGGGGGAGAAG.A.G....UG....G....A....UgccaG.G....C..ACUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR QAGJ01000001.1/12137-12302/1-166     PP ***************************...8.8.88.765........7.....****.**...................**.*************************.9.7....65....4....4....402225.5....7..9*****..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+HG816185.1/2776-2618/1-157                   AAACCUCCCGCAAUCUAAUAACCCAGC...G.U.UC.UUUGC......C.....--CU.AU...................GG.ACUUUGGGAUACAAUGCGGGGGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.U.A..CAA
+#=GR HG816185.1/2776-2618/1-157           PP ***************************...*.*.**.****9......8.......67.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+PVWQ01000001.1/4903679-4903513/1-165         CCACCUCCUGCAAUCUAAUAACCCAUA...U.U.UC.UUU-C......U.....UUCU.GU...................GG.CUUAUGGGAUACAAUGCGGGAGAAG.A.U....UGgaucU....C....A....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR PVWQ01000001.1/4903679-4903513/1-165 PP ***************************...*.9.99.865.7......8.....899*.**...................**.*************************.*.9....6421224....5....8....9.9....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+JYNM02000007.1/2977649-2977492/1-156         AACACUCCCGCAAUCUAAUAACCCAGC...G.U.UC.UUCUC......U.....AUA-.--...................GA.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR JYNM02000007.1/2977649-2977492/1-156 PP ***************************...*.*.**.88766......6.....553.......................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+HG792015.1/6520966-6520808/1-157             AAACCUCCCGCAAUCUAAUAACCCAUC...G.U.UC.UUUGC......C.....--CU.AU...................GG.ACUUUGGGAUACAAUGCGGGGGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.U.A..CAA
+#=GR HG792015.1/6520966-6520808/1-157     PP ***************************...*.*.**.****9......8.......67.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KQ434266.1/2479195-2479355/1-160             UACUCUCCUGCCAUCUAAUAACCCAUU...G.A.UU.CUUUU......C.....UUCC.AU...................GA.ACUAUGGGAUACAAGGCGGGAGGAG.A.G....CA....A....U....G....U.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.AUC.C.C.A..CAG
+#=GR KQ434266.1/2479195-2479355/1-160     PP ***************************...*.8.88.89999......9.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KV878585.1/1257911-1258076/1-166             UCACCUCCUCCAAUCUAACAACCCAUU...U.U.CC.UUU--......U.....GUCC.AU...................GG.CUUAUGGGAUACAAUGGGGGAGAAG.A.G....UG....G....AcgccA....G.A....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR KV878585.1/1257911-1258076/1-166     PP ***************************...8.8.88.765........7.....****.**...................**.*************************.9.8....76....5....411115....6.6....7..9*****..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+HG813315.1/254382-254538/1-155               AAACCCCCCGCAAUCUAAUAACCCAGC...G.U.UC.UUUGC......-.....-UCC.AU...................GG.AC--UGGGAUACAAUGCGGGGGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.A.A..CAA
+#=GR HG813315.1/254382-254538/1-155       PP ***************************...*.*.**.*9987.............8**.**...................**.*8..9********************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+RFFF01004146.1/3432-3588/1-155               AAACCUCCCGCAAUCUAAUAACCCAGC...G.U.UC.UAC--......-.....-UCU.AU...................GG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....C....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR RFFF01004146.1/3432-3588/1-155       PP ***************************...*.*.**.864...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+MOOB01000023.1/235686-235842/1-155           AAACCUCCCGCAAUCUAAUAACCCAGC...G.U.UC.UAC--......-.....-UCU.AU...................GG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....C....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR MOOB01000023.1/235686-235842/1-155   PP ***************************...*.*.**.864...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+PKQL01000052.1/67075-67231/1-155             AAACCUCCCGCAAUCUAAUAACCCAGC...G.U.UC.UAC--......-.....-UCU.AU...................GG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....C....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR PKQL01000052.1/67075-67231/1-155     PP ***************************...*.*.**.864...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+CM012214.1/5468557-5468392/1-164             CCACCUCCUGCAAUCUAAUAACCCA-C...U.U.UC.UU--U......C.....AUCU.CU...................GG.AAGCUGGGAUACAAGGCAGGAGAAG.A.U....CA....A....Uc..aA....C.G....C..ACCGCG..A.CUU.A...UU.UC.CGCUUCU.U.CcUA.AAC.U.C.A..CAA
+#=GR CM012214.1/5468557-5468392/1-164     PP *************************.5...5.5.55.44..3......6.....7888.89...................**.*************************.*.*....*9....9....85..57....*.*....*..******..*.***.*...**.**.******9.9.7255.667.8.9.*..***
+RCNU01000001.1/3292864-3292699/1-164         CCACCUCCUGCAAUCUAAUAACCCA-C...U.U.UC.UU--U......C.....AUCU.CU...................GG.AAGCUGGGAUACAAGGCAGGAGAAG.A.U....CA....A....Uc..aA....C.G....C..ACCGCG..A.CUU.A...UU.UC.CGCUUCU.U.CcUA.AAC.U.C.A..CAA
+#=GR RCNU01000001.1/3292864-3292699/1-164 PP *************************.5...5.5.55.44..3......6.....7888.89...................**.*************************.*.*....*9....9....85..57....*.*....*..******..*.***.*...**.**.******9.9.7255.667.8.9.*..***
+BCIC01000004.1/1962356-1962188/1-169         CCACCUCCUGCCAUCUAAUAACCCGCU...UuC.CU.UUUAC......U.....GCCU.CU...................UG.GAUUCGGGAUACAAGACAGGAGAAG.A.U....UG....A....C....C....A.C....C..ACCGCG..A.CUU.A...UUgUC.CGCUU-C.U.A.CC.CCU.C.C.A..CAA
+#=GR BCIC01000004.1/1962356-1962188/1-169 PP *************************87...516.66.88999......9.....**99.99...................99.99*9*********************.*.*....**....*....*....*....*.*....*..******..*.***.*...99355.56655.5.8.9.99.***.*.*.*..***
+MSJH02000800.1/203623-203458/1-164           CCACCUCCUGCAAUCUAAUAACCCA-C...U.U.UC.UUUCC......-.....-UCU.CU...................GG.AAGCUGGGAUACAAGGCAGGAGAAG.A.U....CA....A....Uc..aA....C.G....C..ACCGCG..A.CUU.A...UU.UC.CGCUUCU.U.CcUA.AAC.U.C.A..CAA
+#=GR MSJH02000800.1/203623-203458/1-164   PP *************************.7...7.7.78.77655.............667.78...................**.*************************.*.*....*9....9....85..57....*.*....*..******..*.***.*...**.**.******9.9.7255.667.8.9.*..***
+MDYN01000007.1/378845-379000/1-156           UACCCUCCCGCAAUCUAAUAACCCGUGaauG.U.UC.UCUUC......-.....--CC.AU...................GG.ACCACGGGAUACAAUGCGGGAGGAG.A.U....CA....A....A....-....G.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.C.A..CAA
+#=GR MDYN01000007.1/378845-379000/1-156   PP ***************************8889.9.99.99877..............69.**...................**.*************************.*.*....99....8....6.........7.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+LLXE01000046.1/5460-5303/1-156               AACCCUCCCGCAAUCUAAUAACCCAGC...G.U.UC.UUCUC......U.....AUA-.--...................GA.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR LLXE01000046.1/5460-5303/1-156       PP ***************************...*.*.**.88766......6.....553.......................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KV878129.1/1268395-1268230/1-166             UCACCUCCCCCAAUCUAAUAACCCAUU...-.-.UU.UCAUC......U.....GUCC.AU...................GG.CUUGUGGGAUACAAUGGGGGAGAAG.A.A....UG....G....A....UgccaG.G....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR KV878129.1/1268395-1268230/1-166     PP ***************************.......66.66889......*.....****.**...................**.************************9.8.7....65....5....4....402225.5....7..9*****..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+QLOF01000019.1/58358-58191/1-166             UCACCUCCCGCAAUCUAAUAACCCAUA...U.U.UC.UUUGU......C.....-UCC.GU...................GG.CUUAUGGGAUACAAUGCGGGAGGAG.A.U....UG....G....AuuccA....G.G....C..AUUGCG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR QLOF01000019.1/58358-58191/1-166     PP ***************************...*.*.**.*9987......7......899.9*...................**.*************************.*.9....64....3....212338....9.9....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+JOMC01000030.1/386208-386373/1-164           UUACCUCCUGCAAUCUAAUAACCCAUU...C.U.UC.--UUC......U.....GUCA.AU...................GG.AUUUUGGGAUACAAGGCGGGAGAAG.A.U....UG....Aa..u-uuccA....G.G....C..ACUGUG..A.CUU.A...UU.UC.CGCUUCA.C.-.-C.CCU.C.U.A..CAA
+#=GR JOMC01000030.1/386208-386373/1-164   PP ************************987...7.7.77...679......9.....****.**...................**.*************************.9.8....65....42..2.44448....9.9....*..******..*.***.*...**.**.*****98.6....6.679.9.9.*..***
+RAQS01000088.1/49192-49351/1-158             AAUCCUCCUGCAAUCUAAUAACCCG-C...U.U.UC.UC---......-.....-UCC.AU...................GG.AUGAUGGGAUACAAUGCAGGAGGAG.A.G....CG....A....-....A....G.C....C..ACCGUG..A.CUU.A...UU.UC.CGCUUC-.U.A.CC.ACG.U.C.A..CCA
+#=GR RAQS01000088.1/49192-49351/1-158     PP *************************.6...6.8.88.87................589.**...................**.*************************.*.9....87....7.........5....9.*....*..******..*.***.*...**.**.****98..8.9.**.***.*.*.*..***
+JNNR01000430.1/1665-1822/1-156               CACCCUCCCGCAUUCUAAUAACCCACC...G.U.UC.UUC--......-.....-UCU.AU...................AG.ACGAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....G....A.C....C..ACGUGG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCCcC.U.A..CAA
+#=GR JNNR01000430.1/1665-1822/1-156       PP ***************************...*.*.98.754...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...7..69.9******.*.*.98.76516.7.9..***
+MLKD01000001.1/537738-537576/1-163           AACCCUCCCACAAUCUAAUAACCCAUG...A.U.UC.UUUUG......C.....-CCU.AU...................GG.GUCAUGGGAUACAAUGUGGGAGGAG.A.U....CA....-....U....C....U.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.C.A..CAA
+#=GR MLKD01000001.1/537738-537576/1-163   PP ***************************...*.*.**.99876......6......588.9*...................**.*************************.*.9....76.........6....6....8.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+MLQL01000001.1/457637-457793/1-155           AAACCUCCCGCAAUCUAAUAACCCAGC...A.U.UC.UAU--......-.....-UCU.AU...................GG.AUUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....C....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCC.C.U.A..CAA
+#=GR MLQL01000001.1/457637-457793/1-155   PP ***************************...*.*.**.987...............678.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+QPIC01000007.1/1429177-1429334/1-156         AACACUCCCGCAAUCUAAUAACCCAGC...G.U.UC.UUCUC......U.....AUA-.--...................GA.ACUAUGGGAUACAAUGCGAGAGGAG.A.A....UA....A....U....G....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR QPIC01000007.1/1429177-1429334/1-156 PP ***************************...*.*.**.88766......6.....553.......................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+MDYP01000004.1/833842-833684/1-157           AACCCUCCUGCAAUCUAAUAACCCAAC...G.U.UC.GCCU-......-.....CUCU.AU...................GG.ACUUUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....G....U.C....C..ACUUUG..G.CUU.A...U-.UC.CGCUUCA.U.G.UU.UCC.C.U.A..CAA
+#=GR MDYP01000004.1/833842-833684/1-157   PP ***************************...*.*.**.9865.............5899.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+RFFF01001027.1/45391-45231/1-161             AACCCUCCCGCAAUCUAAUAACCCGUGaauG.U.UC.UCUAC......C.....---A.AU...................GG.ACCACGGGAUACAAUGCGGGAGGAG.A.A....UG....A....U....U....U.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.C.A..CAA
+#=GR RFFF01001027.1/45391-45231/1-161     PP ***************************999*.*.**.***99......6........6.89...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+PUXE01000206.1/2686-2530/1-155               AACCCUCCCGCAAUCUAAUAACCCAUC...G.U.UC.UUC--......-.....-UCU.AU...................AG.ACUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....A....U....C....A.C....C..ACGUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..CAA
+#=GR PUXE01000206.1/2686-2530/1-155       PP ***************************...*.*.98.754...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+QBDR01000015.1/35704-35869/1-160             CCACCUCCUGCAAUCUAAUAACCCU-C...U.U.UC.UU--U......C.....AUCA.CU...................GG.AAGCUGGGAUACAAGGCAGGAGAAG.A.U....CA....A....Uc..aA....C.G....C..ACCGCG..A.CUU.A...UUuUC.CGCUUCU.U.CcUA.AAC.U.C.A..CAA
+#=GR QBDR01000015.1/35704-35869/1-160     PP ************************7.5...5.5.55.44..4......6.....7888.99...................**.*************************.*.*....*9....9....85..57....*.*....*..******..*.***.9...75268.9*****9.9.7255.667.8.9.*..***
+QAGG01000026.1/41349-41509/1-161             AACCCUCCCGCAAUCUAAUAACCCGUGaauG.U.UC.UCUA-......-.....-UCA.AU...................GG.ACCACGGGAUACAAUGCGGGAGGAG.A.A....CG....A....A....U....U.C....C..ACCUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.C.A..CAA
+#=GR QAGG01000026.1/41349-41509/1-161     PP ***************************8889.9.99.9887..............678.9*...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+JQFZ01000161.1/102553-102397/1-155           AAACCUCCCGCAAUCUAAUAACCCAGC...G.U.UC.UUC--......-.....-UCA.AU...................GG.GCUAUGGGAUACAAUGCGGGAGGAG.A.A....UA....U....U....G....C.C....C..ACUUUG..A.CUU.A...U-.UC.CGCUUCA.U.A.CC.CCU.C.U.A..CAA
+#=GR JQFZ01000161.1/102553-102397/1-155   PP ***************************...*.*.**.865...............788.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+PNEM01000004.1/3615670-3615505/1-165         UGACCUCCUGCAAUCUAAUAACCCA-C...U.U.UC.--UUU......C.....GUCC.UU...................GA.AUGCUGGGAUACAAGGCAGGAGAAG.A.U....UA....A....U....C....A.U....CgcACCGCG..A.CUU.A...UU.UC.CGCUUCU.U.C.CU.AUC.CuC.A..CAA
+#=GR PNEM01000004.1/3615670-3615505/1-165 PP ************************9.4...4.5.55...667......9.....****.**...................99.9999*********************.*.*....**....*....9....7....6.5....511667899..*.***.*...**.**.*******.*.9.99.987.648.*..***
+QEIL01000105.1/110783-110949/1-165           CAACCUCCUGCCAUCUAAUAACCCA-C...U.U.UC.--UUU......C.....AUCC.UU...................GA.AUGCUGGGAUACAAGGCAGGAGAAG.A.U....CA....A....Uc..aU....C.A....C..ACCGCG..A.CUU.A...UUuUC.CGCUUCU.U.G.CUaAGC.U.C.A..CAA
+#=GR QEIL01000105.1/110783-110949/1-165   PP ************************9.4...4.5.55...556......8.....9999.99...................99.9999*********************.*.*....**....9....84..46....9.9....9..9999**..*.***.9...75268.9*****9.9.7.651567.7.9.*..***
+LHQR01000065.1/266698-266855/1-154           AAACCUCCUGCAUUCUAAUAAACUAUG...A.U.CG.UCUC-......-.....-UUU.AU...................GG.AUUAUGGAAUACAAUGUGGGAGGAG.A.A....UA....A....U....G....A.C....C..ACUUUG..G.CUU.A...U-.UC.CGCUUCA.U.A.UU.CCC.C.U.A..CAA
+#=GR LHQR01000065.1/266698-266855/1-154   PP ***************************...*.*.*9.9874..............678.99...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KN846956.1/285761-285922/1-162               CUACCUCUCGCAAUCUAAUAACCCA--...-.C.UC.GACGU......U.....GCCU.GU...................GA.GAGUUGGGAUACAAUGCGAGAGAAG.A.G....AA....A....U....G....U.C....C..ACCGCA..G.CCU.A...UU.UC.CGCUUCG.U.-.-C.ACA.C.U.A..CUG
+#=GR KN846956.1/285761-285922/1-162       PP ************************9.......8.89.88888......9.....9999.99...................99.9999*********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****97.6....6.777.8.8.9..***
+LWEC01000368.1/376136-375979/1-158           AAGCCUCCCGCAAUCUAGUCACCCAGU...G.U.UC.UUUUC......-.....-UCA.AU...................GG.ACUAUGGGAUACAAUGCGGGAGAAG.A.A....UA....A....U....A....A.C....C..UCUUUG..G.CUU.A...U-.UC.CGCUUCA.U.A.UC.CCC.C.U.A..UAA
+#=GR LWEC01000368.1/376136-375979/1-158   PP ***************************...*.*.**.99987.............899.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+DS027051.1/253455-253601/1-147               UUACCUCCUGCAAUCUAAUAACCCAUU...A.U.UC.U-UCC......C.....CUCC.AU...................AG.AUUAUGAGAUACAAGGCAG------.-.-....--....-....-....-....-.-....-..----UG..A.CUU.A...U-.UC.CACUUCA.U.A.CC.CUC.C.C.A..CAA
+#=GR DS027051.1/253455-253601/1-147       PP ***************************...*.*.98.6.568......8.....89**.**...................**.*****************84.................................................68..8.999.8...6..68.99*****.*.*.**.***.*.*.*..***
+BCHZ01000003.1/6864909-6865072/1-155         UCACCUCUUGCAAUCUAAUAACCCGCU...-.-.--.UGAAC......C.....AUCG.CU...................UGaAAGCUGGGAUACAAGGCAAGAGAAU.A.A....GG....A....A....G....G.C....C..ACGAUG..G.ACU.A...UU.UC.CGCUUCA.-.-.CC.AUU.C.U.A..CUA
+#=GR BCHZ01000003.1/6864909-6865072/1-155 PP ************************933..........45555......5.....5555.54...................44144559********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****96.....69.***.*.*.*..*98
+ANHP01000283.1/32261-32421/1-161             AGUCCUCUUGUUAUCUAAUAGCCCA-C...A.U.UC.GUUAC......A.....CUCGgGU...................GG.AUGCUGGGAUACAAAGCAAGAGAAG.A.G....CA....A....U....C....-.-....C..GCUGCA..G.CUU.A...UG.UC.CGCUUCA.-.-.CC.ACC.C.U.A..CCA
+#=GR ANHP01000283.1/32261-32421/1-161     PP ************************9.*...*.*.**.****9......8.....8875257...................**.*************************.*.*....**....*....9....7...........9..99****..*.***.*...**.**.*****97.....68.999.*.*.*..***
+MSED01000003.1/379171-379332/1-162           CUACCUCUCGCAAUCUAAUAACCCACU...U.G.AC.UUU--......-.....GCCU.GU...................GA.GAGAUGGGAUACAAUGCGAGAGGAG.A.G....AA....A....U....G....U.C....C..ACCACU..G.CCU.A...UU.UC.CGCUUCA.U.-.-C.ACA.C.U.A..CUG
+#=GR MSED01000003.1/379171-379332/1-162   PP ************************966...6.6.66.555..............4455.66...................78.8899*********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****98.6....6.667.8.8.9..9**
+KN847521.1/701972-702131/1-158               CUACCUCUCGCCAUCUAAUAACCCA--...-.-.-C.UGGAC......A.....UUCA.UU...................GA.AAGAUGGGAUACAAGGCGAGAGAAG.A.C....CA....G....U....C....A.C....C..ACGAUG..U.ACU.A...UU.UC.CGCUUCA.U.C.AC.AUC.A.C.A..C--
+#=GR KN847521.1/701972-702131/1-158       PP *************************..........9.99999......9.....9999.99...................99.999**********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..*..
+KV878355.1/121728-121564/1-165               UUCCCUCCUGCCAUCUAAUAACCCAU-...U.U.CC.CCUCU......C.....UAUC.AU...................GG.ACCUUGGGAUACAAGGCAGGAGGAG.A.A....UG....A....C....C....C.U...cC..ACUGUG..U.CUU.A...U-.AC.UGCUUCA.C.A.CC.CCU.C.U.A..UAA
+#=GR KV878355.1/121728-121564/1-165       PP ************************97....5.9.99.99***......*.....****.**...................**.*************************.9.8....88....8....8....8....7.7...37..******..*.***.9...6..68.9******.*.*.**.***.*.*.*..***
+KN847336.1/1953855-1954016/1-162             UCACCUCUUGCAAUCUAAUAACCCA--...-.C.UU.GAAGA......C.....ACCC.UU...................GA.GAGCUGGGAUACAAUGCAAGAGAAA.A.G....AG....A....A....G....U.C....C..AUCAUG..A.ACU.A...UU.UC.CGCUUCA.-.-.UC.ACG.C.C.A..CAG
+#=GR KN847336.1/1953855-1954016/1-162     PP ************************9.......6.66.66667......7.....7777.77...................77.77789********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****97.....58.889.9.9.9..988
+KN847322.1/2045347-2045507/1-160             AUACCUCUUGCAGUCUAAUAACCCA--...-.C.UU.-----......-.....----.--gaagua.......augcuuGA.GAGAUGGGAUACAAGGCAAGAGAAG.A.A....AG....A....A....G...aA.C....C..ACCAUG..A.ACU.A...UA.UC.UGCUUCA.U.C.AC.UCU.G.C.A..C--
+#=GR KN847322.1/2045347-2045507/1-160     PP ************************9.......4.44.........................455555.......55555555.56679********************.*.9....97....6....6....5...59.*....*..******..*.***.*...**.**.*******.*.*.**.***.*.*.*..*..
+KN847494.1/3256707-3256546/1-159             UCCCCUCUUGCAAUCUAAUAACCCACU...U.G.AA.GUUAC......C.....UUUG.AA...................--.-AGCUGGGAUACAAUGCAAGAGAAA.A.G....GA....A....A....G....G.C....C..AUCAUG..A.ACU.A...UU.UC.CGCUUCA.U.-.-C.ACA.C.C.A..CGA
+#=GR KN847494.1/3256707-3256546/1-159     PP ************************977...6.6.66.66666......6.....6666.66.......................5669********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****97.5....7.777.9.9.9..988
+KV407454.1/2741789-2741623/1-167             CAUACUCCCUCUAUCUAAUAACCCG-C...G.U.GG.UCUUA......U.....AUUU.AU...................GC.AUGCUGGGAUACAAAGAGGGAGAAG.A.A....AA....A....-....-....U.C....U..UCUGCG.uU.CUU.U...UU.UC.CGCUUCA.U.-.-C.ACG.U.C.G..UGG
+#=GR KV407454.1/2741789-2741623/1-167     PP ************************6.*...*.*.**.*****......*.....****.**...................**.*************************.9.9....98....8..............6.8....9..9*****.55.789.9...99.**.*****98.6....6.667.7.8.8..999
+AMGX01000040.1/165763-165923/1-161           AGCCCUCUUGCAAUCUAAUACCCCAC-...-.-.--.-----......-.....----.--uugaguuggccugugaaag--.---AUGGGAUACAAGGCAAGAGAAG.AgC....AA....A....G....G....U.C....C..ACCACG..G.CCU.A...UA.UC.CGCUUCA.-.-.UC.ACU.C.G.A..CUG
+#=GR AMGX01000040.1/165763-165923/1-161   PP ************************94...................................5567777777777777655......59********************.944....77....8....8....9....*.*....*..******..*.***.*...**.**.*****96.....69.99*.*.*.*..***
+BCIG01000031.1/264934-264773/1-162           GGAUCUCUUGCAAUCUAAUAACCCACU...C.C.UU.--AUC......C.....ACCC.AU...................AG.GCGUUGGGAUACAAGGCAAGAGAAG.A.G....CG....A....-....-....C.U....U..AUGGCG..U.CCU.A...UU.UC.CGCCUCA.U.-.-C.ACA.C.C.A..CGU
+#=GR BCIG01000031.1/264934-264773/1-162   PP ************************976...6.6.65...348......8.....99**.**...................**.*************************.9.8....76....6..............9.9....*..******..*.***.*...**.**.***9997.5....7.777.8.9.9..999
+CM009903.1/677953-678120/1-168               UCACCUCCUGCAAUCUAAUAGCCCAU-...-.U.UC.CCUUG......G.....UUUC.AU...................GG.A-UCUGGGAUACAAGGCAGGAGAAG.A.G....UA....U....-....-....U.C....C..UCUGUG..U.CUU.U..cUA.UC.CGCUUCA.U.A.CC.ACA.C.C.UacCUG
+#=GR CM009903.1/677953-678120/1-168       PP *************************6......5.66.68888......8.....9999.99...................76.6.78*********************.9.8....87....5..............7.9....*..******..9.976.5..277.9*.*******.*.*.*9.998.8.7.433788
+MSFN02000013.1/136100-136279/1-178           UAACCUCCUGCAAUCUAAUACCCCGUU...U.U.UU.UUUUUucuuuuU.....CUCC.AU...................GA.AUUCUGGGAUACAAGGCAGGAGAAG.A.U....UG....AccucC....A....G.A....C..ACAGCG..A.CUU.A...U-.UC.UGCUUCA.U.C.CC.AU-.-.C.A..CAA
+#=GR MSFN02000013.1/136100-136279/1-178   PP **************************9...9.9.99.876541111113.....4567.77...................9*.*************************.*.*....98....844435....9....*.*....*..******..*.***.9...7..68.9*****9.9.9.99.87....8.9..9**
+ACFW01000035.1/909162-909325/1-164           CUCCCUCCUGCAAUCUAAUAACCCAUC...GgA.CC.UCUUC......-.....-ACC.AU...................GG.ACGGGGGGAUACAAGGCAGGAGGAG.A.G....CA....G....C....A....U.C....A..ACUGCG..C.CUU.A...CA.UC.CGCUUCU.GgA.UC.UCA.G.A.G..UGU
+#=GR ACFW01000035.1/909162-909325/1-164   PP ************************999...725.77.77766.............699.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.****996.413.33.333.3.3.3..444
+JZBS01002706.1/42093-41915/1-179             UAACCUCCUGCAAUCUAAUACCCCGUU...U.U.UU.UUCUU......CuuuuuCUCC.AU...................GA.AUUCUGGGAUACAAGGCAGGAGAAG.A.U....UG....AccucC....A....G.A....C..ACAGCG..A.CUU.A...U-.UC.UGCUUCA.U.C.CC.AU-.-.C.A..CAA
+#=GR JZBS01002706.1/42093-41915/1-179     PP *************************99...9.9.88.75433......3111114678.88...................**.*************************.*.*....98....844335....9....*.*....*..******..*.***.9...7..68.9*****9.9.9.99.87....8.9..9**
+PSNO01000009.1/530802-530635/1-168           UCACCUCCUGCAAUCUAAUAGCCCAUU...U.C.C-.-CUUG......G.....CUUU.AU...................GG.-AUCUGGGAUACAAGGCAGGAGAAG.A.G....UA....U....-....-....U.C....C..UCUGUG..U.CUU.U..cUA.UC.CGCUUCA.U.A.CC.ACA.C.C.UacCUG
+#=GR PSNO01000009.1/530802-530635/1-168   PP *************************76...5.5.5...5555......6.....6677.77...................65..588*********************.9.8....87....5..............7.9....*..******..9.976.5..277.9*.*******.*.*.*9.998.8.7.433677
+JH993674.1/1038830-1038980/1-149             AAACCUCCCGCAAUCUAAUAGCUCAGU...G.U.UC.UAUUC......-.....-UCU.AU...................GG.ACCAUGGGAUACAAUGCGGGCA---.-.-....--....-....U....G....A.C....C..AUUUUG..A.CUU.A...C-.UC.CGCUUCA.G.A.UU.CCC.C.U.A..CAA
+#=GR JH993674.1/1038830-1038980/1-149     PP ***************************...*.*.**.87665.............899.**...................**.*******************854......................8....9....*.*....*..******..*.***.9...6..69.9******.*.*.**.***.*.*.*..***
+KB822699.1/101951-102112/1-162               CUACCUCUCGCGAUCUAAUAACCCACU...U.G.AC.---UU......U.....GCCC.GU...................GA.GAGCUGGGAUACAAUGCGAGAGAAG.A.G....AA....A....U....G....U.C....C..ACCACA..G.UCU.A...UU.UC.CGCUUCA.U.C.AC.--A.C.U.A..CUA
+#=GR KB822699.1/101951-102112/1-162       PP *************************54...4.4.44....44......5.....6678.88...................88.8999*********************.*.*....**....*....*....*....*.*....*..****99..9.99*.*...**.**.*****98.7.5.55...5.6.6.7..777
+CH476619.1/2006458-2006623/1-166             GGACCUCCUGCAAUCUAAUAACCCAUC...G.A.GC.CC--C......C.....CGCC.AU...................GG.ACGAGGGGAUACAAGGCAGGAGGAG.A.G....CA....A....U....A....U.G....C..ACUGCG..A.UUU.C...UU.--.-------.-.C.UA.UUU.G.C.U..CGU
+#=GR CH476619.1/2006458-2006623/1-166     PP ***************************...*.9.88.76..5......6.....6799.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..9.876.5...44..............4.56.688.8.9.9..9**
+QGQJ01001354.1/22185-22022/1-161             CGACCUCCCGCAAUCUAAUAACCCAUU...A.C.CU.GAUAC......A.....--UG.AU...................AG.GCAUUGGGAUACAAGGCGGGAGAAAaA.C....AA....A....U....A....U.C....U..GAGUGG..U.CUU.U...CA.UC.CGCUUCU.U.G.UC.AUC.U.C.G..AAU
+#=GR QGQJ01001354.1/22185-22022/1-161     PP ***************************...*.*.**.*9999......6.......57.89...................**.**********************97615.6....88....8....8....8....8.8....8..765555..6.999.9...99.**.*******.*.*.**.***.*.*.*..***
+AMWN01000001.1/3907565-3907403/1-161         ACACCUCUUGCAAUCUAAUAACCCA--...-.C.--.-----......-.....----.--uugauaug...ccauuuga--.GAGCUGGGAUACAAGGCAAGAGGAG.A.G....CG....A....A....A....A.C....C..ACGAUG.gA.CUA.U...UU.UC.CGCUUCA.-.-.UC.ACU.C.U.A..CUA
+#=GR AMWN01000001.1/3907565-3907403/1-161 PP ************************9.......3............................33444444...44444444...45569********************.*.*....**....*....*....*....*.*....*..*****9.56.777.7...88.99.*****96.....69.99*.*.*.*..***
+QWDQ01000017.1/393067-393232/1-164           AACCCUCUCGCCAUCUAAUAACCCG-C...U.U.UC.UCU--......-.....-UAC.AU...................GG.AUGACGGGAUACAAGGCGUGAGAAG.A.U....GA....AuuacU....A....C.U....C..UCCCUG..U.ACU.A...UU.UC.CACUUCA.C.A.AC.ACU.G.C.G..UUU
+#=GR QWDQ01000017.1/393067-393232/1-164   PP *************************.5...5.6.66.665...............678.99...................**.*************************.9.9....88....733336....9....*.*....*..******..*.***.*...**.**.*******.9.9.98.876.5.4.4..433
+PDNC01000173.1/18400-18237/1-149             CGACCUCCCGCAAUCUAAUAACCCAUU...A.C.CU.GAU--......C.....CAUG.AU...................AG.GCAUUGGGAUACAAGGCGGGAGAAA.A.U....UA....A....U....U....A.U....C..UGCGUG.gU.CUU.U...CA.UC.CGCUUCU.U.G.UC.AUC.U.C.A..A--
+#=GR PDNC01000173.1/18400-18237/1-149     PP ***************************...*.*.99.655........4.....5567.89...................99.*************************.*.*....**....*....*....*....*.9....9..977765.38.999.9...9*.**.*******.*.*.**.*99.8.8.7..5..
+AMGY01000008.1/795842-796004/5-147           ----CUCUUGCAAUCUAAUAACCCA--...-.C.UC.GAUAU......A.....UCAC.UU...................GA.GAGAUGGGAUACAAGGCAAGAGGAG.A.A....CG....A....G....G....A.C....C..ACGAUG.gA.CUA.U...UU.UC.CGCUUCA.-.-.UC.ACU.C.U.A..CUA
+#=GR AMGY01000008.1/795842-796004/5-147   PP ....*********************.......9.9*.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..*****9.56.777.7...88.99.*****97.....68.899.9.9.9..987
+LVYI01000012.1/532651-532812/1-160           AUGCCUCUUGCAAUCUAAUAACCCAC-...-.-.--.-----......-.....----.--uugaguuggcacuugaaag--.---AUGGGAUACAAGGCAAGAGAAG.A.G....CA....A....A....G....GuU....C..ACCACG..G.CCU.A...UA.UC.CGCUUCA.U.C.AC.UCU.A.C.U..GUC
+#=GR LVYI01000012.1/532651-532812/1-160   PP ************************94...................................5677777777777777665......59********************.*.8....77....7....7....7....637....*..******..*.***.*...**.**.*******.9.9.99.999.9.9.9..999
+KN848073.1/795316-795480/1-162               AUUCCUCUUGCAAUCUAAUAACCCAC-...-.-.--.-----......-.....----.--uugaguuggcacuugaaag--.---AUGGGAUACAAGGCAAGAGAAG.A.G....CA....G....U....G....GuU....C..ACCAUG..G.CCU.A...UA.UC.CGCUUCA.-.-.UC.ACU.C.C.A..CUA
+#=GR KN848073.1/795316-795480/1-162       PP ************************94...................................5677777777777777665......59********************.*.*....**....*....*....9....945....*..******..*.***.*...**.**.*****96.....69.99*.*.*.*..***
+LJPJ01001247.1/13369-13207/1-163             CCAUCUCCUGCAAUCUAAUAACUCCUC..cG.U.CC.UGU--......-.....CACC.AU...................AG.GCGAGGAGAUACAUGGCAGGAGGAG.A.G....CA....G....C....A....U.C....G..ACUGCG..C.CUU.A...UA.UC.CGCUUCG.U.-.-G.AUC.C.C.A..A--
+#=GR LJPJ01001247.1/13369-13207/1-163     PP **************************7..25.4.44.433..............3467.77...................77.779**********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****97.6....4.566.6.6.6..5..
+GG704913.1/3703156-3703320/1-165             CUCCCUCCUGCAAUCUAAUAACCCGUC...GgA.CC.UCUUC......-.....-ACC.AU...................GG.ACGGGGGGAUACAAGGCAGGAGGAG.A.G....CA....G....C....A....U.C....A..ACUGCG..C.CUU.A...CA.UCcCGCUUCU.G.-.--.---.-.-.-..---
+#=GR GG704913.1/3703156-3703320/1-165     PP ************************988...725.77.77766.............699.**...................**.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...87.6516777774.3....................
+PDND01000154.1/43908-43738/1-153             UUACCUCCCACCAUCUAAUAACCCAUU...G.C.CU.GAUAU......A.....UAUU.AU...................AG.ACAUUGGGAUACAAGGUGGGAGAAG.A.A....AC....A....A....U....A.U....C..UGCGAG..AuCUU.U...UA.UC.CGCUUCU.A.G.UC.AC-.-.-.-..---
+#=GR PDND01000154.1/43908-43738/1-153     PP ***************************...*.*.**.*****......*.....****.**...................**.*************************.*.*....**....*....*....*....*.*....*..****99..73677.8...88.9*.*****99.8.8.88.75............
+PDNB01000072.1/22815-22658/1-158             CAAUCUCCCGCAAUCUAAUAACCCGU-...G.U.UC.UCGU-......-.....-AUA.AU...................GG.ACAAUGGGAUACAAGGCGGGAGAAG.A.A....CA....A....U....A....U.C....U..GCGGCA.uC.UUU.U...CA.UC.CGCUUCU.A.G.UC.ACC.U.C.G..AAC
+#=GR PDNB01000072.1/22815-22658/1-158     PP *************************8....*.*.**.9754..............456.88...................**.*************************.*.*....**....*....*....*....*.*....*..**8776.24.555.6...67.9*.*******.*.*.**.***.*.*.*..***
+EQ999979.1/3138132-3138296/1-149             CGACCUCCCGCAAUCUAAUAACCCAUU...A.C.CU.GAUAC......A.....--CG.AU...................AG.GCAUUGGGAUACAAGGCAGGAGAAA.A.A....CA....A....A....U....A.U....C..UGCGUG..G.UUUuU...UA.UC.CGCUUCU.U.G.UC.AC-.-.-.-..---
+#=GR EQ999979.1/3138132-3138296/1-149     PP ***************************...*.*.**.99998......5.......88.99...................**.*************************.*.*....99....9....9....9....9.*....*..*****9..7.76615...66.99.*******.9.9.99.85............
+GG657468.1/794777-794941/1-149               CGACCUCCCGCAAUCUAAUAACCCAUU...A.C.CU.GAUAC......A.....--CG.AU...................AG.GCAUUGGGAUACAAGGCAGGAGAAA.A.A....CA....A....A....U....A.U....C..UGCGUG..G.UUUuU...UA.UC.CGCUUCU.U.G.UC.AC-.-.-.-..---
+#=GR GG657468.1/794777-794941/1-149       PP ***************************...*.*.**.99998......5.......88.99...................**.*************************.*.*....99....9....9....9....9.*....*..*****9..7.76615...66.99.*******.9.9.99.85............
+LVCJ01000039.1/172537-172378/1-158           AAUCCUCUUGCCAUCUAAUAACCCACU...U.G.--.-----......-.....----.--acuugg......caauuga--.AAGUUGGGAUACAAGGCAAGAGAAG.A.U....CA....A....A....G...cU.U....C..ACCACG..G.CCU.A...UA.UC.CGCUUCA.-.-.UC.ACU.C.U.A..CUG
+#=GR LVCJ01000039.1/172537-172378/1-158   PP ************************954...4.3............................334444......4444444...44559********************.*.*....88....8....7....7...68.9....*..******..*.***.*...**.**.*****97.....68.889.9.9.9..988
+KN847477.1/4225855-4226018/1-160             CAUCCUCUUGCGAUCUAAUAACCCA--...-.C.UU.GAUGC......G.....CCUC.CU...................GA.GAGAUGGGAUACAAGGCAAGAGAAG.A.G....UG....A....A....G....G.C....C..ACGGUG..U.ACU.A...UU.UC.CGCUUC-.C.A.UC.AUU.C.U.A..C--
+#=GR KN847477.1/4225855-4226018/1-160     PP ************************9.......4.44.45544......4.....4445.55...................55.56679********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.****98..6.9.**.***.*.*.*..*..
+JH226130.1/1134482-1134321/1-160             GAACCUCUUGCAAUCUAAUAACCC---...U.C.UU.GAUGU......G.....CUAC.AU...................GA.GAGAUGGGAUACAAUGCAAGAGGAG.A.C....UG....A....G....C....A.C....C..ACAAUG.gA.CUA.U...UU.UC.CGCUUCA.-.-.CC.ACU.C.U.A..CUU
+#=GR JH226130.1/1134482-1134321/1-160     PP ***********************8......6.8.88.88888......9.....9999.99...................99.99999********************.*.*....**....*....*....*....*.*....*..*****9.56.777.7...88.99.*****96.....69.99*.*.*.*..*64
+KN846985.1/339809-339969/1-161               AUCCCUCUUGCAAUCUAAUACCCCAC-...-.-.--.-----......-.....----.--uugaguuggccugugaaag--.---AUGGGAUACAAGGCAAGAGAAG.AgC....AA....A....G....G....U.U....C..ACCACG..G.CCU.A...UA.UC.CGCUUCA.U.C.AC.UCU.C.C.U..A--
+#=GR KN846985.1/339809-339969/1-161       PP ************************94...................................5567777777777777655......59********************.944....77....8....8....9....*.*....*..******..*.***.*...**.**.******9.8.8.87.777.7.7.7..7..
+BCHY01000003.1/3192638-3192478/1-159         AAACCUCUUGCAGUCUAAUAACCCA--...-.C.--.-----......-.....----.--ucgagaua..caagccuga--.GAGAUGGGAUACAAGGCAAGAGGAG.A.A....UG....A....C....A....G.C....C..ACCCAG..A.ACU.A...UU.UC.CGCUUCA.-.-.UC.ACU.C.U.A..CCG
+#=GR BCHY01000003.1/3192638-3192478/1-159 PP ************************9.......3............................45566666..666666655...44569********************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*****97.....69.99*.*.*.*..*99
+AMYF01000091.1/214165-214007/1-159           CCACCUCUUGUCAUCUAAUAACCCUCU...U.G.A-.GCUAC......C.....GAUG.A-...................--.CAUUAGGGAUACAGAACAAGAGAAG.A.U....UG....A....-....G....A.G....C..ACAGUG..U.CUA.U...GG.UC.CGCUUCA.A.A.-C.ACU.U.U.A..C-G
+#=GR AMYF01000091.1/214165-214007/1-159   PP ************************988...7.6.4..47777......7.....7655.5.......................4899*********************.*.*....98....7.........5....7.9....9..999***..*.***.*...**.**.******9.7.6..6.777.7.8.8..8.7
+LJPI01000934.1/141448-141609/1-162           CUGCCUCCUGCAAUCUAAUAACCCUUC...GcG.CC.UUUC-......-.....-ACC.GU...................GG.CCGGAGGGAUACAAGGCAGGAGAAA.A.G....CA....A....C....A....C.U....G..ACUGCG..C.GUU.A...UA.UC.CGCUUCU.A.-.--.---.-.-.-..---
+#=GR LJPI01000934.1/141448-141609/1-162   PP ***************************...*77.77.6653..............467.78...................99.9************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.****985.3....................
+KN847044.1/4048401-4048566/5-150             ----CUCUUGCAAUCUAAUAACCCACU...-.-.--.-----......-.....----.--ugaauugg..cacuugaaa--.--GAUGGGAUACAAGGCAAGAGAAG.A.G...cAA....A....C....G....U.U....C..ACCACG..G.CCU.A...UA.UC.CGCUUCA.-.-.UC.ACU.C.U.A..CUG
+#=GR KN847044.1/4048401-4048566/5-150     PP ....********************943..................................45555555..555555554.....569********************.9.5...377....8....8....8....8.9....*..******..*.***.*...**.**.*****97.....68.999.9.9.9..998
+KN846970.1/505674-505511/1-164               AAUCCUCUUGCUAUCUAAUAACCCAC-...-.-.--.-----......-.....----.--uugaauuggcacuugaaag--.---UUGGGAUACAAGGCAAGAGAAG.A.U....CA....A....A....G...cU.U....C..ACCACG..G.CCU.A...UA.UC.CGCUUCA.-.-.UC.ACU.C.U.A..CUG
+#=GR KN846970.1/505674-505511/1-164       PP ************************94...................................4455555556666655544......58********************.*.*....88....8....7....7...68.9....*..******..*.***.*...**.**.*****97.....68.889.9.9.9..988
+LVKK01000047.1/142734-142571/1-164           AAUCCUCUUGCUAUCUAAUAACCCAC-...-.-.--.-----......-.....----.--uugaauuggcacuugaaag--.---UUGGGAUACAAGGCAAGAGAAG.A.U....CA....A....A....G...cU.U....C..ACCACG..G.CCU.A...UA.UC.CGCUUCA.-.-.UC.ACU.C.U.A..CUG
+#=GR LVKK01000047.1/142734-142571/1-164   PP ************************94...................................4455555556666655544......58********************.*.*....88....8....7....7...68.9....*..******..*.***.*...**.**.*****97.....68.889.9.9.9..988
+CH476660.1/101666-101503/1-150               UGGCCUCCCGCAUUCUAAUAACCCAUU...G.C.CU.GAUAU......G.....--UG.AU...................AG.GAAUUGGGAUACAAGGCGGGAGAAA.A.A....UA....A....U....U....A.U....C..UGCGGG..A.UCU.U...UG.UC.CGCUUCU.A.G.UC.AUC.U.-.-..---
+#=GR CH476660.1/101666-101503/1-150       PP ***************************...*.*.*9.98886......4.......56.88...................9*.*************************.*.*....**....*....*....*....*.*....*..******..*.***.*...**.**.*******.9.9.99.986.5.........
+NMUC01000095.1/53363-53524/1-161             CGACCUCUUGUCAUCUAAUAACCCUUU...U.G.AU.CU---......-.....UGCA.AU...................GA.CAUCUGGGAUACAAGACAAGAGCAG.A.G....UU....A....A....A....-.G....C..ACAACG..U.CUA.U...GG.UC.CGCUUCA.A.A.CC.CAU.C.A.-..-UA
+#=GR NMUC01000095.1/53363-53524/1-161     PP ************************766...6.5.44.33...............3355.66...................77.88889********************.9.8....88....8....7....5......6....8..99****..*.***.*...**.**.*******.*.*.*9.998.8.5.....**
+KN846954.1/3894589-3894750/1-160             GCACCUCUUGCAAUCUAAUAUCCCAC-...-.-.UU.GAAGC......A.....CUGC.AU...................GA.AAGAUGGGAUACAAGGCAAGAGAAG.A.A....GA....A....U....A....G.U...cC..ACCAUG..A.ACU.A...UA.UC.CGCUUCA.A.-.-C.ACC.G.C.A..AU-
+#=GR KN846954.1/3894589-3894750/1-160     PP ************************94........23.34445......5.....5566.66...................66.77789********************.*.*....99....9....9....8....8.8...46..******..*.***.*...**.**.*****97.5....5.555.6.6.6..64.
+PCFH01000019.1/152438-152277/1-161           UGACCUCUUGUCAUCUAAUAACCCUUU...U.G.AU.CU---......-.....UGCA.AU...................GA.CAUCUGGGAUACAAGACAAGAGCAG.A.G....UU....A....A....A....-.G....C..ACAGCG..U.CUA.U...GG.UC.CGCUUCA.A.A.CC.CAU.C.A.-..-UA
+#=GR PCFH01000019.1/152438-152277/1-161   PP ************************766...6.5.44.33...............3355.66...................77.88889********************.9.8....88....8....7....5......6....8..99****..*.***.*...**.**.*******.*.*.*9.998.8.5.....**
+KK106983.1/4170125-4170290/1-164             CAAUCUCCUGCCAUCUAAUGCCCCACU...-.U.UA.UCCAG......U.....UUGC.CA...................CG.AUAUUGGGAUACAAGGCAGGAGCAG.A.A....CA....A....A....C....-.U....C..CUGGCG..U.ACU.A...UA.UC.CGCUUCA.U.U.--.ACU.C.U.G..UGU
+#=GR KK106983.1/4170125-4170290/1-164     PP ***********************9976.....4.44.44444......4.....4444.44...................45.67779********************.*.9....99....8....8....6......5....6..677888..8.899.*...**.**.*****98.7.5....556.6.6.6..666
+LCWF01000016.1/40120-40287/1-152             AACCCUCUUGCCAUCUAAUAACCCAGU...U.U.CC.UCUGC......A.....AU--.AU...................GG.AUAUUGGGAUACAAGGCUGGAGAAG.A.G....CA....A....A....U....C.C....A..CUAUCGcuG.AUU.A...UU.UCaCGCUUCA.U.C.AC.ACU.G.C.A..U--
+#=GR LCWF01000016.1/40120-40287/1-152     PP ***************************...*.*.**.****9......8.....75...89...................**.*************************.*.9....99....8....8....8....8.8....8..877877443.466.6...65.5439******.9.9.99.999.9.9.9..8..
+AMGW01000001.1/5081690-5081528/1-163         CUACCUCUCGCAAUCUAAUAACCCACU...U.G.AC.UU---......U.....UGCC.AU...................GA.GAGCUGGGAUACAAUGCGGGAGAAG.A.G....AA....A....C....G....U.C....C..ACCACA..G.UCU.A...UU.UC.CGCUUCAaU.C.AC.ACU.C.C.U..GUC
+#=GR AMGW01000001.1/5081690-5081528/1-163 PP *************************54...4.4.44.44.........3.....4578.88...................88.8899*********************.*.*....**....*....*....*....*.*....*..****99..9.999.9...99.99.999999723.4.45.555.5.5.4..333
+AZGZ01000024.1/204852-205023/1-168           CUUCCCCCCGUAAUCUAAUAACCCAUC...G.U.UC.UUAUU......U.....UUUG.GU...................GG.AC-AUGGGAUACAAGGCGGGGGUAG.A.A....GA....A....C....C....A.C....C..AGACGG..A.UUU.UuucUU.UC.CGCUUCA.-.-.--.-UU.C.U.A..AGG
+#=GR AZGZ01000024.1/204852-205023/1-168   PP ***************************...*.*.**.*****......*.....****.**...................**.**.**********************.*.*....99....9....9....8....8.8....8..8889**..9.876.511144.56.6666555.........55.5.5.5..555
+KZ107833.1/281061-281197/1-107               CCCCCGCCUGCAAUCUAAUAACCCGCA...U.C.UC.U----......C.....GUCC.AU...................GA.GACGCGGGAUACAAGGCAGGCGCAG.A.G....CG....A....U....A....G.C....C..AC----..-.---.-...--.--.-------.-.-.--.---.-.-.-..---
+#=GR KZ107833.1/281061-281197/1-107       PP ***************************...*.*.**.7..........6.....9***.**...................**.*************************.*.9....99....9....9....9....9.9....7..76...................................................
+LGUA01000070.1/12013-12177/1-148             UUAUCUCCCGCCAUCUAAUAACCCAUU...G.C.CU.UCU--......C.....UAUA.AU...................AG.ACAUUGGGAUACAAGCCGGGAGAAG.A.A....CA....A....U....-....A.U....C..UGCGAG..A.UCU.U...UA.UC.CGCUUCU.A.G.UC.AC-.-.-.-..---
+#=GR LGUA01000070.1/12013-12177/1-148     PP ***************************...*.*.**.998........5.....5678.99...................**.*************************.*.9....99....9....8.........8.8....9..99999*..*.***.*...**.**.*****99.8.8.88.75............
+#=GC SS_cons                                 ::::<<<<<<<<---------<<<<<<...<.<.<<._____......_.....____.__~~~~~~~~~~~~~~~~~~~>>.>>>>>>>>------>>>>>>>>---.-.-....--....-....-....-....<.<....<..<<<<<<..-.---.-...--.--.-------.-.-.--.---.-.-.-..-<<
+#=GC RF                                      CGACCuCCuGCcAUCUAAUAACCCguu...G.u.uC.UCUAC......C.....GUCC.AU~~~~~~~~~~~~~~~~~~~Gg.aCuauGGGAUACAAgGCaGGaGAAG.A.U....AA....A....U....G....a.C....C..acuGCG..A.CUU.A...UU.UC.CGCUUCA.U.A.UC.AUU.C.C.A..Caa
+
+CM000175.1/1017260-1017427/1-168             UUGCCU.G..AC.A.A.U...........................................A.GGC.U.G.UU..A.AG....A....CGCAC.UGGUACA...A.UA.UAUCGCA.ACGCACA
+#=GR CM000175.1/1017260-1017427/1-168     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+QDFW01000125.1/656814-656647/1-168           UUGCCU.G..AC.A.A.U...........................................A.GGC.U.G.UU..A.AG....A....CGCAC.UGGUACA...A.UA.UAUCCCA.ACGCACA
+#=GR QDFW01000125.1/656814-656647/1-168   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+DS027695.1/286414-286581/1-168               UUGCCU.G..AU.A.A.U...........................................A.GGC.U.G.UU..A.AG....A....CGCAC.UGGCACA...A.UA.UAUCGCA.GCGCACA
+#=GR DS027695.1/286414-286581/1-168       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+BCLY01000005.1/1105902-1106069/1-168         UUGCCU.G..AU.A.A.U...........................................A.GGC.U.G.UU..A.AG....A....CGCAC.UGGCACA...A.UA.UAUCGCA.ACGCACA
+#=GR BCLY01000005.1/1105902-1106069/1-168 PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+MSZS01000007.1/802408-802243/1-166           UUGCCU.G..AU.A.A.U...........................................A.GGC.U.G.UU..A.AG....A....CGCAC.UGGCACA...A.UA.UAUCGCA.ACGC--U
+#=GR MSZS01000007.1/802408-802243/1-166   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*996..7
+NKHU02000004.1/135649-135816/1-168           UUGCCU.G..AU.A.A.U...........................................A.GGC.U.G.UU..A.AG....A....CGCAU.UGGCACA...A.UC.UAUCGCA.AAGCACA
+#=GR NKHU02000004.1/135649-135816/1-168   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+BBXM01000095.1/553299-553132/1-168           UUGCCU.G..AU.A.A.U...........................................A.GGC.U.G.CU..A.AG....A....CGCAC.UGGCACA...A.UG.UAUCGCA.GAGCACA
+#=GR BBXM01000095.1/553299-553132/1-168   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+SIHR01000252.1/171362-171195/1-168           UUGCCU.G..AU.A.A.U...........................................A.GGC.U.G.UU..A.AG....A....CGCAA.UGGCACA...A.UG.UAUCGCA.AAGCACA
+#=GR SIHR01000252.1/171362-171195/1-168   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+NKHV02000040.1/147013-147176/1-164           UUGCCU.G..AU.A.A.U...........................................A.GGC.U.G.UU..A.AG....A....CGCAC.UGGCACA...A.UG.UAUCGCA.AAGC--C
+#=GR NKHV02000040.1/147013-147176/1-164   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*996..7
+KZ826321.1/580016-580178/1-161               UAGCCU.G..AU.A.A.G...........................................A.GGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...U.AA.CUU----.AUGAUCA
+#=GR KZ826321.1/580016-580178/1-161       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*****98...7.77.654.....78999**
+KV907503.1/240037-240199/1-163               UAGCCU.G..AU.A.A.G...........................................A.GGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...U.GA.CUU--CU.AUUCAAA
+#=GR KV907503.1/240037-240199/1-163       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...9.88.776..57.899****
+KV907503.1/525339-525501/1-163               UAGCCU.G..AU.A.A.G...........................................A.GGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...U.GA.CUU--CU.AUUCAAA
+#=GR KV907503.1/525339-525501/1-163       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...9.88.776..57.899****
+AM270992.1/246305-246470/1-166               UAGCCU.U..AUgG.A.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AAUCGUA.AU-CAUA
+#=GR AM270992.1/246305-246470/1-166       PP ******.9..8734.7.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....66.79***99.85.9***
+KZ821341.1/1178540-1178375/1-166             UAGCCU.U..AUgG.A.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AAUCGUA.AU-CAUA
+#=GR KZ821341.1/1178540-1178375/1-166     PP ******.9..8734.7.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....66.79***99.85.9***
+KZ851858.1/771358-771193/1-166               UAGCCU.U..AUgG.A.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AAUCGUA.AU-CAUA
+#=GR KZ851858.1/771358-771193/1-166       PP ******.9..8734.7.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....66.79***99.85.9***
+BDHI01000028.1/4084893-4085058/1-166         UAGCCU.U..AUgG.A.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AAUCGUA.AU-CAUA
+#=GR BDHI01000028.1/4084893-4085058/1-166 PP ******.9..8734.7.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....66.79***99.85.9***
+LKBE01000001.1/1713357-1713196/1-162         UAACCU.G..UU.A.A.U...........................................A.GGU.U.G.UU..A.AG....A....CGCAA.UGGCACA...U.GA.AA-CCUA.UGAUACC
+#=GR LKBE01000001.1/1713357-1713196/1-162 PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...7.77.66.5578.8999***
+SSOS01000002.1/1806046-1805885/1-162         UAACCU.G..UU.A.A.U...........................................A.GGU.U.G.UU..A.AG....A....CGCAA.UGGCACA...U.GA.AA-CCUA.UGAUACC
+#=GR SSOS01000002.1/1806046-1805885/1-162 PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...7.77.66.5578.8999***
+KZ824445.1/313391-313229/1-157               UAGCUU.G..AU.A.A.G...........................................A.GGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...U.GA.U------.--UCAUA
+#=GR KZ824445.1/313391-313229/1-157       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*****99...7.66.5.........699**
+KV878697.1/263307-263472/1-166               UAGCCU.U..AUgG.A.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...U.GA.UA--GUA.ACCAAAG
+#=GR KV878697.1/263307-263472/1-166       PP ******.9..8734.7.7...........................................*.***.*.*.**..*.**....*....*****.******9...8.87.65..99*.*******
+MSFK01000026.1/289461-289624/1-162           UAGCCU.G..AU.A.A.G...........................................A.GGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...U.GA.---CUUA.UGUUCCA
+#=GR MSFK01000026.1/289461-289624/1-162   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****997...6.65....5667.77888**
+KZ852076.1/260226-260391/1-166               UAGCCU.U..AUgG.A.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGUACA...-.UG.AAUCGUA.AU-CAUA
+#=GR KZ852076.1/260226-260391/1-166       PP ******.9..8734.7.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....66.79***99.85.9***
+KZ825567.1/4203-4366/1-164                   UGGCCU.G..UU.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA...U.GU.UUAUCCG.AGUCACA
+#=GR KZ825567.1/4203-4366/1-164           PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.99.99999**.*******
+KV878253.1/356303-356138/1-166               UAGCCU.U..AC.GgA.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AAUCGUA.AU-UAUA
+#=GR KV878253.1/356303-356138/1-166       PP ******.*..99.537.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....66.79***99.86.79**
+DF126469.1/258535-258700/1-166               UAGCCU.U..AC.GgA.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AACCGUA.AU-UAUA
+#=GR DF126469.1/258535-258700/1-166       PP ******.*..99.537.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....56.6889988.76.79**
+KZ825892.1/19891-19727/1-161                 UGGCCU.G..UU.A.A.G...........................................U.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...U.--.----GAA.UUGUAAA
+#=GR KZ825892.1/19891-19727/1-161         PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*****98...5........557.778999*
+KZ821617.1/242446-242611/1-166               UAGCCU.U..AC.GgA.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AACCGUA.AU-UAUA
+#=GR KZ821617.1/242446-242611/1-166       PP ******.*..99.537.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....56.6889988.76.79**
+KV878182.1/289012-288847/1-166               UAGCCU.U..AC.GgA.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AACCGUA.AU-UAUA
+#=GR KV878182.1/289012-288847/1-166       PP ******.*..99.537.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....56.6889988.76.79**
+KZ825055.1/2592754-2592589/1-166             UAGCCU.U..AC.GgA.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AACCGUA.AU-UAUA
+#=GR KZ825055.1/2592754-2592589/1-166     PP ******.*..99.537.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....56.6889988.76.79**
+KZ559648.1/48142-47980/1-158                 UGGCCU.G..UU.C.A.G...........................................U.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...U.--.-----CU.ACUCAAA
+#=GR KZ559648.1/48142-47980/1-158         PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****998...4.........67.999****
+KZ821724.1/122464-122627/1-164               UGGCCU.G..UU.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA...U.GU.UUAUCCG.AGUCACA
+#=GR KZ821724.1/122464-122627/1-164       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.99.99999**.*******
+KZ821485.1/220489-220324/1-166               UAGCCU.U..AC.GgA.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AACCGUA.AU-UAUA
+#=GR KZ821485.1/220489-220324/1-166       PP ******.*..99.537.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....56.6889988.76.79**
+MSFU01000021.1/294754-294919/1-166           UAGCCU.U..AC.GgA.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AACCGUA.AU-UAUA
+#=GR MSFU01000021.1/294754-294919/1-166   PP ******.*..99.537.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....56.6889988.76.79**
+KZ824553.1/344949-344784/1-166               UAGCCU.U..AC.GgA.A...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...-.UG.AACCGUA.AU-UAUA
+#=GR KZ824553.1/344949-344784/1-166       PP ******.*..99.537.7...........................................*.***.*.*.**..*.**....*....*****.*****97.....56.6889988.76.79**
+KZ559149.1/91558-91395/1-164                 UGGCCU.G..UC.G.A.G...........................................U.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...U.CA.AUUCACC.A-GUAGA
+#=GR KZ559149.1/91558-91395/1-164         PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.9999997.6.89***
+QAGJ01000334.1/39907-39742/1-166             UGGCCU.C..GC.G.G.A...........................................C.GGC.C.G.UU..A.AG....A....UCCAA.UGGCACA...U.UU.UUGU-GA.AGACACU
+#=GR QAGJ01000334.1/39907-39742/1-166     PP *****9.9..99.9.9.9...........................................9.***.*.*.**..*.**....*....*****.******9...8.87.6655.57.889****
+SMSW01000007.1/527012-526847/1-164           UUGCUU.G..AC.C.A.A...........................................A.GAC.U.G.UU..A.AG....A....CGCAU.UGGUACA...A.U-.---CCUA.UUCCAUC
+#=GR SMSW01000007.1/527012-526847/1-164   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...7.5.....6778.888999*
+JSYV01000857.1/29496-29659/1-164             UUGCCU.G..GC.A.G.A...........................................U.GGC.U.G.CU..A.AG....A....CACGG.UAGUACA...U.GU.CCAUGUA.AC-CAUA
+#=GR JSYV01000857.1/29496-29659/1-164     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...9.99.9999999.87.9***
+CBWZ010000244.1/2811-2648/1-164              UAACCU.G..UU.A.A.U...........................................A.GGU.U.G.UU..A.AG....A....CGCAA.UGGCACA...U.GA.AUCCAUG.UUUGAUA
+#=GR CBWZ010000244.1/2811-2648/1-164      PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+MSFO01000001.1/1773037-1772876/1-161         UGACCU.G..UU.A.A.U...........................................C.GGU.U.G.UU..A.AG....A....CGCAA.UGGCACA...U.GA.---ACCA.GUGAUCC
+#=GR MSFO01000001.1/1773037-1772876/1-161 PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****998...6.65....5678.88999**
+MVGC01000005.1/68794-68629/1-165             UUGCCU.G..UU.A.C.A...........................................U.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...U.UU.CA---UU.AGACUAA
+#=GR MVGC01000005.1/68794-68629/1-165     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****998...7.65.55...56.778999*
+MSFL01000033.1/162872-162709/1-160           UGGCUU.G..UU.A.A.G...........................................U.GGC.C.G.UU..A.AG....A....CACAG.UGGCACA...U.GA.UCU----.--GUAAA
+#=GR MSFL01000033.1/162872-162709/1-160   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...9.88.865.......8899*
+KZ825311.1/228071-228233/1-162               UGGCCU.G..UU.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA...-.--.UAUGUAU.CCGAAUU
+#=GR KZ825311.1/228071-228233/1-162       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****985........5555556.6999***
+MSFM01000012.1/732818-732654/1-165           UGGCCU.G..UU.U.A.G...........................................U.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...U.CA.UUCAAGA.UAGCAUG
+#=GR MSFM01000012.1/732818-732654/1-165   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+KV878970.1/3488157-3487993/1-165             UGGCCU.G..UU.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA..uA.UG.UAUC-CG.AAUUACU
+#=GR KV878970.1/3488157-3487993/1-165     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9..34.55.5655.66.7789***
+KZ824963.1/183471-183309/1-162               UGGCCU.G..UU.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA...-.--.UAUGUAU.CCGAAUU
+#=GR KZ824963.1/183471-183309/1-162       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****985........5555556.6999***
+KZ824652.1/364618-364780/1-162               UGGCCU.G..UU.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA...-.--.UAUGUAU.CCGAAUU
+#=GR KZ824652.1/364618-364780/1-162       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****985........5555556.6999***
+NGZO01000005.1/1830937-1831100/1-164         UAACCU.G..UU.A.A.U...........................................C.GGU.U.G.UU..A.AG....A....CGCAA.UGGCACA...U.GA.AUCCAUG.UUUGAUA
+#=GR NGZO01000005.1/1830937-1831100/1-164 PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+CH476599.1/237370-237533/1-162               UAACCU.G..UU.-.A.U...........................................C.GGU.U.G.UU..A.AG....A....CACAG.UGGCACA...U.CA.UU--GUA.U-CAACA
+#=GR CH476599.1/237370-237533/1-162       PP *****9.9..76...5.7...........................................8.***.*.*.**..*.**....*....*****.******9...8.77.64..544.4.469**
+QUQM01000008.1/1267467-1267305/1-161         UGACCU.G..UU.A.A.A...........................................A.GGU.U.G.UU..A.AG....A....UGCAA.UGGUACA...U.UU.CAA----.CUGCAUA
+#=GR QUQM01000008.1/1267467-1267305/1-161 PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*****99...8.87.664.....479****
+LYCR01000040.1/168085-167920/1-165           UAACCU.G..UUgA.A.A...........................................A.GGU.U.G.UU..A.AG....A....CACAG.UGGCACA...C.GA.UAUC---.AUGUAAC
+#=GR LYCR01000040.1/168085-167920/1-165   PP ******.9..8637.8.8...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.**98....6899***
+KZ825124.1/227536-227375/1-153               UGGCCU.G..UU.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA...-.--.-------.-UGCUUA
+#=GR KZ825124.1/227536-227375/1-153       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****996.................6999**
+KZ824771.1/1146972-1147133/1-153             UGGCCU.G..UU.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA...-.--.-------.-UGCUUA
+#=GR KZ824771.1/1146972-1147133/1-153     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****996.................6999**
+JNOM01000620.1/5848-5683/1-161               UAACCU.G..UU.AaA.A...........................................A.GGU.U.G.UU..A.AG....A....CACAG.UGGCACA...U.GA.UCU----.---UCCA
+#=GR JNOM01000620.1/5848-5683/1-161       PP ******.*..87.615.6...........................................9.***.*.*.**..*.**....*....*****.*******...9.98.866........5689
+RHLO01000759.1/9578-9740/1-163               UAACCU.G..UU.U.G.U...........................................U.GGU.U.G.UU..A.AG....A....CACAG.UGGCACA...U.UA.AAUCUCA.AG--AAA
+#=GR RHLO01000759.1/9578-9740/1-163       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.95..789
+MSJE01000298.1/412250-412087/1-162           UAACCU.G..UU.-.A.U...........................................C.GGU.U.G.UU..A.AG....A....CACAG.UGGCACA...U.CA.UU--GUA.U-CAACA
+#=GR MSJE01000298.1/412250-412087/1-162   PP *****9.9..76...5.7...........................................8.***.*.*.**..*.**....*....*****.******9...8.77.64..544.4.469**
+BA000049.1/6088843-6088679/1-165             UAACCU.G..UU.G.A.A...........................................A.GGU.U.G.UU..A.AG....A....CACAG.UGGCACA...U.UC.--AUAUU.AUGUAAC
+#=GR BA000049.1/6088843-6088679/1-165     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...7.63...23456.899****
+EQ963472.1/395939-396103/1-165               UAACCU.G..UU.G.A.A...........................................A.GGU.U.G.UU..A.AG....A....CACAG.UGGCACA...U.UC.--AUAUU.AUGUAAC
+#=GR EQ963472.1/395939-396103/1-165       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...7.63...23456.899****
+NEXV01000360.1/123483-123647/1-165           UAACCU.G..UU.G.A.A...........................................A.GGU.U.G.UU..A.AG....A....CACAG.UGGCACA...U.UC.--AUAUU.AUGUAAC
+#=GR NEXV01000360.1/123483-123647/1-165   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...7.63...23456.899****
+PIJX01000013.1/289188-289351/1-162           UAACCU.G..UU.-.A.U...........................................C.GGU.U.G.UU..A.AG....A....CACAG.UGGCGCA...U.CA.UU--GUA.U-CAACA
+#=GR PIJX01000013.1/289188-289351/1-162   PP *****9.9..76...5.7...........................................8.***.*.*.**..*.**....*....*****.******9...8.77.64..544.4.469**
+BCIE01000006.1/1100238-1100402/1-163         UGGCCU.C..GC.A.G.U...........................................C.GGC.C.G.UU..A.AG....A....UCCAA.UGGCACA...U.U-.--UCUGU.AAAGAUA
+#=GR BCIE01000006.1/1100238-1100402/1-163 PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****997...5.4....56666.66679**
+HG793156.1/282978-282822/1-155               UAGCUA.-..--.-.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...U.--.--ACACA.UUGUAUA
+#=GR HG793156.1/282978-282822/1-155       PP ****83.........4.4...........................................6.9**.*.*.**..*.**....*....*****.*****98...4......47899.*******
+HG813602.1/97207-97363/1-155                 UAGCUA.-..--.-.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...U.--.--ACACA.UUGUAUA
+#=GR HG813602.1/97207-97363/1-155         PP ****83.........4.4...........................................6.9**.*.*.**..*.**....*....*****.*****98...4......47899.*******
+KZ824271.1/919184-919022/1-163               UGGCCU.G..UU.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA...U.UU.UAUCUCG.AG--AAA
+#=GR KZ824271.1/919184-919022/1-163       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*****99.85..889
+PQMF01000069.1/52331-52496/1-166             UGGCCU.C..GC.G.G.A...........................................C.GGC.C.G.CU..A.AG....A....UCCAA.UGGCACA...U.U-.-UCUGUA.AAGUCCC
+#=GR PQMF01000069.1/52331-52496/1-166     PP *****9.9..99.9.9.9...........................................9.***.*.*.**..*.**....*....*****.******9...7.6...5689**.*******
+KV878211.1/1598599-1598759/1-159             UGGCCU.G..UU.A.U.A...........................................G.AGC.C.G.UU..A.AG....A....CAUGG.UGGCACA...C.UU.U----UC.AUGUAAA
+#=GR KV878211.1/1598599-1598759/1-159     PP ******.*..**.9.9.9...........................................9.9**.*.*.**..*.**....*....*****.******9...9.87.6....45.89*****
+DF093573.1/4194183-4194018/1-166             UAACCU.G..UU.G.A.A...........................................A.GGU.U.G.UU..A.AG....A....CACAG.UGGCACA...U.UC.--AUAUU.AUGUAAC
+#=GR DF093573.1/4194183-4194018/1-166     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...7.63...23456.899****
+CDHK01000003.1/1537683-1537843/1-159         UGGCCU.C..A-.-.-.A...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...-.--.UAUCAU-.ACUUUUA
+#=GR CDHK01000003.1/1537683-1537843/1-159 PP *****9.5..4......4...........................................9.***.*.*.**..*.**....*....*****.****986........555554..68899**
+PQME02000006.1/44843-44679/1-165             UGGCCU.C..GC.G.G.A...........................................C.GGC.C.G.CU..A.AG....A....UCCAA.UGGCACA...U.U-.--UCUGU.AAAGACC
+#=GR PQME02000006.1/44843-44679/1-165     PP *****9.9..99.9.9.9...........................................9.***.*.*.**..*.**....*....*****.****997...5.4....56566.666799*
+MAQV01000007.1/428809-428645/1-163           UGGCCU.C..GC.A.G.U...........................................C.GGC.C.G.UU..A.AG....A....UCCAA.UGGCACA...U.U-.--UCUGU.AAAGAUA
+#=GR MAQV01000007.1/428809-428645/1-163   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****997...5.4....56666.66679**
+LASV01000156.1/57774-57610/1-165             UUGCCU.G..AC.A.A.U...........................................AuGGC.U.G.CU..A.AG....A....CGCGG.UGGGACA...U.CU.UCCCGUA.ACGAAUA
+#=GR LASV01000156.1/57774-57610/1-165     PP ******.*..**.*.*.*...........................................98***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+KZ821244.1/194608-194445/1-160               UGGCCU.G..UC.A.A.G...........................................C.GGC.C.G.UU..A.AG....A....CGCAA.UGGCACA...U.CA.UUUU---.---CAGA
+#=GR KZ821244.1/194608-194445/1-160       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.*9.9875.......899*
+JZEE01000665.1/6799-6634/1-166               UAACCU.G..UU.G.A.A...........................................A.GGU.U.G.UU..A.UG....A....CACAG.UGGCACA...U.UC.--AUAUU.AUGUAAC
+#=GR JZEE01000665.1/6799-6634/1-166       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...7.63...23456.899****
+RHLP01000352.1/46999-46832/1-168             UGGCUU.G..AU.A.A.U...........................................C.GGC.C.G.UU..A.AG....A....CACAG.UGGCACA...AuUA.UGAAGUA.ACCAAUA
+#=GR RHLP01000352.1/46999-46832/1-168     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...8358.99*****.*******
+NPFE01001614.1/64110-63949/1-162             UGGCC-.-..-U.A.A.U...........................................-.GGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...-.UG.UUUGUUG.AUUCACU
+#=GR NPFE01001614.1/64110-63949/1-162     PP *****......5.7.7.7.............................................***.*.*.**..*.**....*....*****.***9996.....67.8888999.9******
+CDMC01000006.1/2136053-2136219/1-166         UGGCCU.G..AU.A.U.-...........................................U.GGC.C.G.UU..A.AG....A....CACAG.UGGCACA...U.CA.UGUACGU.AUGUAAU
+#=GR CDMC01000006.1/2136053-2136219/1-166 PP ******.*..*8.7.5.............................................6.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+KB644408.1/2344798-2344638/5-146             UGGCC-.-..-U.A.A.U...........................................-.GGC.U.G.UU..A.AG....A....CAUGG.UGGCACA...-.--.-------.-------
+#=GR KB644408.1/2344798-2344638/5-146     PP *****......5.7.7.7.............................................***.*.*.**..*.**....*....*****.*******.......................
+MDYL01000004.1/86173-86333/1-157             UUGCCU.U..A-.-.-.-...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.AA.CUU----.--GUCUA
+#=GR MDYL01000004.1/86173-86333/1-157     PP ******.8..7..................................................*.***.*.*.**..*.**....*....*****.****998...7.77.655.......66789
+MNBE01000719.1/721874-722034/1-160           UGGCC-.-..-U.A.A.U...........................................-.GGC.U.G.UU..A.AG....A....CAUCG.UGGCAC-...-.-A.UAUUUUA.CCUUAUC
+#=GR MNBE01000719.1/721874-722034/1-160   PP *****......5.7.7.7.............................................***.*.*.**..*.**....*....*****.****87.......5.7888899.9******
+KB644873.1/209888-210048/1-161               UUGCCU.G..A-.-.-.-...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.AU.AUCAGUU.UAGCAUA
+#=GR KB644873.1/209888-210048/1-161       PP ******.*..9..................................................*.***.*.*.**..*.**....*....*****.***9997...5.55.5556899.99*****
+HG814388.1/15693-15537/1-157                 UAGCUA.-..--.-.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGGACA..uA.CA.CAU---U.GUGUACA
+#=GR HG814388.1/15693-15537/1-157         PP ****83.........4.4...........................................6.9**.*.*.**..*.**....*....*****.*****97..33.45.555...5.579****
+PUHX01000037.1/285745-285901/1-157           UAGCUA.-..--.-.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGGACA..uA.CA.CAU---U.GUGUACA
+#=GR PUHX01000037.1/285745-285901/1-157   PP ****83.........4.4...........................................6.9**.*.*.**..*.**....*....*****.*****97..33.45.555...5.579****
+KV784226.1/773183-773025/1-159               UGGCCU.A..A-.-.-.-...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.UU.--CUAAA.UCGUAUA
+#=GR KV784226.1/773183-773025/1-159       PP ******.6..5..................................................*.***.*.*.**..*.**....*....*****.****998...7.64...45678.8******
+KV878907.1/389505-389668/1-160               UGGCCU.C..GC.A.G.U...........................................C.GGC.U.G.UU..A.AG....A....UCCAA.UGGCACA...-.--.UUUCUGU.AAGAAUU
+#=GR KV878907.1/389505-389668/1-160       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****986........5688889.99*****
+KK088432.1/57264-57101/1-164                 UGGCCU.C..GC.A.G.U...........................................C.GGC.U.G.UU..A.AG....A....UCCAA.UGGCACA...U.UCcUGUAAGA.AUUGAUA
+#=GR KK088432.1/57264-57101/1-164         PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...9.853789999*.*******
+MBFL01000568.1/8488-8325/1-164               UGACCU.GuuAA.A.A.U...........................................A.GGU.C.G.UU..A.AG....A....CACAG.UGGCACA...U.GA.UAA--UU.ACAUAGA
+#=GR MBFL01000568.1/8488-8325/1-164       PP ******.94456.7.8.9...........................................*.***.*.*.**..*.**....*....*****.**88888...8.77.765..67.9999***
+KZ118969.1/202256-202093/1-164               UAGCCU.G..A-.-.-.-...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...-.UU.CAUAGCU.GAAUAUU
+#=GR KZ118969.1/202256-202093/1-164       PP ******.*..9..................................................*.***.*.*.**..*.**....*....*****.****997.....55.8999***.*******
+LXJU01000008.1/212622-212778/1-157           UGGCCU.A..--.-.-.-...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...U.A-.C----AA.CAGGAUA
+#=GR LXJU01000008.1/212622-212778/1-157   PP ******.5.....................................................*.***.*.*.**..*.**....*....*****.****986...3.3..2....34.457899*
+JPLR01000014.1/1992487-1992331/1-157         UGGCCU.A..--.-.-.-...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...U.AC.AAU----.-AGGAUA
+#=GR JPLR01000014.1/1992487-1992331/1-157 PP ******.5.....................................................*.***.*.*.**..*.**....*....*****.****998...6.65.555......56789*
+BCKA01000001.1/3870779-3870617/1-161         UAGCCU.G..A-.-.-.-...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.UU.ACAUACA.UCUAGCA
+#=GR BCKA01000001.1/3870779-3870617/1-161 PP ******.*..9..................................................*.***.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+QPHH01000017.1/342246-342083/1-162           UGGCCU.G..AC.C.G.U...........................................C.GGC.C.G.UU..A.AG....A....CACAG.UGGCACA...C.--.--UCAUG.AAGUACU
+#=GR QPHH01000017.1/342246-342083/1-162   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...6......58889.9******
+LAKW02000739.1/3958-3802/1-155               UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CCUCG.UGGUACA...U.--.--ACUCA.UUGUAUC
+#=GR LAKW02000739.1/3958-3802/1-155       PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*****98...5......47799.*******
+CM002799.1/6798329-6798170/1-159             UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.AC.CAUUGUG.UACCUAA
+#=GR CM002799.1/6798329-6798170/1-159     PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+AM920436.1/2074112-2073953/1-159             UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.AC.CAUUGUG.UACCUAA
+#=GR AM920436.1/2074112-2073953/1-159     PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+QAGI01000090.1/101700-101541/1-159           UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.AC.CAUUGUG.UACCUAA
+#=GR QAGI01000090.1/101700-101541/1-159   PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+MUXA01000093.1/6301234-6301393/1-159         UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.AC.CAUUGUG.UACCUAA
+#=GR MUXA01000093.1/6301234-6301393/1-159 PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*******...*.**.*******.*******
+LDZW01000189.1/197149-196984/1-166           UGGCUU.G..UU.A.A.U...........................................U.AGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...A.UU.A--UAUA.UAGCAAU
+#=GR LDZW01000189.1/197149-196984/1-166   PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...8.74.3..3457.7899***
+QAGH01000024.1/70683-70518/1-166             UGGCUU.G..UU.A.A.U...........................................C.AGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...A.UC.A--UAUA.UAGCAAU
+#=GR QAGH01000024.1/70683-70518/1-166     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...8.74.3..4557.789999*
+CH236923.1/868820-868983/1-164               UGGCCU.G..AC.C.G.U...........................................C.GGC.C.G.UU..A.AG....A....CACAG.UGGCACA...A.U-.-UAUGAA.AUACUUG
+#=GR CH236923.1/868820-868983/1-164       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*****99...8.6...46799*.*******
+QAGJ01000001.1/12137-12302/1-166             UGGCUU.G..UU.A.A.U...........................................C.AGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...A.UC.A--UAUA.UAGCAAU
+#=GR QAGJ01000001.1/12137-12302/1-166     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...8.74.3..4567.789999*
+HG816185.1/2776-2618/1-157                   UGGCCC.A..A-.-.-.-...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.--.--ACCCA.UUGUGUA
+#=GR HG816185.1/2776-2618/1-157           PP ****98.5..4..................................................9.9**.*.*.**..*.**....*....*****.****997...4......4779*.*******
+PVWQ01000001.1/4903679-4903513/1-165         UGGCCU.G..GA.C.A.U...........................................C.GGC.C.G.UU..A.AG....A....CACAG.UGGCACA...A.--.--UCAUG.AAGUACU
+#=GR PVWQ01000001.1/4903679-4903513/1-165 PP ******.9..99.9.9.*...........................................*.***.*.*.**..*.**....*....*****.******9...7......58899.9******
+JYNM02000007.1/2977649-2977492/1-156         UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...U.--.--ACACA.UUGUAUA
+#=GR JYNM02000007.1/2977649-2977492/1-156 PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*****98...4......47899.*******
+HG792015.1/6520966-6520808/1-157             UGGCCC.A..A-.-.-.-...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.--.--ACCCA.UUGUGUA
+#=GR HG792015.1/6520966-6520808/1-157     PP ****98.5..4..................................................9.9**.*.*.**..*.**....*....*****.****997...4......4779*.*******
+KQ434266.1/2479195-2479355/1-160             UGGCCU.-..--.U.A.-...........................................U.GGC.U.G.UU..A.AG....A....CAUCG.UGGCAC-...-.-A.UACUUCA.CCUUUUU
+#=GR KQ434266.1/2479195-2479355/1-160     PP *****6.......4.4.............................................4.***.*.*.**..*.**....*....*****.****87.......5.7888999.9******
+KV878585.1/1257911-1258076/1-166             UGGCUU.G..UU.A.A.U...........................................U.AGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...A.UU.A--UAUA.UAGCAAU
+#=GR KV878585.1/1257911-1258076/1-166     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...8.74.3..3457.7899***
+HG813315.1/254382-254538/1-155               UGGCCC.A..A-.-.-.-...........................................G.AGC.U.A.UU..A.AG....A....CAUCG.UGGCACA...U.--.--ACCCA.UUGUGUA
+#=GR HG813315.1/254382-254538/1-155       PP ****98.5..4..................................................9.9**.*.*.**..*.**....*....*****.****997...4......4779*.*******
+RFFF01004146.1/3432-3588/1-155               UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.--.--ACCCA.UUGUGUA
+#=GR RFFF01004146.1/3432-3588/1-155       PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.****997...4......4779*.*******
+MOOB01000023.1/235686-235842/1-155           UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.--.--ACCCA.UUGUGUA
+#=GR MOOB01000023.1/235686-235842/1-155   PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.****997...4......4779*.*******
+PKQL01000052.1/67075-67231/1-155             UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.--.--ACCCA.UUGUGUA
+#=GR PKQL01000052.1/67075-67231/1-155     PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.****997...4......4779*.*******
+CM012214.1/5468557-5468392/1-164             UUGCCU.G..GC.A.A.C...........................................-.GGC.U.G.UU..A.AG....A....CGGGG.UGUGACA...U.AC.U--UGU-.AUAGCCA
+#=GR CM012214.1/5468557-5468392/1-164     PP ******.*..**.*.9.6.............................................***.*.*.**..*.**....*....*****.****997...5.44.3..344..444459*
+RCNU01000001.1/3292864-3292699/1-164         UUGCCU.G..GC.A.A.C...........................................-.GGC.U.G.UU..A.AG....A....CGGGG.UGUGACA...U.AC.U--UGU-.AUAGCCA
+#=GR RCNU01000001.1/3292864-3292699/1-164 PP ******.*..**.*.9.6.............................................***.*.*.**..*.**....*....*****.****997...5.44.3..344..444459*
+BCIC01000004.1/1962356-1962188/1-169         UGGCCU.G..AC.A.A.U...........................................AuGGC.U.G.CU..A.AG....A....CGCAG.UGGAAC-...A.UA.CUUAGCA.GUAGAUC
+#=GR BCIC01000004.1/1962356-1962188/1-169 PP ******.*..**.*.*.*...........................................98***.*.*.**..*.**....*....*****.***776....6.99.99*****.*******
+MSJH02000800.1/203623-203458/1-164           UUGCCU.G..GC.A.A.C...........................................-.GGC.U.G.UU..A.AG....A....CGGGG.UGUGACA...U.AC.U--UGU-.AUAGCCA
+#=GR MSJH02000800.1/203623-203458/1-164   PP ******.*..**.*.9.6.............................................***.*.*.**..*.**....*....*****.****997...5.44.3..344..444459*
+MDYN01000007.1/378845-379000/1-156           UGGCCU.A..--.-.-.-...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...U.AC.AAU----.-AGGAUA
+#=GR MDYN01000007.1/378845-379000/1-156   PP ******.5.....................................................*.***.*.*.**..*.**....*....*****.****997...6.55.555......56789*
+LLXE01000046.1/5460-5303/1-156               UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.--.--ACACA.UUGUAUA
+#=GR LLXE01000046.1/5460-5303/1-156       PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.****997...4......47899.*******
+KV878129.1/1268395-1268230/1-166             UGGCUU.G..UU.C.A.U...........................................C.AGC.U.G.UU..A.AG....A....CGCAG.UGGCACA...A.UC.AUUU--A.UAGCAAU
+#=GR KV878129.1/1268395-1268230/1-166     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...9.98.7765..6.6799***
+QLOF01000019.1/58358-58191/1-166             UGGCCU.G..UC.U.G.U...........................................C.GGC.C.G.UU..A.AG....A....CGCAG.UGGCACA...A.--.-AUUUGA.AUUAGUA
+#=GR QLOF01000019.1/58358-58191/1-166     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****998...7.....566789.99999**
+JOMC01000030.1/386208-386373/1-164           UGGCUU.G..UC.U.U.-...........................................C.AGC.C.G.UU..A.AG....A....CACAG.UGGCACA...U.CA.CUUAG--.--GGAAA
+#=GR JOMC01000030.1/386208-386373/1-164   PP *****9.9..99.7.6.............................................5.7**.*.*.**..*.**....*....*****.*******...9.99.88755.....7899*
+RAQS01000088.1/49192-49351/1-158             UUGCCU.G..UU.A.U.A...........................................C.GGC.U.G.UU..A.AG....A....CACAG.UGGCACA...U.U-.-GUUGAA.UAGGUCA
+#=GR RAQS01000088.1/49192-49351/1-158     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...8.6...578999.99*****
+JNNR01000430.1/1665-1822/1-156               UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CCUCG.UGGUACA...U.--.--ACUCA.UUGUAUC
+#=GR JNNR01000430.1/1665-1822/1-156       PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*****98...5......47799.*******
+MLKD01000001.1/537738-537576/1-163           UGGCCU.A..A-.-.-.-...........................................A.GGC.U.G.UU..A.AG....A....CAUCG.UGGCACAuuuA.CA.UAUCUCU.A-GCAUA
+#=GR MLKD01000001.1/537738-537576/1-163   PP ******.6..5..................................................*.***.*.*.**..*.**....*....*****.*****993334.57.8888876.5.9****
+MLQL01000001.1/457637-457793/1-155           UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...U.--.--ACCCA.UUGUGUA
+#=GR MLQL01000001.1/457637-457793/1-155   PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.****997...4......4779*.*******
+QPIC01000007.1/1429177-1429334/1-156         UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...U.--.--ACACA.UUGUAUA
+#=GR QPIC01000007.1/1429177-1429334/1-156 PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*****98...4......47899.*******
+MDYP01000004.1/833842-833684/1-157           UAGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGCACA...-.UA.CAUUG--.-UGUACA
+#=GR MDYP01000004.1/833842-833684/1-157   PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.***9985.....78.88877....699***
+RFFF01001027.1/45391-45231/1-161             UGGCC-.-..--.G.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...-.UA.UCUC-CA.UAGCGAA
+#=GR RFFF01001027.1/45391-45231/1-161     PP ****3........3.4.4...........................................6.7**.*.*.**..*.**....*....*****.****986.....45.5554.67.789999*
+PUXE01000206.1/2686-2530/1-155               UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....AAUCG.UGGGACA...U.--.--ACACA.UUGUAUA
+#=GR PUXE01000206.1/2686-2530/1-155       PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.****997...4......47899.*******
+QBDR01000015.1/35704-35869/1-160             UUGCCU.G..GC.A.A.C...........................................-.GGC.U.G.UU..A.AG....A....CGGGG.UGUGACA...-.--.-----UA.ACUUAUA
+#=GR QBDR01000015.1/35704-35869/1-160     PP ******.*..**.*.9.6.............................................***.*.*.**..*.**....*....*****.****987.............57.8999***
+QAGG01000026.1/41349-41509/1-161             UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...-.UA.UCUC-CA.UAGCGAA
+#=GR QAGG01000026.1/41349-41509/1-161     PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.****986.....45.5554.67.789999*
+JQFZ01000161.1/102553-102397/1-155           UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...U.--.--GCACU.UUGUAUA
+#=GR JQFZ01000161.1/102553-102397/1-155   PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*****98...6......57888.99*****
+PNEM01000004.1/3615670-3615505/1-165         UUGCCU.G..AC.A.A.C...........................................-.GGC.U.G.CU..A.AG....G....CGGG-.-GGUGUG...A.CA.GACCUUA.UAGCUAG
+#=GR PNEM01000004.1/3615670-3615505/1-165 PP ******.*..**.*.9.6.............................................***.*.*.**..*.**....*....9854...455555...6.67.899999*.*******
+QEIL01000105.1/110783-110949/1-165           UUGCCU.G..AC.A.A.U...........................................-.GGC.U.G.CU..A.AG....A....CGGGA.UGUGACA...-.--.GACCUGU.AGGGCCA
+#=GR QEIL01000105.1/110783-110949/1-165   PP ******.*..**.*.*.7.............................................9**.*.*.**..*.**....*....***99.9999886........5788888.99999**
+LHQR01000065.1/266698-266855/1-154           UAGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUUG.UGGUACA...-.--.UAUUG--.-UGUACA
+#=GR LHQR01000065.1/266698-266855/1-154   PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.****986........45554....589***
+KN846956.1/285761-285922/1-162               UCCCCG.U..AU.U.A.G...........................................A.GGG.A.G.UA..U.AG....A....CUUGG.UGGCACA...U.UC.AAGAG-A.GCGCAUA
+#=GR KN846956.1/285761-285922/1-162       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.******9...8.87.77655.8.9******
+LWEC01000368.1/376136-375979/1-158           CGGCU-.-..--.-.-.-g......................................ag..-.AGC.A.U.UU..A.AG....G....CAUUG.UGGUGCA...-.UA.CACCU-U.UUAUACA
+#=GR LWEC01000368.1/376136-375979/1-158   PP 99987.............3......................................43....799.9.9.**..*.**....*....*****.****986.....66.66654.4.5789***
+DS027051.1/253455-253601/1-147               UAGCCU.A..AC.C.A.U...........................................A.GGC.U.G.UU..A.AG....A....CACAG.UCGCACA...U.UC.UAUCACAgACUCAUA
+#=GR DS027051.1/253455-253601/1-147       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...*.**.*****98789*****
+BCHZ01000003.1/6864909-6865072/1-155         -UCCUC.G..GU.A.U.G...........................................G.AGG.A.A.CA..U.AG....A....CAUCG.UGGCACA...A.UC.-------.CCGGAUA
+#=GR BCHZ01000003.1/6864909-6865072/1-155 PP .59***.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.*******...9.85.........5899***
+ANHP01000283.1/32261-32421/1-161             UGGCUU.G..UC.A.A.-...........................................A.AGC.C.G.UU..A.AG....G....UGCGG.CG--ACA...C.AA.AUAAGAA.GAUGAGA
+#=GR ANHP01000283.1/32261-32421/1-161     PP ******.*..**.9.8.............................................9.***.*.*.**..*.**....*....****9.99..555...5.55.6667888.88899**
+MSED01000003.1/379171-379332/1-162           UCCCCG.C..UU.U.A.G...........................................A.GGG.A.G.UA..U.AG....A....CUUGG.UGGCACA...U.UC.AAAAG-A.GAGAACA
+#=GR MSED01000003.1/379171-379332/1-162   PP *****9.9..99.9.9.9...........................................9.***.*.*.**..*.**....*....*****.******9...9.98.87776.6.6799***
+KN847521.1/701972-702131/1-158               -UCCUU.G..UU.U.-.-g......................................uc..A.AGG.A.C.CA..U.AG....G....CAUCG.UGGAACA...U.UU.GA---UA.AAGAUGA
+#=GR KN847521.1/701972-702131/1-158       PP .45555.5..44.3....3......................................33..5.555.5.5.67..8.99....9....*****.****998...7.76.66...57.888889*
+KV878355.1/121728-121564/1-165               UGGCUU.G..GU.G.A.A...........................................U.GGC.C.A.UC..A.AG....A....UACAG.UGAGACA...-.UA.UACAGU-.AGGUAGU
+#=GR KV878355.1/121728-121564/1-165       PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****995.....89.998886..579****
+KN847336.1/1953855-1954016/1-162             UCUUCA.-..-C.A.U.C...........................................U.GAG.G.A.AUuaU.AG....U....CAUGA.UGGUACA...U.UA.U-UCAAG.CUUGACA
+#=GR KN847336.1/1953855-1954016/1-162     PP 766665.....5.5.5.5...........................................6.666.6.6.55123.67....7....*****.*******...9.99.8.56666.77789**
+KN847322.1/2045347-2045507/1-160             -UCCUC.G..CC.C.U.U...........................................G.GGG.A.A.CA..U.AG....G....CAUGG.UGGUACA...C.CA.---CGAA.AAUCAAC
+#=GR KN847322.1/2045347-2045507/1-160     PP .7****.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****998...7.65....89**.*******
+KN847494.1/3256707-3256546/1-159             UCUUC-.A..CA.U.C.U...........................................G.AGG.A.A.UC..AuAG....U....CAUGA.UGGUACA...A.UA.C----CC.AAGCUUG
+#=GR KN847494.1/3256707-3256546/1-159     PP 74433..3..33.3.3.4...........................................5.555.5.6.88..6489....9....*****.*******...9.98.5....67.89*****
+KV407454.1/2741789-2741623/1-167             AGCCCC.A..AU.A.A.G.........................................ucG.GGG.C.G.CU..A.AG....G....CGCACgAAGGACA...U.GA.CUUAGUA.UUCGAAA
+#=GR KV407454.1/2741789-2741623/1-167     PP 999***.9..99.8.7.3.........................................34*.***.*.*.**..*.**....*....****73689****...*.**.*******.*******
+AMGX01000040.1/165763-165923/1-161           U-CCUC.G..CC.C.U.A...........................................G.AGGaA.G.CA..U.AG....A....CCUGG.UGGAACA...A.U-.--UGGAC.AGGCACU
+#=GR AMGX01000040.1/165763-165923/1-161   PP 8.5666.6..66.6.6.6...........................................6.66526.9.**..*.**....*....*****.*******...9.8....56788.99*****
+BCIG01000031.1/264934-264773/1-162           AGCUCU.G..UC.U.AcU...........................................A.GAG.C.A.UU..AuAG....G....CGCCA.UUGGACA...U.UC.UUUCCCA.UG--UCA
+#=GR BCIG01000031.1/264934-264773/1-162   PP 999999.9..98.5.538...........................................9.999.9.8.88..6489....9....*****.*******...*.**.****998.75..579
+CM009903.1/677953-678120/1-168               UGGCCC.G..UC.A.A.-ca....................................uaa..G.GCC.A.G.CU..A.AG....U....UGCAG.AGGGACA...U.UC.UCUAGUA.AC--AAA
+#=GR CM009903.1/677953-678120/1-168       PP 888888.8..77.6.5..55....................................544..5.556.6.8.99..*.**....*....*****.*******...*.**.******9.96..889
+MSFN02000013.1/136100-136279/1-178           UGGCCU.G..GA.U.G.U...........................................U.GGC.C.G.UU..A.AGuaagA....CACGC.UGUCGCA...C.-A.CACACAC.ACACACA
+#=GR MSFN02000013.1/136100-136279/1-178   PP ******.*..**.*.*.*...........................................*.***.*.*.**..8.6522227....99999.9999887...5..5.6666667.89*****
+ACFW01000035.1/909162-909325/1-164           CAGUC-.-..--.-.-.-uc....................................cga..-.GAC.A.A.AU..A.AG....C....CGCAG.U-GGACA...U.CA.AUUGUCA.AUGGAUA
+#=GR ACFW01000035.1/909162-909325/1-164   PP 44444.............56....................................664....666.6.7.77..8.88....8....*****.9.66799...*.**.*******.*******
+JZBS01002706.1/42093-41915/1-179             UGGCCU.G..GA.U.G.U...........................................U.GGC.C.G.UU..A.AG....UaagaCACGC.UGUCGCA..cA.CA.CACACAC.ACCCACA
+#=GR JZBS01002706.1/42093-41915/1-179     PP ******.*..**.*.*.*...........................................*.***.*.*.**..8.75....3333388888.8888887..34.56.6666666.999****
+PSNO01000009.1/530802-530635/1-168           UGGCCC.G..CC.A.A.-ca....................................uaa..G.GCC.A.G.CU..A.AG....U....UGCAG.AGGGACA...U.UC.UCUAGUA.AC--AAA
+#=GR PSNO01000009.1/530802-530635/1-168   PP 777777.7..66.5.4..55....................................554..5.556.6.8.99..*.**....*....*****.*******...*.**.******9.96..889
+JH993674.1/1038830-1038980/1-149             UGGC--.-..-C.A.A.A...........................................G.AGC.U.G.UU..A.AG....A....CAUCG.UGGUACA...U.--.--ACACA.UUGUAUA
+#=GR JH993674.1/1038830-1038980/1-149     PP ****.......6.7.7.7...........................................8.8**.*.*.**..*.**....*....*****.*****98...4......47899.*******
+KB822699.1/101951-102112/1-162               UCCUCG.C..UU.C.A.G...........................................A.GGG.A.G.UA..U.AG....G....CUUGG.GGGUACA...U.UC.AAGUGAG.AAG-AAA
+#=GR KB822699.1/101951-102112/1-162       PP 766665.5..55.6.6.6...........................................7.777.8.8.99..9.99....9....99***.*******...*.**.****999.988.569
+CH476619.1/2006458-2006623/1-166             GGGUCU.C..--.-.-.-agggauuc.........................agucuuug..A.GAC.C.A.AU..A.AG....U....CGCAA.-GCGAAC...A.UU.UUGCUCA.AAGAAUA
+#=GR CH476619.1/2006458-2006623/1-166     PP *****9.6..........589*****.........................********..9.***.*.*.**..*.**....*....****7..******...*.**.*******.*******
+QGQJ01001354.1/22185-22022/1-161             CGCAUU.C..AC.U.U.U...........................................G.AGG.U.U.AU..A.AG....A....ACCA-.GAGAAC-...-.--.-AUAAAA.AAAGAAA
+#=GR QGQJ01001354.1/22185-22022/1-161     PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....9....6543..244433..........344556.777899*
+AMWN01000001.1/3907565-3907403/1-161         UCCUCU.U..UC.U.U.G...........................................A.GGA.G.A.CA..U.AG....A....CAUUG.UGGUACA...C.U-.--UCCAA.GUUUUGA
+#=GR AMWN01000001.1/3907565-3907403/1-161 PP ******.*..**.*.*.*...........................................*.***.*.*.**..*.**....*....*****.****998...7.7....56666.777788*
+QWDQ01000017.1/393067-393232/1-164           CCUGUU.G..UU.A.A.-...........................................G.AGA.U.G.CA..U.AG....C....CAGGC.AGAGACA...A.U-.-UCCAAU.ACCAGCA
+#=GR QWDQ01000017.1/393067-393232/1-164   PP 333333.3..33.3.3.............................................3.446.6.7.77..8.89....9....*****.******9...8.6...568889.99999**
+PDNC01000173.1/18400-18237/1-149             ------.-..--.-.-.-aucg.................................gacu..-.---.-.-.--..-.--....-....CACUU.CGAGGUU...A.UA.AGGACCA.GAGAACA
+#=GR PDNC01000173.1/18400-18237/1-149     PP ..................9999.................................9887.............................44444.4444446...7.77.7788899.99*****
+AMGY01000008.1/795842-796004/5-147           UCCUCG.C..UU.G.A.G...........................................A.GGA.G.A.CA..U.AG....A....CGUUG.UGGUACA...-.--.-------.-------
+#=GR AMGY01000008.1/795842-796004/5-147   PP 664444.4..44.4.4.4...........................................5.556.7.7.89..9.**....*....*****.*******.......................
+LVYI01000012.1/532651-532812/1-160           CUUGCU.-..-C.U.A.G...........................................A.GGA.A.G.GA..U.AG....A....CCUGG.UGGCACA...A.UA.UU----A.GGGUAUU
+#=GR LVYI01000012.1/532651-532812/1-160   PP 999999.....7.7.8.8...........................................9.99*.*.*.**..*.**....*....*****.*******...*.*9.96....5.66999**
+KN848073.1/795316-795480/1-162               U--CCU.U..GC.-.-.-uu....................................gag..A.GGA.A.G.UA..U.AG....A....CCUGG.UGGCACA...A.UU.--UCAGG.ACGUUUC
+#=GR KN848073.1/795316-795480/1-162       PP 8..666.4..33......33....................................333..7.777.8.9.**..*.**....*....*****.****999...8.65...68888.*******
+LJPJ01001247.1/13369-13207/1-163             ------.-..--.-.-.-agugacagccu..................cugggcucgaua..-.---.-.-.--..A.AG....C....CGCAG.U-GAACA...-.UU.UCUGUUA.AUGGAUA
+#=GR LJPJ01001247.1/13369-13207/1-163     PP ..................45556677777..................777777666554................6.67....7....*****.9.99886.....56.88999**.*******
+GG704913.1/3703156-3703320/1-165             ------.-..G-.-.-.-aucucagagug...................ucagucuccga..-.GAC.A.A.AU..A.AG....C....CGCAG.U-GGACA...U.CA.AUUGUCA.AUGGAUA
+#=GR GG704913.1/3703156-3703320/1-165     PP ..........0.......22223333444...................44555556675....666.6.6.67..7.77....7....*****.9.66799...*.**.*******.*******
+PDND01000154.1/43908-43738/1-153             ------.-..--.-.-.-cucgaacua.......................cccacucac..-.---.-.-.--..-.--....-....UUCGA.GGUUAUA...A.GA.A---CCA.GAGGACA
+#=GR PDND01000154.1/43908-43738/1-153     PP ..................66789****.......................******998.............................89999.9999888...8.76.5...578.899****
+PDNB01000072.1/22815-22658/1-158             GGCAUC.C..AC.G.U.U...........................................G.AGG.U.U.AU..A.AG....A....---AC.CAGAGCA...C.AU.AAGC---.-AGUAAA
+#=GR PDNB01000072.1/22815-22658/1-158     PP ******.*..**.9.9.*...........................................*.*99.9.9.99..9.99....9.......49.9999998...6.55.5544.....48899*
+EQ999979.1/3138132-3138296/1-149             ------.-..--.-.-.-cucgga............................ucgcacu..-.---.-.-.--..-.--....-....CACGU.CGAGGUU...A.UA.GGAACCA.GAGAACA
+#=GR EQ999979.1/3138132-3138296/1-149     PP ..................56789*............................****998.............................*****.*******...*.**.*******.*******
+GG657468.1/794777-794941/1-149               ------.-..--.-.-.-cucgga............................ucgcacu..-.---.-.-.--..-.--....-....CACGU.CGAGGUU...A.UA.GGAACCA.GAGAACA
+#=GR GG657468.1/794777-794941/1-149       PP ..................56789*............................****998.............................*****.*******...*.**.*******.*******
+LVCJ01000039.1/172537-172378/1-158           U--CCUuG.uUC.U.A.G...........................................A.GGA.A.G.UA..U.AG....A....CCUGG.UGACACA...A.UU.G------.GAGGAUA
+#=GR LVCJ01000039.1/172537-172378/1-158   PP 7..66623.134.5.5.5...........................................7.778.8.9.**..*.**....*....*****.***9999...9.85.4.......45889**
+KN847477.1/4225855-4226018/1-160             ------.-..--.-.-.-cauccuugcuc...................uagaggaaaca..-.---.-.-.--..U.AG....A....CAGUG.UGGCACA...A.CA.----GUA.AGGGUUU
+#=GR KN847477.1/4225855-4226018/1-160     PP ..................55555566666...................66655555555................6.99....*....*****.*******...9.76.....899.*******
+JH226130.1/1134482-1134321/1-160             UCCUCA.G..UU.G.A.G...........................................A.GGA.G.A.CA..U.AG....A....CAUUG.UGGCACA...U.GA.----GAA.ACUAAGU
+#=GR JH226130.1/1134482-1134321/1-160     PP 444444.4..44.4.4.4...........................................5.555.5.5.57..9.99....9....*****.******9...8.77.....679.9999***
+KN846985.1/339809-339969/1-161               -UCCUC.G..CC.C.U.A...........................................G.AGG.AaG.CA..U.AG....A....CCUGG.UGGAACA...A.U-.--UGGAG.AGGCAUU
+#=GR KN846985.1/339809-339969/1-161       PP .56777.7..77.7.7.7...........................................7.776.525.67..9.**....*....*****.******9...9.8....67999.*******
+BCHY01000003.1/3192638-3192478/1-159         UCCUCG.G..UC.-.-.-...........................................C.GAG.G.A.AGcaU.AG....A....CUGAG.CGGCACA...C.--.--GCAUG.AAGAAGA
+#=GR BCHY01000003.1/3192638-3192478/1-159 PP 988887.7..66.................................................7.777.7.6.55227.89....9....*****.******9...6......46778.99*****
+AMYF01000091.1/214165-214007/1-159           UUGCCAuG..CU.U.A.A...........................................U.GGC.A.G.UA..U.AG....U....CAUUG.UGCGA--...-.UA.AAUGCGA.GUGCACA
+#=GR AMYF01000091.1/214165-214007/1-159   PP 77777735..55.6.7.6...........................................7.777.7.7.77..8.99....9....***99.99885.......66.6888899.9******
+LJPI01000934.1/141448-141609/1-162           ------.-..--.-.-.-ggucucagaauguca...........auuuccgagaccaau..-.---.-.-.--..A.AG....U....UGCAG.UUG-ACA...-.UG.CUUGUGA.GCGGAUA
+#=GR LJPI01000934.1/141448-141609/1-162   PP ..................333334455678999...........999999977776654................6.67....7....*****.*85.776.....55.5566679.9******
+KN847044.1/4048401-4048566/5-150             UCCUUU.G..--.-.-.-cuc...................................uag..A.GGA.A.G.UA..U.AG....A....CCUGG.UGGCACA...A.U-.-------.-------
+#=GR KN847044.1/4048401-4048566/5-150     PP 855555.5..........333...................................333..6.666.6.8.99..*.**....*....*****.*******...*.*.................
+KN846970.1/505674-505511/1-164               U--CCUuG.uUC.U.A.G...........................................A.GGA.A.G.UA..U.AG....A....CCUGG.UGACACA...A.UU.GGAGAUA.UUUGAUC
+#=GR KN846970.1/505674-505511/1-164       PP 7..66623.134.5.5.5...........................................7.778.8.9.**..*.**....*....*****.*******...*.**.*******.*******
+LVKK01000047.1/142734-142571/1-164           U--CCUuG.uUC.U.A.G...........................................A.GGA.A.G.UA..U.AG....A....CCUGG.UGACACA...A.UU.GGAGAUA.UUUGAUC
+#=GR LVKK01000047.1/142734-142571/1-164   PP 7..66623.134.5.5.5...........................................7.778.8.9.**..*.**....*....*****.*******...*.**.*******.*******
+CH476660.1/101666-101503/1-150               ------.-..--.-.-.-cgaaucac.........................auagucac..-.---.-.-.--..-.--....-....UUCGA.GGUUAUA...A.GA.A---CCA.GAGAACA
+#=GR CH476660.1/101666-101503/1-150       PP ..................57799999.........................99999887.............................89999.9999888...7.76.5...578.8999***
+NMUC01000095.1/53363-53524/1-161             UGGCCA.U..GC.U.-.-u......................................ca..U.GGC.A.G.UA..U.AG....U....CGUUG.UGC-GAG...A.UG.UUGAGUU.ACGUGAU
+#=GR NMUC01000095.1/53363-53524/1-161     PP *****9.6..55.4....3......................................33..9.***.*.*.**..*.**....*....****9.987.778...9.99.99*****.*******
+KN846954.1/3894589-3894750/1-160             UUCCUC.G..UA.U.U.A...........................................G.AGG.A.GcCA..U.AG....A....CAUGG.UGAUACA...C.UG.C----UA.GCUUUCA
+#=GR KN846954.1/3894589-3894750/1-160     PP 777777.7..77.7.7.7...........................................7.777.7.7347..8.9*....*....*****.*****99...8.75.4....67.8999***
+PCFH01000019.1/152438-152277/1-161           UUGCCA.U..GC.U.-.-u......................................ca..U.GGC.A.G.UA..U.AG....U....CGUUG.UGC-GAG...A.UG.UUGAGUU.AUGUGAU
+#=GR PCFH01000019.1/152438-152277/1-161   PP *****9.6..55.4....3......................................33..9.***.*.*.**..*.**....*....****9.987.778...9.99.99*****.*******
+KK106983.1/4170125-4170290/1-164             CGCUCU.U..GU.G.U.A...........................................A.GAG.C.A.UC..AuAG....C....CGCCA.GGA-AAC...A.UC.AGUAUAU.GCGCCUA
+#=GR KK106983.1/4170125-4170290/1-164     PP 666666.6..66.6.6.6...........................................6.666.6.6.66..5267....7....88877.666.555...6.66.6788889.9******
+LCWF01000016.1/40120-40287/1-152             ------.-..--.-.-.-aucu................................cgcga..-.---.-.-.--..A.AG....A....CGA--.--GGUGC...A.UA.AGCAGCG.ACGGACA
+#=GR LCWF01000016.1/40120-40287/1-152     PP ..................6777................................77776................6.77....8....887.....77778...8.99.9999***.*******
+AMGW01000001.1/5081690-5081528/1-163         C-----.-..--.-.-.-ucgcuucagagggaguauaggcuugaggauacauucaagug..-.---.-.A.GG..-.AG....A....UG---.-------...-.--.-------.-------
+#=GR AMGW01000001.1/5081690-5081528/1-163 PP 3.................3344457789**************************74433..........3.33....58....8....99..................................
+AZGZ01000024.1/204852-205023/1-168           GUCUCA.-..--.-.-.-aguuuca..........................ccaacgcu..U.GAG.U.C.UU..A.AA....A....CCGGC.CUGGACA...U.UC.------U.UCGUUGA
+#=GR AZGZ01000024.1/204852-205023/1-168   PP 555554............3455556..........................66666666..8.***.*.*.**..*.**....*....99876.5555998...7.75.......4.689999*
+KZ107833.1/281061-281197/1-107               ------.-..--.-.-.-ag.....................................gu..-.---.-.-.--..-.--....-....----C.UCGCAAU...A.GC.ACUCGCC.CGGCAUC
+#=GR KZ107833.1/281061-281197/1-107       PP ..................69.....................................*6.................................6.7799999...9.99.99*****.*******
+LGUA01000070.1/12013-12177/1-148             ------.-..--.-.-.-cucgaagc........................acaucucac..-.---.-.-.--..-.--....-....UUCGA.GGUUAUA...A.GA.A---CCA.GAGAACA
+#=GR LGUA01000070.1/12013-12177/1-148     PP ..................56688999........................999999887.............................88888.8888777...7.66.4...578.899****
+#=GC SS_cons                                 <<<<<<._..__._._._~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~..>.>>>.>.>.>>..-.--....-....>>>>>.>>>>:::...:.::.:::::::.:::::::
+#=GC RF                                      uuGCCu.G..AC.A.A.U~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~..a.GGC.u.g.uu..A.AG....A....CGCag.uGGuACA...A.UA.UAUCGCA.ACGCACA
+//
