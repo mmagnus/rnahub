@@ -86,8 +86,9 @@ The flanked mode is used to screen introns and untranslated regions (UTRs) to di
 In the tutorial, there are two flanked query sequences provided. They contain the same IGR as in the unflanked mode, flanked by the upstream and downstream protein-coding sequences. Because the official S. cerevisiae S288C genome annotation annotates protein-coding genes based only on their CDSes and does not annotate UTRs, the "IGRs" likely contain true intergenic region, along with the UTRs of the two protein-coding genes. In both alignments here, the entire IGR is treated as if it could potentially be the UTR of each gene, since it is only 503 nt. For much longer IGRs, it is reasonable to only include intergenic sequences some distance away from the CDS (e.g. 2000 nt). 
 
 Using these four arguments, the flanked mode script can be run as follows:
-```bash flanked_mode.sh tutorial/YAR014C_plus_IGR.fasta tutorial/genome_db/Saccharomyces_genomes.fa	S288C	50```
-```bash flanked_mode.sh tutorial/YAR015W_plus_IGR.fasta tutorial/genome_db/Saccharomyces_genomes.fa	S288C	50```
+
+	bash flanked_mode.sh tutorial/YAR014C_plus_IGR.fasta tutorial/genome_db/Saccharomyces_genomes.fa	S288C	50
+	bash flanked_mode.sh tutorial/YAR015W_plus_IGR.fasta tutorial/genome_db/Saccharomyces_genomes.fa	S288C	50
 
 The flanked mode script produces the following:
 - A directory with the basename of the query sequence, in the same directory as the query sequence.
