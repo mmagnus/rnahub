@@ -4,4 +4,6 @@ opt/
 /config_local.py
 __pycache__/*
 .DS_Store
-jobs/*
+#jobs/*
+*out
+*log
