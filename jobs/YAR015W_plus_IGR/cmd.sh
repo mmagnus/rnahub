@@ -1,0 +1,1 @@
+./rnahub.py --flank db/Saccharomyces_genomes.fa example/YAR015W_plus_IGR.fa
