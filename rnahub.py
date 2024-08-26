@@ -208,7 +208,7 @@ def save_to_slurm():
         name = f'{dbbase}X{fbase}'
         t = f"""#!/bin/bash
 
-#SBATCH -n 2 # Number of cores requested
+#SBATCH -n 3 # Number of cores requested
 #SBATCH -N 1 # Ensure that all cores are on one machine
 #SBATCH -t 0 # Runtime in minutes
 #SBATCH -p eddy # Partition to submit to
