@@ -13,7 +13,7 @@ import shutil
 import subprocess
 import sys
 import os
-from config import RSCAPE_PATH, nhmmer, SCRIPTS_DIR
+from config import RSCAPE_PATH, nhmmer, SCRIPTS_DIR, CPUs, EASEL_PATH
 import logging
 
 # SLURM directives are not directly used in Python scripts.
@@ -153,11 +153,11 @@ def search():
             #if first_site is None or second_site is None:
             #        print("Failed to locate first_site or second_site in the bp_col.txt file.")
             #        sys.exit(1)
-            cmd = ''.join(['/Users/magnus/bin/esl-alimask -t ', j, '/flanked.sto ', first_site, '..', second_site, ' > ', j, '/noncoding.sto'])
+            cmd = ''.join([f'{EASEL_PATH}/esl-alimask -t ', j, '/flanked.sto ', first_site, '..', second_site, ' > ', j, '/noncoding.sto'])
             print(cmd)
             exe(cmd)
 
-            cmd = ''.join(['/Users/magnus/bin/esl-alimanip --lmin 50  ', j, '/noncoding.sto > ', j, '/trim_noncoding.sto'])
+            cmd = ''.join([f'{EASEL_PATH}/esl-alimanip --lmin 50  ', j, '/noncoding.sto > ', j, '/trim_noncoding.sto'])
             print(cmd)
             exe(cmd)
             # esl-alimanip --lmin 50 tutorial/YAR014C_plus_IGR/noncoding.sto
