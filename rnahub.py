@@ -113,7 +113,7 @@ def search():
                 for i, each in enumerate(array, start=1):
                     f.write(f"{i} \t {each}\n")
 
-        def extractor(query):
+        def extractor(query, verbose=False):
             # gkab355_supplemental_files/tutorial/method_scripts/tutorial/YAR014C_plus_IGR/
             # Extract the relevant information from the query file
             ic(query)
@@ -132,11 +132,8 @@ def search():
                 print("Failed to extract s1 or s2 from the query file.")
                 sys.exit(1)
 
-            ic(s1, s2)
-
             # Locate the first and second site in the bp_col.txt file
             bp_col_path = os.path.join(f'{j}', 'bp_col.txt')
-            ic(bp_col_path)
 
             first_site = ''
             second_site = ''
@@ -144,7 +141,7 @@ def search():
             with open(bp_col_path, 'r') as fl:
                 for line in fl:
                     parts = line.split()
-                    print(parts, s1, s2)
+                    if verbose: print(parts, s1, s2)
                     if parts[0] == s1:
                         first_site = parts[1]
                     if parts[0] == s2:
@@ -170,11 +167,10 @@ def search():
         if not args.dev_skip_nhmmer0:
             exe(cmd, dry = False)
         # subscripts/bp_col.sh tutorial/YAR014C_plus_IGR/flanked.sto S288C
-        cmd = f'{SCRIPTS_DIR}/bp_col.py {j}/flanked.sto S288C' #
-        dry = False
+        #cmd = f'{SCRIPTS_DIR}/bp_col.py {j}/flanked.sto S288C' #
+        #dry = False
         #exe(cmd, dry)
         bp_col(f'{j}/flanked.sto', 'S288C')
-
         #+ subscripts/noncoding_extractor.sh tutorial/YAR014C_plus_IGR.fasta esl-alimask
         #+ esl-alimask -t tutorial/YAR014C_plus_IGR/flanked.sto 2305..
         extractor(f'{j}/{fbase}.fa') # noncoding.sto and trim_noncoding.sto
