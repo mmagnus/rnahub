@@ -53,6 +53,7 @@ def get_parser():
     parser.add_argument("--evalue", default="1e-5", help="e-value threshold")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
+    parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
     parser.add_argument("file", help=".fa for now, don't use .fasta", default="", nargs='+')
@@ -162,11 +163,12 @@ def search():
             exe(cmd)
             # esl-alimanip --lmin 50 tutorial/YAR014C_plus_IGR/noncoding.sto
 
-
         # v0 is flanked
         #cmd = nhmmer -E 1e-10 -A $DIR/$filename/flanked.sto --tblout $DIR/$filename/flanked.hmmout $query $DB > out.txt
-        cmd = f"{nhmmer} --cpu 2 --incE 1e-10 -A {j}/flanked.sto {j}/{fbase}.fa {db} > {j}/flanked.out" # v0.sto is flanked # fa vs fasta #TODO
-        exe(cmd, dry = False)
+        # nhmmer -E 1e-10 --cpu 64 -A tutorial/gly1_igr/flanked.sto --tblout tutorial/gly1_igr/flanked.hmmout tutorial/gly1_igr.fa ../../../db/1409_Acomycota_genomes-may19.fa
+        cmd = f"{nhmmer} --cpu {CPUs} --incE 1e-10 -A {j}/flanked.sto {j}/{fbase}.fa {db} > {j}/flanked.out" #v0.sto is flanked # fa vs fasta #TODO
+        if not args.dev_skip_nhmmer0:
+            exe(cmd, dry = False)
         # subscripts/bp_col.sh tutorial/YAR014C_plus_IGR/flanked.sto S288C
         cmd = f'{SCRIPTS_DIR}/bp_col.py {j}/flanked.sto S288C' #
         dry = False
