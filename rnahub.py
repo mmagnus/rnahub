@@ -180,8 +180,12 @@ def search():
             sto_file = f'v{i}.sto'
             output_file = f'v{i}.out'
             input_file = query if i == 1 else f'{j}/v{i-1}.sto'
-            command = f"{nhmmer} --cpu 2 --incE {evalue} -A {j}/{sto_file} {input_file} {db} > {j}/{output_file}"
+            evalue = '1e-10'
+            if i == 3:
+                evalue = '1e-5'
+            command = f"{nhmmer} --cpu {CPUs} --incE {evalue} -A {j}/{sto_file} {input_file} {db} > {j}/{output_file}"
             exe(command, dry)
+            
 def remove_multicopies():
         scriptsdir = './'
         exe(f'python {scriptsdir}/remove_multicopies5.py', dry)
