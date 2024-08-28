@@ -13,7 +13,7 @@ import shutil
 import subprocess
 import sys
 import os
-from config import RSCAPE_PATH, nhmmer, SCRIPTS_DIR, CPUs, EASEL_PATH
+from config import RSCAPE_PATH, nhmmer, SCRIPTS_DIR, EASEL_PATH
 import logging
 
 # SLURM directives are not directly used in Python scripts.
@@ -52,6 +52,7 @@ def get_parser():
     parser.add_argument("-f", "--flanked",  action="store_true", help="run flanked mode (create extra v0)")
     parser.add_argument("--evalue", default="1e-5", help="e-value threshold")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
+    parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--rscape", help="rscape only",
@@ -236,7 +237,8 @@ if __name__ == '__main__':
     evalue = args.evalue
     nofinteractions = args.iteractions
     dry = args.dry
-    
+    CPUs = args.cpus
+
     if list != type(args.file):
         args.file = [args.file]
 
