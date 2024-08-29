@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+j job directory
 
 """
 from __future__ import print_function
@@ -44,7 +45,7 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 
-    parser.add_argument('db', help="", default="")
+    parser.add_argument('--db', help="", default="")
     parser.add_argument('--job-name', default="", help="by default is input file name (wihout extension)")
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
@@ -57,7 +58,7 @@ def get_parser():
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
-    parser.add_argument("file", help=".fa for now, don't use .fasta", default="", nargs='+')
+    parser.add_argument("--file", help=".fa for now, don't use .fasta", default="", nargs='+')
     
     return parser
 
@@ -187,14 +188,106 @@ def search():
             command = f"{nhmmer} --cpu {CPUs} --incE {evalue} -A {j}/{sto_file} {input_file} {db} > {j}/{output_file}"
             exe(command, dry)
             
-def remove_multicopies():
-        scriptsdir = './'
-        exe(f'python {scriptsdir}/remove_multicopies5.py', dry)
+
+def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
+    """
+    Created on Mon May 24 09:58:47 2021
+
+    @author: ayang
+
+    Script for taking top scoring hit per genome from last iteration of nhmmer
+    Determines which sequences to keep and writes accessions to a file (accessions_to_keep.txt)
+    Can then run eslalimanip.sh to keep only these sequences
+
+    Finds the top scoring hit per genome from the last iteration of nhmmer and writes 
+    the accessions to a file.
+    
+    Parameters
+    ----------
+    directory : str, optional
+        The directory to search for .sto files. Defaults to the current working directory.
+    output_file : str, optional
+        The output file where accessions to keep will be written. Defaults to 'accessions_to_keep.txt'.
+    """
+    def parse_last_iteration(alignment):
+        '''
+        Parses the last alignment built by nhmmer.
+
+        Parameters
+        ----------
+        alignment : string
+            Name of a stockholm alignment made by nhmmer.
+
+        Returns
+        -------
+        genome : list of strings
+            The genomes from which each sequence in the alignment is from (as species name).
+        accession : list of strings
+            Full ensembl accession for each sequence, includes coordinates.
+        '''
         
-def esl_aliminip():
-        # Run esl-alimanip
-        eslalimanip = os.path.join(rscapedir, "lib/hmmer/easel/miniapps/esl-alimanip")
-        exe(f"{eslalimanip} --seq-k accessions_to_keep.txt v3.sto > rm_v3.sto", dry)
+        genome = [] # name of species in which the hit was found
+        accession = [] # full accession number, includes coordinates
+        print(alignment)
+        with open(alignment, "r") as fh: # open the file (alignment) for reading
+            for line in fh: # go through every line in the alignment
+                if line.startswith("#=GS"): # only consider lines of the alignment portion
+                    this = line.split()
+                    
+                    # parse using indexes
+                    genus = this[5]
+                    species = this[6]
+                    
+                    for character in genus:
+                        if character.isalpha() == False:
+                            genus = genus.replace(character, '')
+                    for character in species:
+                        if character.isalpha() == False:
+                            species = species.replace(character, '')
+                    
+                    this_genome = genus + species
+                    this_accession = this[1]
+                    
+                    # add to list2
+                    genome.append(this_genome)
+                    accession.append(this_accession)
+            
+        return genome, accession
+
+    # Initialize lists to keep track of genomes and accessions
+    encountered_genomes = [] # for keeping track of first instance of a genome
+    accessions_to_keep = [] # and corresponding accession
+
+    # Go through every file in the directory containing .sto files made by nhmmer
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file == output_file: # writes over old files, if there are any
+                os.remove(os.path.join(root, file))
+                
+            elif file.endswith(".sto"): # go through the .sto files
+                #v0.sto", "v1.sto", "v2.sto", 
+                if file in [f"v{nofinteractions}.sto"]: # only consider the last iteration
+                    genomes, accessions = parse_last_iteration(os.path.join(root, file)) # parse
+                    num_seqs = len(genomes)
+
+                    for j in range(num_seqs): # go through all the genomes in the alignment
+                        this_genome = genomes[j] 
+                        this_accession = accessions[j]
+
+                        if this_genome not in encountered_genomes: # save only the first instance
+                            encountered_genomes.append(this_genome)
+                            accessions_to_keep.append(this_accession)
+                    print(this_genome, this_accession)
+            
+    # Write the accessions to keep to a file
+    with open(os.path.join(directory, output_file), "w") as f:
+        for accession in accessions_to_keep:
+            f.write(f"{accession}\n")
+    
+    print(f"Accessions to keep have been written to {output_file}.")
+    cmd = f'{EASEL_PATH}/esl-alimanip --seq-k {directory}/accessions_to_keep.txt {directory}/v{nofinteractions}.sto > {directory}/rm_v{nofinteractions}.sto'
+    print(cmd)
+    exe(cmd)
 
 def rscape():
     # Set up for R-scape analysis
@@ -205,7 +298,8 @@ def rscape():
     except FileExistsError:
        pass
     #exe(f"{RSCAPE_PATH} --outdir {job_folder}/rscape_output --cacofold --outtree rm_v3.sto > rscape_results.txt")
-    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/v{nofinteractions}.sto | tee {j}/rscape_results.txt", dry)
+    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/rm_v{nofinteractions}.sto | tee {j}/rscape_results.txt", dry)
+
 
 def save_to_slurm():
         name = f'{dbbase}X{fbase}'
@@ -254,8 +348,8 @@ if __name__ == '__main__':
             os.makedirs(f'{j}', exist_ok=True) 
         except FileExistsError:
             pass
-        shutil.copy(f, j)
-
+        if f:
+            shutil.copy(f, j)
         now()
 
         print(args, flush=True)
@@ -295,17 +389,15 @@ if __name__ == '__main__':
         
         logger.info('start')
         logger.info(str(args))
+        
         #scriptsdir = "/n/eddy_lab/users/erivas/projects/SKennedy/2024_conserved_introns/shscripts/unflanked_scripts"
         # Clean up previous output files
         #clean()
         # Perform nhmmer iterations
-        if not args.rscape:
-            search()
+        #if not args.rscape:
+        #    search()
         # Remove duplicate copies of genomes
-        #remove_multicopies()
-        # Module load (if necessary in your environment; may require a system-specific approach)
-        #exe('module load Anaconda2/2019.10-fasrc01')
-        #esl_aliminip()
+        find_top_scoring_hits(j)
         rscape()
 
         logging.info('done')
