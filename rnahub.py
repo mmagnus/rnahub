@@ -300,7 +300,60 @@ def rscape():
     #exe(f"{RSCAPE_PATH} --outdir {job_folder}/rscape_output --cacofold --outtree rm_v3.sto > rscape_results.txt")
     exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/rm_v{nofinteractions}.sto | tee {j}/rscape_results.txt", dry)
 
+def is_hit():
+    """
+    Get the number of base pairs covered by the helices in the .helixcov file.
+If the total number of base pairs covered is greater than or equal to 3 and there are at least 2 helices that cover 2 or more base pairs, return True.
+    
+    # RM_HELIX 27-45 148-162, nbp = 13 nbp_cov = 2
+    # RM_HELIX 172-175 183-186, nbp = 4 nbp_cov = 0
+    # RM_HELIX 187-192 373-377, nbp = 5 nbp_cov = 1
+    # RM_HELIX 8-14 378-384, nbp = 7 nbp_cov = 1
+    # RM_HELIX 396-406 469-479, nbp = 11 nbp_cov = 0
+    # RM_HELIX 385-394 727-761, nbp = 10 nbp_cov = 0
+    """
+    import re
+    import glob
 
+    def analyze_nbp_cov(nbp_cov):
+        """
+        """
+        ic(results)
+        total_nbp_covs = sum(nbp_cov)
+        print(f"Total nbp_covs: {total_nbp_covs}")
+        if total_nbp_covs >= 3 and [i for i in nbp_cov if i >= 2]:
+            print("Hit")
+            return True
+        return False
+    
+    def find_helixcov_file(folder_path):
+        # Use glob to find all .helixcov files in the folder
+        helixcov_files = glob.glob(os.path.join(folder_path + '/rscape_output', "*.helixcov"))
+
+        if helixcov_files:
+            # Return the path of the first .helixcov file found
+            return helixcov_files[0]
+        else:
+            return None
+
+    def parse_nbp_cov(text):
+        pattern = r'# RM_HELIX .+, nbp = \d+ nbp_cov = (\d+)'
+        matches = re.findall(pattern, text)
+
+        results = []
+        for nbp_cov in matches:
+            results.append(int(nbp_cov))
+        return results
+
+    helixcov_file = find_helixcov_file(j)
+    ic(helixcov_file)
+    if helixcov_file:
+        print(f"Found .helixcov file: {helixcov_file}")
+        with open(helixcov_file, 'r') as file:
+            content = file.read()
+            results = parse_nbp_cov(content)
+            return analyze_nbp_cov(results)
+    
 def save_to_slurm():
         name = f'{dbbase}X{fbase}'
         t = f"""#!/bin/bash
@@ -397,9 +450,10 @@ if __name__ == '__main__':
         #if not args.rscape:
         #    search()
         # Remove duplicate copies of genomes
-        find_top_scoring_hits(j)
-        rscape()
-
+        #find_top_scoring_hits(j)
+        #rscape()
+        print(is_hit())
+        
         logging.info('done')
         logger.info('done')
         print('done', flush=True)
