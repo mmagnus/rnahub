@@ -3,6 +3,10 @@
 """
 j job directory
 
+.. warning ::
+
+   R-scape version, searching for .helixcov files here!
+
 """
 from __future__ import print_function
 import argparse
@@ -14,7 +18,7 @@ import shutil
 import subprocess
 import sys
 import os
-from config import RSCAPE_PATH, nhmmer, SCRIPTS_DIR, EASEL_PATH
+from config import RSCAPE_PATH, nhmmer, SCRIPTS_DIR, EASEL_PATH, RFAM_DB_PATH
 import logging
 
 # SLURM directives are not directly used in Python scripts.
@@ -353,6 +357,42 @@ If the total number of base pairs covered is greater than or equal to 3 and ther
             content = file.read()
             results = parse_nbp_cov(content)
             return analyze_nbp_cov(results)
+
+def run_infernal():
+    import os
+    import glob
+
+    def find_cocofold_file(folder_path):
+        # Use glob to find all .cocofold files in the folder
+        cocofold_files = glob.glob(os.path.join(folder_path, 'rscape_output', "*.cacofold.sto")) # cocofold
+
+        if cocofold_files:
+            # Return the path of the first .cocofold file found
+            return cocofold_files[0]
+        else:
+            return None
+
+    # Example usage
+    cocofold_file = find_cocofold_file(j)
+    if cocofold_file:
+        print(f"Found .cocofold file: {cocofold_file}")
+    else:
+        print("No .cocofold file found in the specified folder.")
+
+    # Run cmbuild
+    cm = os.path.splitext(cocofold_file)[0] + '.cm'
+    cmd = f'cmbuild -F {cm} {cocofold_file}'
+    print(cmd)
+    exe(cmd, dry)
+    # Run cmcalibrate
+    cmd = f'cmcalibrate {cm}'
+    print(cmd)
+    exe(cmd, dry = True)
+    # Search the Rfam database with the covariance model to eliminate known case
+    db = 'Rfam.cm'
+    cmd = f'cmscan -o {j}/cmscan_res.out {RFAM_DB_PATH} {cm}'
+    print(cmd)
+    exe(cmd)
     
 def save_to_slurm():
         name = f'{dbbase}X{fbase}'
@@ -447,13 +487,13 @@ if __name__ == '__main__':
         # Clean up previous output files
         #clean()
         # Perform nhmmer iterations
-        #if not args.rscape:
-        #    search()
+        if not args.rscape:
+            search()
         # Remove duplicate copies of genomes
         #find_top_scoring_hits(j)
         #rscape()
         print(is_hit())
-        
+        run_infernal()
         logging.info('done')
         logger.info('done')
         print('done', flush=True)
