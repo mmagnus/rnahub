@@ -1,6 +1,8 @@
 #!/bin/bash
-# ./nextflow rnahub.nf
+./rnahub.py example/example.fa
 
+exit
+# ./nextflow rnahub.nf
 echo 'fasta: example/random.fa' > config.yaml #example.fa
 #echo 'fasta: example/example.fa' > config.yaml
 
