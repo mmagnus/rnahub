@@ -1,5 +1,5 @@
 #!/bin/bash
-./rnahub.py example/example.fa
+./rnahub.py --file example/example.fa
 
 exit
 # ./nextflow rnahub.nf
