@@ -62,7 +62,7 @@ def get_parser():
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
-    parser.add_argument("--file", help=".fa for now, don't use .fasta", default="", nargs='+')
+    parser.add_argument("--fasta", help=".fa for now, don't use .fasta", default="", nargs='+')
     
     return parser
 
@@ -426,10 +426,10 @@ if __name__ == '__main__':
     dry = args.dry
     CPUs = args.cpus
 
-    if list != type(args.file):
-        args.file = [args.file]
+    if list != type(args.fasta):
+        args.fasta = [args.fasta]
 
-    for f in args.file:
+    for f in args.fasta:
         query = f
         fbase = os.path.basename(f).replace('.fa', '')
         dbbase = os.path.basename(db).replace('.fa', '')
