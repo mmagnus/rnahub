@@ -171,7 +171,7 @@ def search():
         # nhmmer -E 1e-10 --cpu 64 -A tutorial/gly1_igr/flanked.sto --tblout tutorial/gly1_igr/flanked.hmmout tutorial/gly1_igr.fa ../../../db/1409_Acomycota_genomes-may19.fa
         cmd = f"{nhmmer} --cpu {CPUs} --incE 1e-10 -A {j}/flanked.sto {j}/{fbase}.fa {db} > {j}/flanked.out" #v0.sto is flanked # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:
-            exe(cmd, dry = False)
+            exe(cmd, dry)
         # subscripts/bp_col.sh tutorial/YAR014C_plus_IGR/flanked.sto S288C
         #cmd = f'{SCRIPTS_DIR}/bp_col.py {j}/flanked.sto S288C' #
         #dry = False
