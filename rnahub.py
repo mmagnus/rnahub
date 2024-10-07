@@ -60,6 +60,11 @@ def get_parser():
     parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
+    parser.add_argument("--dev-skip-nhmmer123", help="show all cmds, dont run them", action="store_true")
+    parser.add_argument("--dev-skip-cmcalibrate", help="show all cmds, dont run them", action="store_true")
+    parser.add_argument("--dev-skip-rscape", help="show all cmds, dont run them", action="store_true")
+    parser.add_argument("--dev-skip-infernal", help="show all cmds, dont run them", action="store_true")
+
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
     parser.add_argument("--fasta", help=".fa for now, don't use .fasta", default="", nargs='+')
@@ -72,6 +77,9 @@ def clean():
 
 def search():
     """Return the last sto file generated"""
+    query = f'{j}/{fbase}.fa' # this will be overwritten if in flanked mode
+    print(f'query: {query}')
+
     if args.flanked:
         def bp_col(alignment, seq_spec_string):
             ic(seq_spec_string)
@@ -176,13 +184,16 @@ def search():
         #cmd = f'{SCRIPTS_DIR}/bp_col.py {j}/flanked.sto S288C' #
         #dry = False
         #exe(cmd, dry)
-        bp_col(f'{j}/flanked.sto', 'S288C')
+        bp_col(f'{j}/flanked.sto', 'S288C') # !!!!!!!!!!!!!!!!!!!!!!!!! #TODO
         #+ subscripts/noncoding_extractor.sh tutorial/YAR014C_plus_IGR.fasta esl-alimask
         #+ esl-alimask -t tutorial/YAR014C_plus_IGR/flanked.sto 2305..
         extractor(f'{j}/{fbase}.fa') # noncoding.sto and trim_noncoding.sto
 
         query = f'{j}/trim_noncoding.sto' # query is now the noncoding.sto, not a single sequence
-    for i in range(1, nofinteractions + 1):  # you can play with this one, starting from 1
+
+
+    if not args.dev_skip_nhmmer123:
+        for i in range(1, nofinteractions + 1):  # you can play with this one, starting from 1
             sto_file = f'v{i}.sto'
             output_file = f'v{i}.out'
             input_file = query if i == 1 else f'{j}/v{i-1}.sto'
@@ -301,8 +312,17 @@ def rscape():
         os.makedirs(f'{j}/rscape_output')
     except FileExistsError:
        pass
-    #exe(f"{RSCAPE_PATH} --outdir {job_folder}/rscape_output --cacofold --outtree rm_v3.sto > rscape_results.txt")
     exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/rm_v{nofinteractions}.sto | tee {j}/rscape_results.txt", dry)
+
+def rscape_infernal():
+    # Set up for R-scape analysis
+    #exe('rm -f rscape_results.txt')
+    #exe('rm -rf rscape_output')
+    try:
+        os.makedirs(f'{j}/rscape_infernal')
+    except FileExistsError:
+       pass
+    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_infernal --cacofold --outtree {j}/infernal.sto | tee {j}/rscape_infernal_results.txt", dry)
 
 def is_hit():
     """
@@ -358,7 +378,7 @@ If the total number of base pairs covered is greater than or equal to 3 and ther
             results = parse_nbp_cov(content)
             return analyze_nbp_cov(results)
 
-def run_infernal():
+def infernal():
     import os
     import glob
 
@@ -379,20 +399,25 @@ def run_infernal():
     else:
         print("No .cocofold file found in the specified folder.")
 
-    # Run cmbuild
-    cm = os.path.splitext(cocofold_file)[0] + '.cm'
-    cmd = f'cmbuild -F {cm} {cocofold_file}'
+    if not args.dev_skip_cmcalibrate:
+        # Run cmbuild
+        cm = os.path.splitext(cocofold_file)[0] + '.cm'
+        cmd = f'cmbuild -F {cm} {cocofold_file}'
+        print(cmd)
+        exe(cmd, dry)
+        # Run cmcalibrate
+        cmd = f'cmcalibrate {cm}'
+        print(cmd)
+        exe(cmd, dry)
+        pass
+    # Search the Rfam database with the covariance model to eliminate known case
+    #cmd = f'cmscan -o {j}/cmscan_res.out {RFAM_DB_PATH} {cm}'
+    #print(cmd)
+    #exe(cmd)
+    cmd = f'cmsearch -A {j}/infernal.sto -o {j}/cmsearch.out {cm} {args.db}'
     print(cmd)
     exe(cmd, dry)
-    # Run cmcalibrate
-    cmd = f'cmcalibrate {cm}'
-    print(cmd)
-    exe(cmd, dry = True)
-    # Search the Rfam database with the covariance model to eliminate known case
-    db = 'Rfam.cm'
-    cmd = f'cmscan -o {j}/cmscan_res.out {RFAM_DB_PATH} {cm}'
-    print(cmd)
-    exe(cmd)
+    rscape_infernal()
     
 def save_to_slurm():
         name = f'{dbbase}X{fbase}'
@@ -487,13 +512,17 @@ if __name__ == '__main__':
         # Clean up previous output files
         #clean()
         # Perform nhmmer iterations
-        if not args.rscape:
-            search()
+        #if not args.rscape:
+        search()
         # Remove duplicate copies of genomes
-        #find_top_scoring_hits(j)
-        #rscape()
+        find_top_scoring_hits(j)
+        if not args.dev_skip_rscape:
+            rscape()
         print(is_hit())
-        run_infernal()
+
+        if not args.dev_skip_infernal:
+            infernal()
+        
         logging.info('done')
         logger.info('done')
         print('done', flush=True)
