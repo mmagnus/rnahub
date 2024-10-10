@@ -54,12 +54,13 @@ def get_parser():
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
-    parser.add_argument("-f", "--flanked",  action="store_true", help="run flanked mode (create extra v0)")
+    parser.add_argument("-f", "--flanked",  action="store_true", help="run flanked mode (create extra v0 files), syntax in the fasta header '><seq_name> <start>-<end>")
     parser.add_argument("--evalue", default="1e-10", help="e-value threshold for all the runs but the final one")
     parser.add_argument("--evalue-final", default="1e-5", help="e-value threshold for the final run")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
     parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
+
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer123", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-cmcalibrate", help="show all cmds, dont run them", action="store_true")
@@ -80,22 +81,20 @@ def search():
     """Return the last sto file generated"""
     query = f'{j}/{fbase}.fa' # this will be overwritten if in flanked mode
     print(f'query: {query}')
-
     if args.flanked:
-        def bp_col(alignment, seq_spec_string):
-            ic(seq_spec_string)
+        def bp_col(alignment):
             # directory of alignment file that you provide, the output will go into there
             DIR = os.path.dirname(alignment)
-
             # Read the alignment file to get the top sequence that contains reference genome
             with open(alignment, 'r') as f:
                 for line in f:
-                    if seq_spec_string in line:
+                    if '#=GS' in line:
                         seq_name = line.split()[1]
+                        ic(seq_name)
                         break
-            ic(seq_name)
+
             if not seq_name:
-                print(f"No sequence found matching {seq_spec_string}")
+                print(f"No sequence found matching")
                 sys.exit(1)
 
             # Extract only the sequence (gaps included) of that sequence from the MSA
@@ -139,8 +138,10 @@ def search():
                     if line.startswith('>'):
                         print(line)
                         parts = line.split()
-                        s1 = parts[3]
-                        s2 = parts[4]
+                        ic(parts)
+                        #>target 5-20
+                        s1, s2 = parts[1].split('-') ##3]
+                        ic(s1, s2)
                         break
 
             if s1 is None or s2 is None:
@@ -166,11 +167,11 @@ def search():
             #if first_site is None or second_site is None:
             #        print("Failed to locate first_site or second_site in the bp_col.txt file.")
             #        sys.exit(1)
-            cmd = ''.join([f'{EASEL_PATH}/esl-alimask -t ', j, '/flanked.sto ', first_site, '..', second_site, ' > ', j, '/noncoding.sto'])
+            cmd = ''.join([f'{EASEL_PATH}/esl-alimask -t ', j, '/v0.sto ', first_site, '..', second_site, ' > ', j, '/v0_targetRegionOnly.sto'])
             print(cmd)
             exe(cmd)
 
-            cmd = ''.join([f'{EASEL_PATH}/esl-alimanip --lmin 50  ', j, '/noncoding.sto > ', j, '/trim_noncoding.sto'])
+            cmd = ''.join([f'{EASEL_PATH}/esl-alimanip --lmin 50  ', j, '/v0_targetRegionOnly.sto > ', j, '/v0_targetRegionOnly_trim.sto'])
             print(cmd)
             exe(cmd)
             # esl-alimanip --lmin 50 tutorial/YAR014C_plus_IGR/noncoding.sto
@@ -178,20 +179,19 @@ def search():
         # v0 is flanked
         #cmd = nhmmer -E 1e-10 -A $DIR/$filename/flanked.sto --tblout $DIR/$filename/flanked.hmmout $query $DB > out.txt
         # nhmmer -E 1e-10 --cpu 64 -A tutorial/gly1_igr/flanked.sto --tblout tutorial/gly1_igr/flanked.hmmout tutorial/gly1_igr.fa ../../../db/1409_Acomycota_genomes-may19.fa
-        cmd = f"{nhmmer} --cpu {CPUs} --incE 1e-10 -A {j}/flanked.sto {j}/{fbase}.fa {db} > {j}/flanked.out" #v0.sto is flanked # fa vs fasta #TODO
+        cmd = f"cat {j}/{fbase}.fa {db} | {nhmmer} --cpu {CPUs} --incE {args.evalue} -A {j}/v0.sto {j}/{fbase}.fa - > {j}/v0.out"
+        #v0.sto is flanked.sto # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:
             exe(cmd, dry)
         # subscripts/bp_col.sh tutorial/YAR014C_plus_IGR/flanked.sto S288C
         #cmd = f'{SCRIPTS_DIR}/bp_col.py {j}/flanked.sto S288C' #
         #dry = False
         #exe(cmd, dry)
-        bp_col(f'{j}/flanked.sto', 'S288C') # !!!!!!!!!!!!!!!!!!!!!!!!! #TODO
+        bp_col(f'{j}/v0.sto') # !!!!!!!!!!!!!!!!!!!!!!!!! #TODO
         #+ subscripts/noncoding_extractor.sh tutorial/YAR014C_plus_IGR.fasta esl-alimask
         #+ esl-alimask -t tutorial/YAR014C_plus_IGR/flanked.sto 2305..
         extractor(f'{j}/{fbase}.fa') # noncoding.sto and trim_noncoding.sto
-
-        query = f'{j}/trim_noncoding.sto' # query is now the noncoding.sto, not a single sequence
-
+        query = f'{j}/v0_targetRegionOnly_trim.sto'
 
     if not args.dev_skip_nhmmer123:
         for i in range(1, nofinteractions + 1):  # you can play with this one, starting from 1
@@ -301,7 +301,7 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
             f.write(f"{accession}\n")
     
     print(f"Accessions to keep have been written to {output_file}.")
-    cmd = f'{EASEL_PATH}/esl-alimanip --seq-k {directory}/accessions_to_keep.txt {directory}/v{nofinteractions}.sto > {directory}/rm_v{nofinteractions}.sto'
+    cmd = f'{EASEL_PATH}/esl-alimanip --seq-k {directory}/accessions_to_keep.txt {directory}/v{nofinteractions}.sto > {directory}/v{nofinteractions}_rm.sto'
     print(cmd)
     exe(cmd)
 
@@ -313,7 +313,7 @@ def rscape():
         os.makedirs(f'{j}/rscape_output')
     except FileExistsError:
        pass
-    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/rm_v{nofinteractions}.sto | tee {j}/rscape_results.txt", dry)
+    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/v{nofinteractions}_rm.sto | tee {j}/rscape_results.txt", dry)
 
 def rscape_infernal():
     # Set up for R-scape analysis
