@@ -55,7 +55,8 @@ def get_parser():
                         action="store_true", help="be verbose")
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
     parser.add_argument("-f", "--flanked",  action="store_true", help="run flanked mode (create extra v0)")
-    parser.add_argument("--evalue", default="1e-5", help="e-value threshold")
+    parser.add_argument("--evalue", default="1e-10", help="e-value threshold for all the runs but the final one")
+    parser.add_argument("--evalue-final", default="1e-5", help="e-value threshold for the final run")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
     parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
@@ -197,9 +198,9 @@ def search():
             sto_file = f'v{i}.sto'
             output_file = f'v{i}.out'
             input_file = query if i == 1 else f'{j}/v{i-1}.sto'
-            evalue = '1e-10'
-            if i == 3:
-                evalue = '1e-5'
+            evalue = args.evalue
+            if i == args.iteractions:
+                evalue =  args.evalue_final
             command = f"{nhmmer} --cpu {CPUs} --incE {evalue} -A {j}/{sto_file} {input_file} {db} > {j}/{output_file}"
             exe(command, dry)
             
