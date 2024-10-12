@@ -524,7 +524,8 @@ if __name__ == '__main__':
         if not args.dev_skip_infernal:
             infernal()
         
-        logging.info('done')
-        logger.info('done')
-        print('done', flush=True)
+        logging.info('Normal termination of rnahub')
+        logger.info('Normal termination of rnahub')
+        print('Normal termination of rnahub', flush=True)
         now()
+        
