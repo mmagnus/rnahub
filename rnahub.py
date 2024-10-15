@@ -60,7 +60,7 @@ def get_parser():
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
     parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
-
+    parser.add_argument("--create-job-folder", help="create a job folder based on the path to the input fasta sequence, e.g. example/seq.fa, jobs/seq/seq.fa", action="store_true")
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer123", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-cmcalibrate", help="show all cmds, dont run them", action="store_true")
@@ -459,16 +459,21 @@ if __name__ == '__main__':
         query = f
         fbase = os.path.basename(f).replace('.fa', '')
         dbbase = os.path.basename(db).replace('.fa', '')
-        if args.job_name:
-            j = 'jobs/' + args.job_name
+
+        if args.create_job_folder:
+            if args.job_name:
+                j = 'jobs/' + args.job_name
+            else:
+                j = 'jobs/' + fbase
+            try:
+                os.makedirs(f'{j}', exist_ok=True) 
+            except FileExistsError:
+                pass
+            if f:
+                shutil.copy(f, j)
         else:
-            j = 'jobs/' + fbase
-        try:
-            os.makedirs(f'{j}', exist_ok=True) 
-        except FileExistsError:
-            pass
-        if f:
-            shutil.copy(f, j)
+            j = os.path.dirname(f)  # the folder where the fasta file is
+           
         now()
 
         print(args, flush=True)
