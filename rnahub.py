@@ -529,11 +529,13 @@ if __name__ == '__main__':
         find_top_scoring_hits(j)
         if not args.dev_skip_rscape:
             rscape()
-        print(is_hit())
-
-        if not args.dev_skip_infernal:
-            infernal()
-        
+        is_hit = is_hit()
+        ic(is_hit)
+        if is_hit:
+            if not args.dev_skip_infernal:
+                infernal()
+        else:   
+            logging.info('No Infernal')
         logging.info('Normal termination of rnahub')
         logger.info('Normal termination of rnahub')
         print('Normal termination of rnahub', flush=True)
