@@ -203,8 +203,13 @@ def search():
                 evalue =  args.evalue_final
             command = f"{nhmmer} --cpu {CPUs} --incE {evalue} -A {j}/{sto_file} {input_file} {db} > {j}/{output_file}"
             exe(command, dry)
-            
 
+    # statistics for v3
+    cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', j, '/v3_rm.sto > ', j, '/v3_rm_stats.txt'])
+    print(cmd)
+    exe(cmd)
+    
+            
 def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
     """
     Created on Mon May 24 09:58:47 2021
