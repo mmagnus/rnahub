@@ -54,7 +54,6 @@ def get_parser():
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
-    parser.add_argument("-f", "--flanked",  action="store_true", help="run flanked mode (create extra v0 files), syntax in the fasta header '>target ")
     parser.add_argument("--evalue", default="1e-10", help="e-value threshold for all the runs but the final one")
     parser.add_argument("--evalue-final", default="1e-5", help="e-value threshold for the final run")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
@@ -69,7 +68,9 @@ def get_parser():
 
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
-    parser.add_argument("--fasta", help=".fa for now, don't use .fasta", default="", nargs='+')
+    parser.add_argument("fasta", help=".fa for now, don't use .fasta")#, default="", nargs='+')
+    parser.add_argument("--flanked", help=".fa for now, don't use .fasta, flank the sequence including the query sequence")
+    parser.add_argument("--flanks-in-header", action="store_true", help="run flanked mode (create extra v0 files), syntax in the fasta header '><seq_name> <start>-<end>, use this or --flanked fasta file")
     
     return parser
 
@@ -82,6 +83,7 @@ def search():
     query = f'{j}/{fbase}.fa' # this will be overwritten if in flanked mode
     print(f'query: {query}')
     if args.flanked:
+
         def bp_col(alignment):
             # directory of alignment file that you provide, the output will go into there
             DIR = os.path.dirname(alignment)
@@ -130,24 +132,54 @@ def search():
         def extractor(query, verbose=False):
             # gkab355_supplemental_files/tutorial/method_scripts/tutorial/YAR014C_plus_IGR/
             # Extract the relevant information from the query file
-            ic(query)
-            with open(query, 'r') as fn:
-                s1 = None
-                s2 = None
-                for line in fn:
-                    if line.startswith('>'):
-                        print(line)
-                        parts = line.split()
-                        ic(parts)
-                        #>target 5-20
-                        s1, s2 = parts[1].split('-') ##3]
-                        ic(s1, s2)
-                        break
+            # get full file and find substring from the long one
+            if not args.flanks_in_header:
+                ic(query)
+                with open(query, 'r') as fn:
+                    lines = fn.readlines()
+                    sequence_only = "".join(line.strip().upper() for line in lines if not line.startswith('>'))
+                ic(sequence_only)
+
+
+                with open(args.flanked, 'r') as fn:
+                    lines = fn.readlines()
+                    flanked_sequence_only = "".join(line.strip().upper() for line in lines if not line.startswith('>'))
+                ic(flanked_sequence_only)
+
+                # Find the beginning index
+                start_index = flanked_sequence_only.find(sequence_only)
+
+                # Calculate the end index if substring is found
+                if start_index != -1:
+                    end_index = start_index + len(sequence_only) - 1
+                    print(f"Substring found from index {start_index + 1} to {end_index}.")
+                else:
+                    raise Exception("Substring not found.")
+
+                s1 = str(start_index + 1)
+                s2 = str(end_index)
+
+            # parse the header of the fasta file
+            else:
+                with open(query, 'r') as fn:
+                    s1 = None
+                    s2 = None
+                    for line in fn:
+                        if line.startswith('>'):
+                            print(line)
+                            parts = line.split()
+                            ic(parts)
+                            #>target 5-20
+                            s1, s2 = parts[1].split('-') ##3]
+                            ic(s1, s2)
+                            break
 
             if s1 is None or s2 is None:
                 print("Failed to extract s1 or s2 from the query file.")
                 sys.exit(1)
 
+            ic(s1, s2)
+            
             # Locate the first and second site in the bp_col.txt file
             bp_col_path = os.path.join(f'{j}', 'bp_col.txt')
 
@@ -156,14 +188,14 @@ def search():
 
             with open(bp_col_path, 'r') as fl:
                 for line in fl:
-                    parts = line.split()
-                    if verbose: print(parts, s1, s2)
-                    if parts[0] == s1:
+                    parts = line.split() #> parts: ['16', '16']
+                    if parts[0] == s1: 
                         first_site = parts[1]
                     if parts[0] == s2:
                         second_site = parts[1]
 
-            ic(s1, first_site, second_site)
+            ic(s1, first_site, second_site) # take the last number if you can't find s2 ;-)
+
             #if first_site is None or second_site is None:
             #        print("Failed to locate first_site or second_site in the bp_col.txt file.")
             #        sys.exit(1)
@@ -527,13 +559,34 @@ if __name__ == '__main__':
         #clean()
         # Perform nhmmer iterations
         #if not args.rscape:
+        # test for seq now! ;))))
+        if not args.flanks_in_header:
+            with open(query, 'r') as fn:
+                lines = fn.readlines()
+                sequence_only = "".join(line.strip().upper() for line in lines if not line.startswith('>'))
+            ic(sequence_only)
+
+            with open(args.flanked, 'r') as fn:
+                lines = fn.readlines()
+                flanked_sequence_only = "".join(line.strip().upper() for line in lines if not line.startswith('>'))
+            ic(flanked_sequence_only)
+
+            # Find the beginning index
+            start_index = flanked_sequence_only.find(sequence_only)
+
+            # Calculate the end index if substring is found
+            if start_index != -1:
+                end_index = start_index + len(sequence_only) - 1
+                print(f"Substring found from index {start_index + 1} to {end_index}.")
+            else:
+                raise Exception("Substring not found.")
+
         search()
         # Remove duplicate copies of genomes
         find_top_scoring_hits(j)
         if not args.dev_skip_rscape:
             rscape()
         is_hit = is_hit()
-        ic(is_hit)
         if is_hit:
             if not args.dev_skip_infernal:
                 infernal()
