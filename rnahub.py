@@ -49,12 +49,12 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 
-    parser.add_argument('--db', help="", default="")
+    parser.add_argument('--db', help="", default="", nargs='+')
     parser.add_argument('--job-name', default="", help="by default is input file name (wihout extension)")
     parser.add_argument("-v", "--verbose",
                         action="store_true", help="be verbose")
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
-    parser.add_argument("-f", "--flanked",  action="store_true", help="run flanked mode (create extra v0 files), syntax in the fasta header '><seq_name> <start>-<end>")
+    parser.add_argument("-f", "--flanked",  action="store_true", help="run flanked mode (create extra v0 files), syntax in the fasta header '>target ")
     parser.add_argument("--evalue", default="1e-10", help="e-value threshold for all the runs but the final one")
     parser.add_argument("--evalue-final", default="1e-5", help="e-value threshold for the final run")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
@@ -178,8 +178,10 @@ def search():
 
         # v0 is flanked
         #cmd = nhmmer -E 1e-10 -A $DIR/$filename/flanked.sto --tblout $DIR/$filename/flanked.hmmout $query $DB > out.txt
-        # nhmmer -E 1e-10 --cpu 64 -A tutorial/gly1_igr/flanked.sto --tblout tutorial/gly1_igr/flanked.hmmout tutorial/gly1_igr.fa ../../../db/1409_Acomycota_genomes-may19.fa
-        cmd = f"cat {j}/{fbase}.fa {db} | {nhmmer} --cpu {CPUs} --incE {args.evalue} -A {j}/v0.sto {j}/{fbase}.fa - > {j}/v0.out"
+        # nhmmer -E 1e-10 --cpu 64 -A tutorial/gly1_igr/flanked.sto --tblout tutorial/gly1_igr/flanked.hmmout tutorial/gly1_igr.fa ../../../db/1409_Acomycota_genomes-may19.fa#
+
+        # {j}/{fbase}.fa is causing missing organism problem
+        cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {j}/v0.sto {j}/{fbase}.fa - "#| tee {j}/v0.out"
         #v0.sto is flanked.sto # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:
             exe(cmd, dry)
@@ -201,13 +203,14 @@ def search():
             evalue = args.evalue
             if i == args.iteractions:
                 evalue =  args.evalue_final
-            command = f"{nhmmer} --cpu {CPUs} --incE {evalue} -A {j}/{sto_file} {input_file} {db} > {j}/{output_file}"
+            #  {j}/{fbase}.fa
+            command = f"time cat {db} | {nhmmer} --noali --cpu {CPUs} --incE {evalue} -A {j}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
 
     # statistics for v3
     cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', j, '/v3_rm.sto > ', j, '/v3_rm_stats.txt'])
     print(cmd)
-    exe(cmd)
+    exe(cmd, dry)
     
             
 def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
@@ -420,7 +423,7 @@ def infernal():
     #cmd = f'cmscan -o {j}/cmscan_res.out {RFAM_DB_PATH} {cm}'
     #print(cmd)
     #exe(cmd)
-    cmd = f'cmsearch -A {j}/infernal.sto -o {j}/cmsearch.out {cm} {args.db}'
+    cmd = f'cmsearch -A {j}/infernal.sto -o {j}/cmsearch.out {cm} {db}'
     print(cmd)
     exe(cmd, dry)
     rscape_infernal()
@@ -441,7 +444,6 @@ def save_to_slurm():
 # Runs a command on all FASTA files in current directory
 python {' '.join(sys.argv[:]).replace('--slurm', '')}
         """
-
         with open(f'{j}/run.slurm', 'w') as fi:
             fi.write(t)
         print(f'sbatch {j}/run.slurm')
@@ -463,8 +465,9 @@ if __name__ == '__main__':
     for f in args.fasta:
         query = f
         fbase = os.path.basename(f).replace('.fa', '')
-        dbbase = os.path.basename(db).replace('.fa', '')
-
+        dbbase = os.path.basename(args.db[0]).replace('.fa', '')
+        db = ' '.join(args.db)
+        
         if args.create_job_folder:
             if args.job_name:
                 j = 'jobs/' + args.job_name
