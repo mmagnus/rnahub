@@ -563,7 +563,7 @@ if __name__ == '__main__':
         # Perform nhmmer iterations
         #if not args.rscape:
         # test for seq now! ;))))
-        if not args.flanks_in_header:
+        if args.flanked:
             with open(query, 'r') as fn:
                 lines = fn.readlines()
                 sequence_only = "".join(line.strip().upper() for line in lines if not line.startswith('>'))
