@@ -213,7 +213,10 @@ def search():
         # nhmmer -E 1e-10 --cpu 64 -A tutorial/gly1_igr/flanked.sto --tblout tutorial/gly1_igr/flanked.hmmout tutorial/gly1_igr.fa ../../../db/1409_Acomycota_genomes-may19.fa#
 
         # {j}/{fbase}.fa is causing missing organism problem
-        cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {j}/v0.sto {j}/{fbase}.fa - "#| tee {j}/v0.out"
+        if args.flanks_in_header:
+            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {j}/v0.sto {j}/{fbase}.fa - "#| tee {j}/v0.out"
+        else:
+            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {j}/v0.sto {j}/{fbase}_flanked.fa - "#| tee {j}/v0.out"            
         #v0.sto is flanked.sto # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:
             exe(cmd, dry)
