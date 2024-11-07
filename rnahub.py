@@ -82,8 +82,7 @@ def search():
     """Return the last sto file generated"""
     query = f'{j}/{fbase}.fa' # this will be overwritten if in flanked mode
     print(f'query: {query}')
-    if args.flanked:
-
+    if args.flanked or args.flanks_in_header:
         def bp_col(alignment):
             # directory of alignment file that you provide, the output will go into there
             DIR = os.path.dirname(alignment)
