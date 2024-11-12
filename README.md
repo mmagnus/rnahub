@@ -1,9 +1,10 @@
 # rnahub
 
-```
-(base) rnahub@rnahub:~/rnahub$ ./rnahub.py -h
-usage: rnahub.py [-h] [--db DB] [--job-name JOB_NAME] [-v] [--slurm] [-f] [--evalue EVALUE] [--evalue-final EVALUE_FINAL] [--iteractions ITERACTIONS] [--cpus CPUS] [--dry] [--dev-skip-nhmmer0] [--dev-skip-nhmmer123]
-                 [--dev-skip-cmcalibrate] [--dev-skip-rscape] [--dev-skip-infernal] [--rscape] [--fasta FASTA [FASTA ...]]
+```/rnahub.py -h
+usage: rnahub.py [-h] [--db DB [DB ...]] [--job-name JOB_NAME] [-v] [--slurm] [--evalue EVALUE] [--evalue-final EVALUE_FINAL] [--iteractions ITERACTIONS] [--cpus CPUS] [--dry]
+                 [--create-job-folder] [--dev-skip-nhmmer0] [--dev-skip-nhmmer123] [--dev-skip-cmcalibrate] [--dev-skip-rscape] [--dev-skip-infernal] [--rscape] [--flanked FLANKED]
+                 [--flanks-in-header]
+                 fasta
 
 j job directory
 
@@ -11,13 +12,15 @@ j job directory
 
    R-scape version, searching for .helixcov files here!
 
-optional arguments:
+positional arguments:
+  fasta                 .fa for now, don't use .fasta
+
+options:
   -h, --help            show this help message and exit
-  --db DB
+  --db DB [DB ...]
   --job-name JOB_NAME   by default is input file name (wihout extension)
   -v, --verbose         be verbose
   --slurm               send it to slumrm
-  -f, --flanked         run flanked mode (create extra v0 files), syntax in the fasta header '><seq_name> <start>-<end>
   --evalue EVALUE       e-value threshold for all the runs but the final one
   --evalue-final EVALUE_FINAL
                         e-value threshold for the final run
@@ -25,11 +28,16 @@ optional arguments:
                         number of iterations
   --cpus CPUS           number of cpus for nhmmer
   --dry                 show all cmds, dont run them
-
+  --create-job-folder   create a job folder based on the path to the input fasta sequence, e.g. example/seq.fa, jobs/seq/seq.fa
+  --dev-skip-nhmmer0    show all cmds, dont run them
+  --dev-skip-nhmmer123  show all cmds, dont run them
+  --dev-skip-cmcalibrate
+                        show all cmds, dont run them
+  --dev-skip-rscape     show all cmds, dont run them
+  --dev-skip-infernal   show all cmds, dont run them
   --rscape              rscape only
-  --fasta FASTA [FASTA ...]
-                        .fa for now, don't use .fasta
-						
+  --flanked FLANKED     .fa for now, don't use .fasta, flank the sequence including the query sequence
+  --flanks-in-header    run flanked mode (create extra v0 files), syntax in the fasta header '><seq_name> <start>-<end>, use this or --flanked fasta file
 ```
 # Workflow
 
