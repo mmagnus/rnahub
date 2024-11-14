@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-j job directory
+job_path directory (j before)
 
 .. warning ::
 
@@ -82,7 +82,9 @@ def clean():
 
 def search(seq_path, seq_flanked_path = ''):
     """Return the last sto file generated"""
+    query = seq_path
     print(f'query: {seq_path}')
+    
     if args.flanked or args.flanks_in_header:
         def bp_col(alignment):
             # directory of alignment file that you provide, the output will go into there
@@ -413,7 +415,7 @@ If the total number of base pairs covered is greater than or equal to 3 and ther
             results.append(int(nbp_cov))
         return results
 
-    helixcov_file = find_helixcov_file(j)
+    helixcov_file = find_helixcov_file(job_path)
     ic(helixcov_file)
     if helixcov_file:
         print(f"Found .helixcov file: {helixcov_file}")
@@ -614,7 +616,7 @@ if __name__ == '__main__':
         if not args.dev_skip_search:
             search(seq_path, seq_flanked_path)
         # Remove duplicate copies of genomes
-        find_top_scoring_hits(j)
+        find_top_scoring_hits(job_path)
         if not args.dev_skip_rscape:
             rscape()
         is_hit = is_hit()
