@@ -18,7 +18,7 @@ import shutil
 import subprocess
 import sys
 import os
-from config import RSCAPE_PATH, nhmmer, EASEL_PATH, RFAM_DB_PATH
+from config import RSCAPE_PATH, nhmmer, EASEL_PATH, RFAM_DB_PATH, REPEAT_MASKER_PATH
 import logging
 
 # SLURM directives are not directly used in Python scripts.
@@ -59,7 +59,9 @@ def get_parser():
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
     parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
+    parser.add_argument("--repeatmasker", help="", action="store_true")
     parser.add_argument("--create-job-folder", help="create a job folder based on the path to the input fasta sequence, e.g. example/seq.fa, jobs/seq/seq.fa", action="store_true")
+    parser.add_argument("--dev-skip-search", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer123", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-cmcalibrate", help="show all cmds, dont run them", action="store_true")
@@ -78,10 +80,9 @@ def clean():
         for pattern in ['v0*', 'v1*', 'v2*', 'v3*', 'rm_v3.sto']:#, './*.txt', './*/']:
             exe(f'rm -f {pattern}', dry)
 
-def search():
+def search(seq_path, seq_flanked_path = ''):
     """Return the last sto file generated"""
-    query = f'{j}/{fbase}.fa' # this will be overwritten if in flanked mode
-    print(f'query: {query}')
+    print(f'query: {seq_path}')
     if args.flanked or args.flanks_in_header:
         def bp_col(alignment):
             # directory of alignment file that you provide, the output will go into there
@@ -180,7 +181,7 @@ def search():
             ic(s1, s2)
             
             # Locate the first and second site in the bp_col.txt file
-            bp_col_path = os.path.join(f'{j}', 'bp_col.txt')
+            bp_col_path = os.path.join(f'{job_path}', 'bp_col.txt')
 
             first_site = ''
             second_site = ''
@@ -213,9 +214,9 @@ def search():
 
         # {j}/{fbase}.fa is causing missing organism problem
         if args.flanks_in_header:
-            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {j}/v0.sto {j}/{fbase}.fa - "#| tee {j}/v0.out"
+            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
         else:
-            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {j}/v0.sto {j}/{fbase}_flanked.fa - "#| tee {j}/v0.out"            
+            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_masked_path} - "#| tee {j}/v0.out"            
         #v0.sto is flanked.sto # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:
             exe(cmd, dry)
@@ -223,26 +224,26 @@ def search():
         #cmd = f'{SCRIPTS_DIR}/bp_col.py {j}/flanked.sto S288C' #
         #dry = False
         #exe(cmd, dry)
-        bp_col(f'{j}/v0.sto') # !!!!!!!!!!!!!!!!!!!!!!!!! #TODO
+        bp_col(f'{job_path}/v0.sto') # !!!!!!!!!!!!!!!!!!!!!!!!! #TODO
         #+ subscripts/noncoding_extractor.sh tutorial/YAR014C_plus_IGR.fasta esl-alimask
         #+ esl-alimask -t tutorial/YAR014C_plus_IGR/flanked.sto 2305..
-        extractor(f'{j}/{fbase}.fa') # noncoding.sto and trim_noncoding.sto
-        query = f'{j}/v0_targetRegionOnly_trim.sto'
+        extractor(f'{job_path}/{fbase}.fa') # noncoding.sto and trim_noncoding.sto
+        query = f'{job_path}/v0_targetRegionOnly_trim.sto'
 
     if not args.dev_skip_nhmmer123:
         for i in range(1, nofinteractions + 1):  # you can play with this one, starting from 1
             sto_file = f'v{i}.sto'
             output_file = f'v{i}.out'
-            input_file = query if i == 1 else f'{j}/v{i-1}.sto'
+            input_file = query if i == 1 else f'{job_path}/v{i-1}.sto'
             evalue = args.evalue
             if i == args.iteractions:
                 evalue =  args.evalue_final
             #  {j}/{fbase}.fa
-            command = f"time cat {db} | {nhmmer} --noali --cpu {CPUs} --incE {evalue} -A {j}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+            command = f"time cat {db} | {nhmmer} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
 
     # statistics for v3
-    cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', j, '/v3_rm.sto > ', j, '/v3_rm_stats.txt'])
+    cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', job_path, '/v3_rm.sto > ', job_path, '/v3_rm_stats.txt'])
     print(cmd)
     exe(cmd, dry)
     
@@ -352,20 +353,20 @@ def rscape():
     #exe('rm -f rscape_results.txt')
     #exe('rm -rf rscape_output')
     try:
-        os.makedirs(f'{j}/rscape_output')
+        os.makedirs(f'{job_path}/rscape_output')
     except FileExistsError:
        pass
-    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_output --cacofold --outtree {j}/v{nofinteractions}_rm.sto | tee {j}/rscape_results.txt", dry)
+    exe(f"{RSCAPE_PATH} --outdir {job_path}/rscape_output --cacofold --outtree {job_path}/v{nofinteractions}_rm.sto | tee {job_path}/rscape_results.txt", dry)
 
 def rscape_infernal():
     # Set up for R-scape analysis
     #exe('rm -f rscape_results.txt')
     #exe('rm -rf rscape_output')
     try:
-        os.makedirs(f'{j}/rscape_infernal')
+        os.makedirs(f'{job_path}/rscape_infernal')
     except FileExistsError:
        pass
-    exe(f"{RSCAPE_PATH} --outdir {j}/rscape_infernal --cacofold --outtree {j}/infernal.sto | tee {j}/rscape_infernal_results.txt", dry)
+    exe(f"{RSCAPE_PATH} --outdir {job_path}/rscape_infernal --cacofold --outtree {job_path}/infernal.sto | tee {job_path}/rscape_infernal_results.txt", dry)
 
 def is_hit():
     """
@@ -457,7 +458,7 @@ def infernal():
     #cmd = f'cmscan -o {j}/cmscan_res.out {RFAM_DB_PATH} {cm}'
     #print(cmd)
     #exe(cmd)
-    cmd = f'cmsearch -A {j}/infernal.sto -o {j}/cmsearch.out {cm} {db}'
+    cmd = f'cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {db}'
     print(cmd)
     exe(cmd, dry)
     rscape_infernal()
@@ -472,17 +473,17 @@ def save_to_slurm():
 #SBATCH -p eddy # Partition to submit to
 #SBATCH --mem=50000 # Memory per cpu in MB (see also --mem-per-cpu)
 #SBATCH --open-mode=append
-#SBATCH -o {j}/%j.out # Standard out goes to this file
-#SBATCH -e {j}/%j.err # Standard err goes to this filehostname
-#SBATCH --job-name={j} # Name of the job
+#SBATCH -o {job_path}/%j.out # Standard out goes to this file
+#SBATCH -e {job_path}/%j.err # Standard err goes to this filehostname
+#SBATCH --job-name={job_path} # Name of the job
 # Runs a command on all FASTA files in current directory
 python {' '.join(sys.argv[:]).replace('--slurm', '')}
         """
-        with open(f'{j}/run.slurm', 'w') as fi:
+        with open(f'{job_path}/run.slurm', 'w') as fi:
             fi.write(t)
-        print(f'sbatch {j}/run.slurm')
-        os.chmod(f'{j}/run.slurm', 0o755) #mode=stat.S_IXUSR)
-        os.system(f'sbatch {j}/run.slurm')
+        print(f'sbatch {job_path}/run.slurm')
+        os.chmod(f'{job_path}/run.slurm', 0o755) #mode=stat.S_IXUSR)
+        os.system(f'sbatch {job_path}/run.slurm')
         
 if __name__ == '__main__':
     parser = get_parser()
@@ -497,30 +498,34 @@ if __name__ == '__main__':
         args.fasta = [args.fasta]
 
     for f in args.fasta:
-        query = f
         fbase = os.path.basename(f).replace('.fa', '')
+        seq_fn = os.path.basename(f)
         dbbase = os.path.basename(args.db[0]).replace('.fa', '')
         db = ' '.join(args.db)
-        
+
         if args.create_job_folder:
             if args.job_name:
-                j = 'jobs/' + args.job_name
+                job_path = 'jobs/' + args.job_name
             else:
-                j = 'jobs/' + fbase
+                job_path = 'jobs/' + fbase
             try:
-                os.makedirs(f'{j}', exist_ok=True) 
+                os.makedirs(f'{job_path}', exist_ok=True) 
             except FileExistsError:
                 pass
             if f:
-                shutil.copy(f, j)
+                shutil.copy(f, job_path)
+                shutil.copy(args.flanked, job_path + '/' + fbase + '_flanked.fa')
         else:
-            j = os.path.dirname(f)  # the folder where the fasta file is
-           
+            job_path = os.path.dirname(f)  # the folder where the fasta file is
+
         now()
 
+        seq_path = job_path + '/' + seq_fn
+        seq_flanked_path = job_path + '/' +  seq_fn.replace('.fa', '') + '_flanked.fa'
+        
         print(args, flush=True)
 
-        with open(f'{j}/cmd.sh', 'w') as fi:
+        with open(f'{job_path}/cmd.sh', 'w') as fi:
             fi.write(' '.join(sys.argv))
         
         if args.slurm:
@@ -540,7 +545,7 @@ if __name__ == '__main__':
         logger = logging.getLogger('rnahub')
         logger.setLevel(logging.DEBUG)
         # create file handler which logs even debug messages
-        fh = logging.FileHandler(f'{j}/log.log')
+        fh = logging.FileHandler(f'{job_path}/log.log')
         fh.setLevel(logging.DEBUG)
 
         ch = logging.StreamHandler()
@@ -562,8 +567,9 @@ if __name__ == '__main__':
         # Perform nhmmer iterations
         #if not args.rscape:
         # test for seq now! ;))))
+
         if args.flanked:
-            with open(query, 'r') as fn:
+            with open(seq_path, 'r') as fn:
                 lines = fn.readlines()
                 sequence_only = "".join(line.strip().upper() for line in lines if not line.startswith('>'))
             ic(sequence_only)
@@ -583,7 +589,29 @@ if __name__ == '__main__':
             else:
                 raise Exception("Substring not found.")
 
-        search()
+        if args.repeatmasker:
+            # cmd REPEAT_MASKER_PATH
+            cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {job_path}/{seq_path}'
+            print(cmd)
+            seq_masked_path = seq_path + '.masked'
+            if not os.path.exists(seq_masked_path):
+               print('RepeatMasker: No repetitive sequences were detected in seq')
+            else:
+               print('RepeatMasker: Repetitive sequences were detected in seq')
+               query = seq_masked_path  
+
+            # cmd REPEAT_MASKER_PATH
+            cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {job_path}/{seq_flanked_path}'
+            print(cmd)
+            seq_flanked_masked_path = seq_flanked_path + '.masked'
+            if not os.path.exists(seq_flanked_masked_path):
+               print('RepeatMasker: No repetitive sequences were detected in seq flanked')
+            else:
+               print('RepeatMasker: Repetitive sequences were detected in seq flanked')
+               seq_flanked_path = seq_masked_path  
+
+        if not args.dev_skip_search:
+            search(seq_path, seq_flanked_path)
         # Remove duplicate copies of genomes
         find_top_scoring_hits(j)
         if not args.dev_skip_rscape:
