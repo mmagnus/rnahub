@@ -61,7 +61,7 @@ def get_parser():
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--repeatmasker", help="", action="store_true")
     parser.add_argument("--create-job-folder", help="create a job folder based on the path to the input fasta sequence, e.g. example/seq.fa, jobs/seq/seq.fa", action="store_true")
-    parser.add_argument("--dev-skip-search", help="show all cmds, dont run them", action="store_true")
+    parser.add_argument("--dev-skip-search", help="skip v0..v3 all nhmmer searches", action="store_true")
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer123", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-cmcalibrate", help="show all cmds, dont run them", action="store_true")
@@ -201,11 +201,11 @@ def search(seq_path, seq_flanked_path = ''):
             #if first_site is None or second_site is None:
             #        print("Failed to locate first_site or second_site in the bp_col.txt file.")
             #        sys.exit(1)
-            cmd = ''.join([f'{EASEL_PATH}/esl-alimask -t ', j, '/v0.sto ', first_site, '..', second_site, ' > ', j, '/v0_targetRegionOnly.sto'])
+            cmd = ''.join([f'{EASEL_PATH}/esl-alimask -t ', job_path, '/v0.sto ', first_site, '..', second_site, ' > ', job_path, '/v0_targetRegionOnly.sto'])
             print(cmd)
             exe(cmd)
 
-            cmd = ''.join([f'{EASEL_PATH}/esl-alimanip --lmin 50  ', j, '/v0_targetRegionOnly.sto > ', j, '/v0_targetRegionOnly_trim.sto'])
+            cmd = ''.join([f'{EASEL_PATH}/esl-alimanip --lmin 50  ', job_path, '/v0_targetRegionOnly.sto > ', job_path, '/v0_targetRegionOnly_trim.sto'])
             print(cmd)
             exe(cmd)
             # esl-alimanip --lmin 50 tutorial/YAR014C_plus_IGR/noncoding.sto
@@ -439,7 +439,7 @@ def infernal():
             return None
 
     # Example usage
-    cocofold_file = find_cocofold_file(j)
+    cocofold_file = find_cocofold_file(job_path)
     if cocofold_file:
         print(f"Found .cocofold file: {cocofold_file}")
     else:
@@ -602,6 +602,7 @@ if __name__ == '__main__':
             else:
                print('RepeatMasker: Repetitive sequences were detected in seq')
                query = seq_masked_path  
+            print(open(seq_masked_path).read())
 
             # cmd REPEAT_MASKER_PATH
             cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {seq_flanked_path}'
@@ -612,9 +613,11 @@ if __name__ == '__main__':
             else:
                print('RepeatMasker: Repetitive sequences were detected in seq flanked')
                seq_flanked_path = seq_masked_path  
+            print(open(seq_flanked_masked_path).read())
 
         if not args.dev_skip_search:
-            search(seq_path, seq_flanked_path)
+            #search(seq_path, seq_flanked_path)
+            pass
         # Remove duplicate copies of genomes
         find_top_scoring_hits(job_path)
         if not args.dev_skip_rscape:
