@@ -1,7 +1,18 @@
 #!/bin/bash
-#python rnahub.py --job-name gly1_1632
-#exit
-rsync -zarv /Users/magnus/work/src/rnahub/ ody:/n/home06/mmagnus/m/rnahub/   --exclude 'config_local.py' --exclude '.git/' --include="*" #--dry-run #
+#./rnahub.py --create-job-folder --cpus 16 --repeatmasker example/xrrna.fa --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa --dev-skip-search
+
+./rnahub.py --create-job-folder --repeatmasker --cpus 16 example/gly1_query.fa --flanked example/gly1_flanked.fa --db /home/rnahub/db/1409_Acomycota_genomes-may19.fa
+
+#./rnahub.py  --cpus 16 --fasta example/xrrna.fa --flank --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa
+#./rnahub.py  --cpus 16 --fasta example/xrrna_casp.fa  --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa
+#./rnahub.py  --cpus 16 --fasta example/xrna_casp_flank.fa --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa
+#./rnahub.py  --cpus 16 --flank --fasta example/grc1_intron_exon.fa  --db /home/rnahub/db/1409_Acomycota_genomes-may19.fa
+#./rnahub.py  --cpus 16 --fasta example/grc1_intron2.fa  --db /home/rnahub/db/1409_Acomycota_genomes-may19.fa
+exit
+./rnahub.py --flank --cpus 16 --db /home/rnahub/db/1409_Acomycota_genomes-may19.fa --fasta /home/rnahub/rnahub/example/gly1_flanked.fa --dev-skip-nhmmer123 --dev-skip-nhmmer0 --dry
+exit
+#
+rsync -zarv /Users/magnus/work/src/rnahub/ ody:/n/home06/mmagnus/m/rnahub/  --exclude 'config_local.py' --exclude '.git/' --include="*" #--dry-run #
 ssh ody '~/m/rnahub/test_ody.sh' # && python unflank.py db/1409_Acomycota_genomes-may19.fa example/grc1_intron.fa'
 #rsync -rv odx:/n/home06/mmagnus/m/rnahub/jobs ~/d/
 exit

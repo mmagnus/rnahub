@@ -7,6 +7,7 @@ RSCAPE_DIR = "/home/rnahub/opt/rscape/rscape_v2.0.5"
 RSCAPE_PATH = os.path.join(RSCAPE_DIR, "bin/R-scape")
 EASEL_PATH = '/home/rnahub/opt/hmmer/hmmer-3.3.2/bin/'
 INFERNAL_PATH = '/usr/bin/'
+REPEAT_MASKER_PATH = '/home/rnahub/opt/RepeatMasker'
 if os.path.exists('config_local.py'):
     from config_local import *
 
