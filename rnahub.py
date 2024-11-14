@@ -522,7 +522,7 @@ if __name__ == '__main__':
 
         seq_path = job_path + '/' + seq_fn
         seq_flanked_path = job_path + '/' +  seq_fn.replace('.fa', '') + '_flanked.fa'
-        
+
         print(args, flush=True)
 
         with open(f'{job_path}/cmd.sh', 'w') as fi:
@@ -591,9 +591,10 @@ if __name__ == '__main__':
 
         if args.repeatmasker:
             # cmd REPEAT_MASKER_PATH
-            cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {job_path}/{seq_path}'
+            cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {seq_path}'
             print(cmd)
             seq_masked_path = seq_path + '.masked'
+            print(seq_masked_path)
             if not os.path.exists(seq_masked_path):
                print('RepeatMasker: No repetitive sequences were detected in seq')
             else:
@@ -601,7 +602,7 @@ if __name__ == '__main__':
                query = seq_masked_path  
 
             # cmd REPEAT_MASKER_PATH
-            cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {job_path}/{seq_flanked_path}'
+            cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {seq_flanked_path}'
             print(cmd)
             seq_flanked_masked_path = seq_flanked_path + '.masked'
             if not os.path.exists(seq_flanked_masked_path):
