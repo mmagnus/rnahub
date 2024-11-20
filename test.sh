@@ -1,14 +1,35 @@
 #!/bin/bash
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/rnahub/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/rnahub/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/rnahub/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/rnahub/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+python search_rfam.py example/example.fa example/gly1_query.fa example/xrrna.fa
+#python search_blast.py --db pdbnt example/gly1_query.fa example/u6.fa
+exit
 #./rnahub.py --create-job-folder --cpus 16 --repeatmasker example/xrrna.fa --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa --dev-skip-search
-
 ./rnahub.py --create-job-folder --repeatmasker --cpus 16 example/gly1_query.fa --flanked example/gly1_flanked.fa --db /home/rnahub/db/1409_Acomycota_genomes-may19.fa
-
+exit
+cd /home/rnahub/rnahub-web
+python daemon.py --debug xrRNA-06be51de
+exit
+./rnahub.py --create-job-folder --repeatmasker --cpus 16 example/gly1_query.fa --flanked example/gly1_flanked.fa --db /home/rnahub/db/1409_Acomycota_genomes-may19.fa
+exit
 #./rnahub.py  --cpus 16 --fasta example/xrrna.fa --flank --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa
 #./rnahub.py  --cpus 16 --fasta example/xrrna_casp.fa  --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa
 #./rnahub.py  --cpus 16 --fasta example/xrna_casp_flank.fa --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa
 #./rnahub.py  --cpus 16 --flank --fasta example/grc1_intron_exon.fa  --db /home/rnahub/db/1409_Acomycota_genomes-may19.fa
 #./rnahub.py  --cpus 16 --fasta example/grc1_intron2.fa  --db /home/rnahub/db/1409_Acomycota_genomes-may19.fa
-exit
+
 ./rnahub.py --flank --cpus 16 --db /home/rnahub/db/1409_Acomycota_genomes-may19.fa --fasta /home/rnahub/rnahub/example/gly1_flanked.fa --dev-skip-nhmmer123 --dev-skip-nhmmer0 --dry
 exit
 #
