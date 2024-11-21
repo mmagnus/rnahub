@@ -516,7 +516,8 @@ if __name__ == '__main__':
                 pass
             if f:
                 shutil.copy(f, job_path)
-                shutil.copy(args.flanked, job_path + '/' + fbase + '_flanked.fa')
+                if args.flanked:
+                    shutil.copy(args.flanked, job_path + '/' + fbase + '_flanked.fa')
         else:
             job_path = os.path.dirname(f)  # the folder where the fasta file is
 
