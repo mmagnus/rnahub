@@ -1,12 +1,13 @@
 # rnahub
 
-```/rnahub.py -h
-usage: rnahub.py [-h] [--db DB [DB ...]] [--job-name JOB_NAME] [-v] [--slurm] [--evalue EVALUE] [--evalue-final EVALUE_FINAL] [--iteractions ITERACTIONS] [--cpus CPUS] [--dry]
-                 [--create-job-folder] [--dev-skip-nhmmer0] [--dev-skip-nhmmer123] [--dev-skip-cmcalibrate] [--dev-skip-rscape] [--dev-skip-infernal] [--rscape] [--flanked FLANKED]
+```
+./rnahub.py -h
+usage: rnahub.py [-h] [--db DB [DB ...]] [--job-name JOB_NAME] [-v] [--slurm] [--evalue EVALUE] [--evalue-final EVALUE_FINAL] [--iteractions ITERACTIONS] [--cpus CPUS] [--dry] [--repeatmasker]
+                 [--job-folder JOB_FOLDER] [--dev-skip-search] [--dev-skip-nhmmer0] [--dev-skip-nhmmer123] [--dev-skip-cmcalibrate] [--dev-skip-rscape] [--dev-skip-infernal] [--rscape] [--flanked FLANKED]
                  [--flanks-in-header]
                  fasta
 
-j job directory
+job_path directory (j before)
 
 .. warning ::
 
@@ -15,7 +16,7 @@ j job directory
 positional arguments:
   fasta                 .fa for now, don't use .fasta
 
-options:
+optional arguments:
   -h, --help            show this help message and exit
   --db DB [DB ...]
   --job-name JOB_NAME   by default is input file name (wihout extension)
@@ -28,7 +29,10 @@ options:
                         number of iterations
   --cpus CPUS           number of cpus for nhmmer
   --dry                 show all cmds, dont run them
-  --create-job-folder   create a job folder based on the path to the input fasta sequence, e.g. example/seq.fa, jobs/seq/seq.fa
+  --repeatmasker
+  --job-folder JOB_FOLDER
+                        create a job folder based on the path to the input fasta sequence, by default 'jobs/'so with example/seq.fa, the job folder is going to be jobs/seq/seq.fa [and other files here]
+  --dev-skip-search     skip v0..v3 all nhmmer searches
   --dev-skip-nhmmer0    show all cmds, dont run them
   --dev-skip-nhmmer123  show all cmds, dont run them
   --dev-skip-cmcalibrate
