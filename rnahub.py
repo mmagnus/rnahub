@@ -602,7 +602,7 @@ if __name__ == '__main__':
             else:
                print('RepeatMasker: Repetitive sequences were detected in seq')
                query = seq_masked_path  
-            print(open(seq_masked_path).read())
+               print(open(seq_masked_path).read())
 
             # cmd REPEAT_MASKER_PATH
             cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {seq_flanked_path}'
@@ -613,7 +613,7 @@ if __name__ == '__main__':
             else:
                print('RepeatMasker: Repetitive sequences were detected in seq flanked')
                seq_flanked_path = seq_masked_path  
-            print(open(seq_flanked_masked_path).read())
+               print(open(seq_flanked_masked_path).read())
 
         if not args.dev_skip_search:
             search(seq_path, seq_flanked_path)
