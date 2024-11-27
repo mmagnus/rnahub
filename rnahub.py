@@ -60,7 +60,7 @@ def get_parser():
     parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--repeatmasker", help="", action="store_true")
-    parser.add_argument("--job-folder", help="create a job folder based on the path to the input fasta sequence, by default 'jobs/'so with example/seq.fa, the job folder is going to be jobs/seq/seq.fa [and other files here]", default='jobs/')
+    parser.add_argument("--job-folder", help="create a job folder based on the path to the input fasta sequence, by default 'jobs/'so with example/seq.fa, the job folder is going to be jobs/seq/seq.fa [and other files here]", default='')
     parser.add_argument("--dev-skip-search", help="skip v0..v3 all nhmmer searches", action="store_true")
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer123", help="show all cmds, dont run them", action="store_true")
