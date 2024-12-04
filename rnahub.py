@@ -496,6 +496,8 @@ if __name__ == '__main__':
     dry = args.dry
     CPUs = args.cpus
 
+    os.system('figlet -f smblock rnahub')
+
     if list != type(args.fasta):
         args.fasta = [args.fasta]
 
