@@ -397,11 +397,14 @@ If the total number of base pairs covered is greater than or equal to 3 and ther
         return False
     
     def find_helixcov_file(folder_path):
+        """
+        xrRNA.cacofold.helixcov
+        vs
+        xrRNA.helixcov
+        """        
         # Use glob to find all .helixcov files in the folder
-        helixcov_files = glob.glob(os.path.join(folder_path + '/rscape_output', "*.helixcov"))
-
+        helixcov_files = glob.glob(os.path.join(folder_path + '/rscape_output', "*.cacofold.helixcov"))
         if helixcov_files:
-            # Return the path of the first .helixcov file found
             return helixcov_files[0]
         else:
             return None
