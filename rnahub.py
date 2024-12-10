@@ -55,6 +55,7 @@ def get_parser():
                         action="store_true", help="be verbose")
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
     parser.add_argument("--evalue", default="1e-10", help="e-value threshold for all the runs but the final one")
+    parser.add_argument("--lmin", default=50, help="esl-alimanip for v0 processing, default 50")
     parser.add_argument("--evalue-final", default="1e-5", help="e-value threshold for the final run")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
     parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
