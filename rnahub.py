@@ -391,6 +391,8 @@ If the total number of base pairs covered is greater than or equal to 3 and ther
         ic(results)
         total_nbp_covs = sum(nbp_cov)
         print(f"Total nbp_covs: {total_nbp_covs}")
+        if total_nbp_covs > 0:
+            return True
         if total_nbp_covs >= 3 and [i for i in nbp_cov if i >= 2]:
             print("Hit")
             return True
