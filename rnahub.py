@@ -467,6 +467,11 @@ def infernal():
     #print(cmd)
     #exe(cmd)
     cmd = f'cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {db}'
+    # fasta
+    cmd = f'{EASEL_PATH}/esl-reformat fasta {job_path}/v3_rm.sto > {job_path}/v3_rm.fa'
+    print(cmd)
+    exe(cmd, dry)
+    cmd = f'{INFERNAL_PATH}/cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {job_path}/v3_rm.fa'
     print(cmd)
     exe(cmd, dry)
     rscape_infernal()
