@@ -18,7 +18,7 @@ import shutil
 import subprocess
 import sys
 import os
-from config import RSCAPE_PATH, nhmmer, EASEL_PATH, RFAM_DB_PATH, REPEAT_MASKER_PATH
+from config import RSCAPE_PATH, nhmmer, EASEL_PATH, RFAM_DB_PATH, REPEAT_MASKER_PATH, INFERNAL_PATH
 import logging
 
 # SLURM directives are not directly used in Python scripts.
