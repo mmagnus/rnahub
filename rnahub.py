@@ -65,7 +65,7 @@ def get_parser():
     parser.add_argument("--dev-skip-search", help="skip v0..v3 all nhmmer searches", action="store_true")
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer123", help="show all cmds, dont run them", action="store_true")
-    parser.add_argument("--dev-skip-cmcalibrate", help="show all cmds, dont run them", action="store_true")
+    #parser.add_argument("--dev-skip-cmcalibrate", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-rscape", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-infernal", help="show all cmds, dont run them", action="store_true")
 
@@ -634,7 +634,11 @@ if __name__ == '__main__':
         if not args.dev_skip_search:
             search(seq_path, seq_flanked_path)
         # Remove duplicate copies of genomes
-        find_top_scoring_hits(job_path)
+        find_top_scoring_hits(job_path) # get v3_rm
+        # statistics for v3
+        cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', job_path, '/v3_rm.sto > ', job_path, '/v3_rm_stats.txt'])
+        print(cmd)
+        exe(cmd, dry) 
         if not args.dev_skip_rscape:
             rscape()
         is_hit = is_hit()
