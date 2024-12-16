@@ -206,7 +206,7 @@ def search(seq_path, seq_flanked_path = ''):
             print(cmd)
             exe(cmd)
 
-            cmd = ''.join([f'{EASEL_PATH}/esl-alimanip --lmin 50  ', job_path, '/v0_targetRegionOnly.sto > ', job_path, '/v0_targetRegionOnly_trim.sto'])
+            cmd = ''.join([f'{EASEL_PATH}/esl-alimanip --lmin {args.lmin} ', job_path, '/v0_targetRegionOnly.sto > ', job_path, '/v0_targetRegionOnly_trim.sto'])
             print(cmd)
             exe(cmd)
             # esl-alimanip --lmin 50 tutorial/YAR014C_plus_IGR/noncoding.sto
