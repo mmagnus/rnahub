@@ -7,6 +7,12 @@ job_path directory (j before)
 
    R-scape version, searching for .helixcov files here!
 
+Is hit now its true with 1 covariance.
+
+Re-run it in given folder:
+
+    ~/rnahub/rnahub.py --job-folder . --dev-skip-nhmmer123
+
 """
 from __future__ import print_function
 import argparse
@@ -68,12 +74,14 @@ def get_parser():
     #parser.add_argument("--dev-skip-cmcalibrate", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-rscape", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-infernal", help="show all cmds, dont run them", action="store_true")
-
+    parser.add_argument("--rscape-path", help="overwrite rscape-path from config")
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
-    parser.add_argument("fasta", help=".fa for now, don't use .fasta")#, default="", nargs='+')
+    parser.add_argument("--fasta", help=".fa for now, don't use .fasta", default="")#, nargs='+')
     parser.add_argument("--flanked", help=".fa for now, don't use .fasta, flank the sequence including the query sequence")
     parser.add_argument("--flanks-in-header", action="store_true", help="run flanked mode (create extra v0 files), syntax in the fasta header '><seq_name> <start>-<end>, use this or --flanked fasta file")
+    parser.add_argument("--flanks-start", help="start of flank")
+    parser.add_argument("--flanks-end", help="end of flank")
     
     return parser
 
@@ -86,7 +94,7 @@ def search(seq_path, seq_flanked_path = ''):
     query = seq_path
     print(f'query: {seq_path}')
     
-    if args.flanked or args.flanks_in_header:
+    if args.flanked or args.flanks_in_header or args.flanks_start:
         def bp_col(alignment):
             # directory of alignment file that you provide, the output will go into there
             DIR = os.path.dirname(alignment)
@@ -136,7 +144,29 @@ def search(seq_path, seq_flanked_path = ''):
             # gkab355_supplemental_files/tutorial/method_scripts/tutorial/YAR014C_plus_IGR/
             # Extract the relevant information from the query file
             # get full file and find substring from the long one
-            if not args.flanks_in_header:
+
+            # defined start and end
+            if args.flanks_start and args.flanks_end:
+                s1 = str(args.flanks_start)
+                s2 = str(args.flanks_end)
+
+            # extract from the header
+            if args.flanks_in_header:
+                with open(query, 'r') as fn:
+                    s1 = None
+                    s2 = None
+                    for line in fn:
+                        if line.startswith('>'):
+                            print(line)
+                            parts = line.split()
+                            ic(parts)
+                            #>target 5-20
+                            s1, s2 = parts[1].split('-') ##3]
+                            ic(s1, s2)
+                            break
+
+            # substring from the query file 
+            if args.flanked:  
                 ic(query)
                 with open(query, 'r') as fn:
                     lines = fn.readlines()
@@ -161,21 +191,6 @@ def search(seq_path, seq_flanked_path = ''):
 
                 s1 = str(start_index + 1)
                 s2 = str(end_index)
-
-            # parse the header of the fasta file
-            else:
-                with open(query, 'r') as fn:
-                    s1 = None
-                    s2 = None
-                    for line in fn:
-                        if line.startswith('>'):
-                            print(line)
-                            parts = line.split()
-                            ic(parts)
-                            #>target 5-20
-                            s1, s2 = parts[1].split('-') ##3]
-                            ic(s1, s2)
-                            break
 
             if s1 is None or s2 is None:
                 print("Failed to extract s1 or s2 from the query file.")
@@ -216,10 +231,11 @@ def search(seq_path, seq_flanked_path = ''):
         # nhmmer -E 1e-10 --cpu 64 -A tutorial/gly1_igr/flanked.sto --tblout tutorial/gly1_igr/flanked.hmmout tutorial/gly1_igr.fa ../../../db/1409_Acomycota_genomes-may19.fa#
 
         # {j}/{fbase}.fa is causing missing organism problem
-        if args.flanks_in_header:
+        if args.flanks_in_header or args.flanks_start:
             cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
         else:
-            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_masked_path} - "#| tee {j}/v0.out"            
+            # overwrite with seq_flanked_masked_path if needed
+            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {j}/v0.out"            
         #v0.sto is flanked.sto # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:
             exe(cmd, dry)
@@ -234,7 +250,7 @@ def search(seq_path, seq_flanked_path = ''):
         query = f'{job_path}/v0_targetRegionOnly_trim.sto'
 
     if not args.dev_skip_nhmmer123:
-        for i in range(1, nofinteractions + 1):  # you can play with this one, starting from 1
+        for i in range(1, nofiterations + 1):  # you can play with this one, starting from 1
             sto_file = f'v{i}.sto'
             output_file = f'v{i}.out'
             input_file = query if i == 1 else f'{job_path}/v{i-1}.sto'
@@ -245,11 +261,6 @@ def search(seq_path, seq_flanked_path = ''):
             command = f"time cat {db} | {nhmmer} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
 
-    # statistics for v3
-    cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', job_path, '/v3_rm.sto > ', job_path, '/v3_rm_stats.txt'])
-    print(cmd)
-    exe(cmd, dry)
-    
             
 def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
     """
@@ -272,8 +283,7 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
         The output file where accessions to keep will be written. Defaults to 'accessions_to_keep.txt'.
     """
     def parse_last_iteration(alignment):
-        '''
-        Parses the last alignment built by nhmmer.
+        '''Parses the last alignment built by nhmmer.
 
         Parameters
         ----------
@@ -295,25 +305,35 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
             for line in fh: # go through every line in the alignment
                 if line.startswith("#=GS"): # only consider lines of the alignment portion
                     this = line.split()
-                    
                     # parse using indexes
                     genus = this[5]
-                    species = this[6]
-                    
-                    for character in genus:
-                        if character.isalpha() == False:
-                            genus = genus.replace(character, '')
-                    for character in species:
-                        if character.isalpha() == False:
-                            species = species.replace(character, '')
-                    
-                    this_genome = genus + species
-                    this_accession = this[1]
-                    
-                    # add to list2
-                    genome.append(this_genome)
-                    accession.append(this_accession)
-            
+                    # this is a hack for the IMGVR genomes #
+                    """
+                    # STOCKHOLM 1.0
+                    #=GF ID rnac
+                    #=GF AU nhmmer (HMMER 3.3.2)
+
+                    #=GS IMGVR_UViG_2595698701_000001|2595698701|2595727683/68567-68705         DE [subseq from] IMGVR_UViG_2595698701_000001|2595698701|2595727683
+                    """
+                    if 'IMGVR_UViG' in genus:
+                        genome.append(this[5])
+                        accession.append(this[1])
+                    else:
+                        species = this[6]
+                        for character in genus:
+                            if character.isalpha() == False:
+                                genus = genus.replace(character, '')
+                        for character in species:
+                            if character.isalpha() == False:
+                                species = species.replace(character, '')
+
+                        this_genome = genus + species
+                        this_accession = this[1]
+
+                        # add to list2
+                        genome.append(this_genome)
+                        accession.append(this_accession)
+
         return genome, accession
 
     # Initialize lists to keep track of genomes and accessions
@@ -328,7 +348,7 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
                 
             elif file.endswith(".sto"): # go through the .sto files
                 #v0.sto", "v1.sto", "v2.sto", 
-                if file in [f"v{nofinteractions}.sto"]: # only consider the last iteration
+                if file in [f"v{nofiterations}.sto"]: # only consider the last iteration
                     genomes, accessions = parse_last_iteration(os.path.join(root, file)) # parse
                     num_seqs = len(genomes)
 
@@ -347,7 +367,7 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
             f.write(f"{accession}\n")
     
     print(f"Accessions to keep have been written to {output_file}.")
-    cmd = f'{EASEL_PATH}/esl-alimanip --seq-k {directory}/accessions_to_keep.txt {directory}/v{nofinteractions}.sto > {directory}/v{nofinteractions}_rm.sto'
+    cmd = f'{EASEL_PATH}/esl-alimanip --seq-k {directory}/accessions_to_keep.txt {directory}/v{nofiterations}.sto > {directory}/v{nofiterations}_rm.sto'
     print(cmd)
     exe(cmd)
 
@@ -359,7 +379,7 @@ def rscape():
         os.makedirs(f'{job_path}/rscape_output')
     except FileExistsError:
        pass
-    exe(f"{RSCAPE_PATH} --outdir {job_path}/rscape_output --cacofold --outtree {job_path}/v{nofinteractions}_rm.sto | tee {job_path}/rscape_results.txt", dry)
+    exe(f"{RSCAPE_PATH} --outdir {job_path}/rscape_output --cacofold --outtree {job_path}/v{nofiterations}_rm.sto | tee {job_path}/rscape_results.txt", dry)
 
 def rscape_infernal():
     # Set up for R-scape analysis
@@ -451,27 +471,34 @@ def infernal():
     else:
         print("No .cocofold file found in the specified folder.")
 
-    if not args.dev_skip_cmcalibrate:
-        # Run cmbuild
-        cm = os.path.splitext(cocofold_file)[0] + '.cm'
-        cmd = f'cmbuild -F {cm} {cocofold_file}'
-        print(cmd)
-        exe(cmd, dry)
-        # Run cmcalibrate
-        cmd = f'cmcalibrate {cm}'
-        print(cmd)
-        exe(cmd, dry)
-        pass
+    # define cm and the optionally calibrate
+    cm = os.path.splitext(cocofold_file)[0] + '.cm'
+    # Run cmbuild
+    cmd = f'{INFERNAL_PATH}/cmbuild -F {cm} {cocofold_file}'
+    print(cmd)
+    exe(cmd, dry)
+
+    # skip it for now anyway
+    # if not args.dev_skip_cmcalibrate:
+    #     # Run cmcalibrate
+    #     cmd = f'{INFERNAL_PATH}/cmcalibrate {cm}'
+    #     print(cmd)
+    #     exe(cmd, dry)
+    #     pass
+
     # Search the Rfam database with the covariance model to eliminate known case
     #cmd = f'cmscan -o {j}/cmscan_res.out {RFAM_DB_PATH} {cm}'
     #print(cmd)
     #exe(cmd)
-    cmd = f'cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {db}'
+    if not db:
+        print('db is missing!')
+    # cmd = f'{INFERNAL_PATH}/cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {db}' against the tb
     # fasta
     cmd = f'{EASEL_PATH}/esl-reformat fasta {job_path}/v3_rm.sto > {job_path}/v3_rm.fa'
     print(cmd)
     exe(cmd, dry)
-    cmd = f'{INFERNAL_PATH}/cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {job_path}/v3_rm.fa'
+    #cmd = f'{INFERNAL_PATH}/cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {job_path}/v3_rm.fa'
+    cmd = f'{INFERNAL_PATH}/cmalign {cm} {job_path}/v3_rm.fa > {job_path}/infernal.sto'
     print(cmd)
     exe(cmd, dry)
     rscape_infernal()
@@ -503,11 +530,12 @@ if __name__ == '__main__':
     args = parser.parse_args()
     db = args.db
     evalue = args.evalue
-    nofinteractions = args.iteractions
+    nofiterations = args.iteractions
     dry = args.dry
     CPUs = args.cpus
 
     os.system('figlet -f smblock rnahub')
+    RSCAPE_PATH = args.rscape_path if args.rscape_path else RSCAPE_PATH
 
     if list != type(args.fasta):
         args.fasta = [args.fasta]
@@ -515,7 +543,8 @@ if __name__ == '__main__':
     for f in args.fasta:
         fbase = os.path.basename(f).replace('.fa', '')
         seq_fn = os.path.basename(f)
-        dbbase = os.path.basename(args.db[0]).replace('.fa', '')
+        if args.db:
+            dbbase = os.path.basename(args.db[0]).replace('.fa', '')
         db = ' '.join(args.db)
 
         if args.job_folder:
@@ -611,6 +640,7 @@ if __name__ == '__main__':
             # cmd REPEAT_MASKER_PATH
             cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {seq_path}'
             print(cmd)
+            exe(cmd)
             seq_masked_path = seq_path + '.masked'
             print(seq_masked_path)
             if not os.path.exists(seq_masked_path):
@@ -620,17 +650,20 @@ if __name__ == '__main__':
                query = seq_masked_path  
                print(open(seq_masked_path).read())
 
-            # cmd REPEAT_MASKER_PATH
-            cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {seq_flanked_path}'
-            print(cmd)
-            seq_flanked_masked_path = seq_flanked_path + '.masked'
-            if not os.path.exists(seq_flanked_masked_path):
-               print('RepeatMasker: No repetitive sequences were detected in seq flanked')
-            else:
-               print('RepeatMasker: Repetitive sequences were detected in seq flanked')
-               seq_flanked_path = seq_masked_path  
-               print(open(seq_flanked_masked_path).read())
+            if args.flanked:
+                # cmd REPEAT_MASKER_PATH
+                cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {seq_flanked_path}'
+                print(cmd)
+                exe(cmd)
+                seq_flanked_masked_path = seq_flanked_path + '.masked'
+                if not os.path.exists(seq_flanked_masked_path):
+                   print('x RepeatMasker: No repetitive sequences were detected in seq flanked')
+                else:
+                   print('y RepeatMasker: Repetitive sequences were detected in seq flanked')
+                   seq_flanked_path = seq_flanked_masked_path
+                   print(open(seq_flanked_masked_path).read())
 
+        ic(seq_flanked_path)
         if not args.dev_skip_search:
             search(seq_path, seq_flanked_path)
         # Remove duplicate copies of genomes
