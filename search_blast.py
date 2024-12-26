@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/rnahub/miniconda3/bin/python
 # -*- coding: utf-8 -*-
 """
 """
