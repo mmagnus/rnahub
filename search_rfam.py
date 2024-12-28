@@ -148,7 +148,7 @@ if __name__ == '__main__':
             d = os.path.dirname(filename)
             if os.path.exists(d + "/cmscan.out"):
                 os.remove(d + "/cmscan.out")                
-            cmd = "cmscan --tblout " + d + "/cmscan.tblout -o " + d + "/cmscan.out --noali " + db + " " + filename
+            cmd = "cmscan --tblout " + d + "/cmscan.tblout -o " + d + "/cmscan.out --noali --acc " + db + " " + filename
             #families=`grep -v '^#' cmscan.tblout | head -n $max_rfam_num | uniq | awk '{print $2}' | sed -z 's/\n/|/g;s/|$/\n/'`
             #echo "Rfam families:" $families
             ic(cmd)
@@ -182,9 +182,12 @@ if __name__ == '__main__':
 
             if hits:      
                 top_hit_modelname = hits[0].split()[5]
-                rfam_accession = get_rfam_accession(top_hit_modelname)
-                print()
-                print(f"Rfam accession for {top_hit_modelname}: {rfam_accession}")
+                if 0:
+                    rfam_accession = get_rfam_accession(top_hit_modelname)
+                    print()
+                    print(f"Rfam accession for {top_hit_modelname}: {rfam_accession}")
+                else:
+                    rfam_accession = top_hit_modelname
                 job_path = args.job_path
                 aligment = process_rfam(rfam_accession, filename)
 
