@@ -11,7 +11,7 @@ import sys
 ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
 ic.configureOutput(prefix='> ')
 import os
-from config import RFAM_DB_PATH, RSCAPE_PATH, EASEL_PATH
+from config import RFAM_DB_PATH, RSCAPE_PATH, EASEL_PATH, RFAM_FILES
 import re
 
 def rscape(alignment, dry=False):
@@ -90,20 +90,13 @@ def coverge(alignment_fn, verbose=False):
         
 def process_rfam(family_id, seq):
     """seq ../rnahub-web/media/jobs/xrRNA-925d3bfd/seq.fa """
-    
-    # Download files
-    if 1:
-        os.system(f"wget https://rfam.org/family/{family_id}/alignment/stockholm -O  {job_path}/{family_id}.seed.sto")
-        os.system(f"wget https://rfam.org/family/{family_id}/alignment/fastau -O {job_path}/{family_id}.seed.fa")
-        os.system(f"wget https://rfam.org/family/{family_id}/cm -O {job_path}/{family_id}.cm")
-    
     # Concatenate files
     # ../rnahub-web/media/jobs/xrRNA-925d3bfd/seq(.fa) -> seq+
     seq_seed = seq.replace('.fa', f'+{family_id}_seed.fa')
 
     with open(seq_seed, "w") as outfile:
         content = open(seq).read()
-        content += '\n' + open(f'{job_path}/{family_id}.seed.fa').read()
+        content += '\n' + open(f'{RFAM_FILES}/{family_id}.seed.fa').read()  # get seed fa
         #print(content)
         outfile.write(content)
         print('saved to', seq_seed)
@@ -118,7 +111,7 @@ def process_rfam(family_id, seq):
     print('[...]')        
     # Run cmalign
     alignment = seq.replace('.fa', f'+{family_id}_seed.sto')
-    cmd = ' '.join(["cmalign", f"{family_id}.cm", seq_seed, ">", alignment])
+    cmd = ' '.join(["cmalign", f"{RFAM_FILES}/{family_id}.cm", seq_seed, ">", alignment])
     print(cmd)
     #subprocess.run(cmd)
     os.system(cmd)

@@ -7,6 +7,7 @@ RSCAPE_PATH = os.path.join(RSCAPE_DIR, "bin/R-scape")
 EASEL_PATH = '/home/rnahub/opt/hmmer/hmmer-3.3.2/bin/'
 INFERNAL_PATH = '/usr/bin/'
 REPEAT_MASKER_PATH = '/home/rnahub/opt/RepeatMasker'
+RFAM_FILES = "/home/rnahub/rnahub/rfam"
 try:
     from config_local import *
 except ImportError:
