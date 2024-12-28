@@ -15,8 +15,8 @@ unset __conda_setup
 # <<< conda initialize <<<
 #cd /home/rnahub/rnahub-web
 cd /home/rnahub/rnahub
-blastn -num_threads 6 -db /home/rnahub/db/pdbnt/pdbnt -query /home/rnahub/rnahub-web/media/jobs//xrRNA-4488d320/seq.fa
-#python search_rfam.py ../rnahub-web/media/jobs/xrRNA-925d3bfd/seq.fa --job-path ../rnahub-web/media/jobs/xrRNA-925d3bfd
+#blastn -num_threads 6 -db /home/rnahub/db/pdbnt/pdbnt -query /home/rnahub/rnahub-web/media/jobs//xrRNA-4488d320/seq.fa
+time python search_rfam.py ../rnahub-web/media/jobs/xrRNA-925d3bfd/seq.fa --job-path ../rnahub-web/media/jobs/xrRNA-925d3bfd
 #python daemon.py --debug xrRNA-d77b3fd7
 #cd /home/rnahub/rnahub-web/media/jobs/xrRNA_inferal_realig-d5291c8b #xrRNA-3505f7a5 # rnac_metagenomes-2961a93c
 #./search_rfam.py  example/xrrna.fa 
