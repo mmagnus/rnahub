@@ -55,9 +55,21 @@ optional arguments:
 ```
 
 # Install
-See config_local.py to set up paths to your HMMER, R-Scape, INFERNAL.
+Install 
 
-     python -m pip install icecream
+     $ python -m pip install icecream
+     
+Set up your local config; in the rnahub folder, create a new file, `config_local.py`, to set up paths to your HMMER, R-Scape, and INFERNAL.
+
+    nhmmer = "/home/rnahub/opt/hmmer/hmmer-3.3.2/bin/nhmmer"
+
+    RSCAPE_PATH = "/home/rnahub/opt/rscape/rscape_v2.5.2/bin/R-scape")
+    EASEL_PATH = '/home/rnahub/opt/hmmer/hmmer-3.3.2/bin/'
+    INFERNAL_PATH = '/usr/bin/' # for cmalign
+    REPEAT_MASKER_PATH = '/home/rnahub/opt/RepeatMasker'
+    # optional for rfam related searches #
+    RFAM_FILES = "/home/rnahub/rnahub/rfam"
+    RFAM_DB_PATH = "/home/rnahub/db/rfam/Rfam.cm"
 
 RC Harvard Cluster:
 
