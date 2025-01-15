@@ -53,7 +53,25 @@ optional arguments:
   --flanks-end FLANKS_END
                         end of flank
 ```
+
+# Install
+See config_local.py to set up paths to your HMMER, R-Scape, INFERNAL.
+
+  python -m pip install icecream
+
+RC Harvard Cluster:
+
+```
+[mmagnus@holylogin08 ~]$ module load python/3.10.12-fasrc01
+[mmagnus@holylogin08 ~]$ python
+Python 3.10.12 | packaged by conda-forge | (main, Jun 23 2023, 22:40:32) [GCC 12.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+[mmagnus@holylogin08 ~]$ python -m pip install icecream
+```
+
 # Workflow
+
 
 Pre-workflow: 
 
