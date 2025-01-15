@@ -57,7 +57,7 @@ optional arguments:
 # Install
 See config_local.py to set up paths to your HMMER, R-Scape, INFERNAL.
 
-  python -m pip install icecream
+     python -m pip install icecream
 
 RC Harvard Cluster:
 
