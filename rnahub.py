@@ -77,7 +77,7 @@ def get_parser():
     parser.add_argument("--rscape-path", help="overwrite rscape-path from config")
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
-    parser.add_argument("--fasta", help=".fa for now, don't use .fasta", default="")#, nargs='+')
+    parser.add_argument("--input", help=".fasta/.fa file with query seq or alignment .sto", default="", nargs='+')
     parser.add_argument("--flanked", help=".fa for now, don't use .fasta, flank the sequence including the query sequence")
     parser.add_argument("--flanks-in-header", action="store_true", help="run flanked mode (create extra v0 files), syntax in the fasta header '><seq_name> <start>-<end>, use this or --flanked fasta file")
     parser.add_argument("--flanks-start", help="start of flank")
@@ -537,14 +537,14 @@ if __name__ == '__main__':
     os.system('figlet -f smblock rnahub')
     RSCAPE_PATH = args.rscape_path if args.rscape_path else RSCAPE_PATH
 
-    if list != type(args.fasta):
-        args.fasta = [args.fasta]
+    if list != type(args.input):
+        args.input = [args.input]
 
-    for f in args.fasta:
-        fbase = os.path.basename(f).replace('.fa', '')
+    for f in args.input:
+        fbase = os.path.basename(f).replace('.fa', '').replace('.sto', '').replace('.fasta', '')
         seq_fn = os.path.basename(f)
         if args.db:
-            dbbase = os.path.basename(args.db[0]).replace('.fa', '')
+            dbbase = os.path.basename(args.db[0]).replace('.fa', '').replace('.sto', '').replace('.fasta', '')
         db = ' '.join(args.db)
 
         if args.job_folder:
