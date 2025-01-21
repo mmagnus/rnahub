@@ -1,4 +1,4 @@
-#!/home/rnahub/miniconda3/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 job_path directory (j before)
