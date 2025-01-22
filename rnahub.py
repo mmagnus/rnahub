@@ -557,6 +557,8 @@ if __name__ == '__main__':
         sys.exit(0)
         
     os.system('figlet -f smblock rnahub')
+    print(f"version: {get_git_version()}")
+
     RSCAPE_PATH = args.rscape_path if args.rscape_path else RSCAPE_PATH
 
     if list != type(args.input):
