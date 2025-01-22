@@ -51,14 +51,31 @@ def exe(command, dry=False, logging=False):
     #     print(e.output.decode())
     #     sys.exit(1)
 
+import subprocess
+
+def get_git_version():
+    try:
+        # Get the latest Git tag
+        script_dir = os.path.abspath(os.path.dirname(__file__))
+        version = subprocess.check_output(
+            ["git", "describe", "--tags"],
+            cwd=script_dir,
+            text=True
+        ).strip()
+        return version
+    except subprocess.CalledProcessError:
+        return "No version tag found"
+
+
 def get_parser():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 
     parser.add_argument('--db', help="", default="", nargs='+')
     parser.add_argument('--job-name', default="", help="by default is input file name (wihout extension)")
-    parser.add_argument("-v", "--verbose",
+    parser.add_argument("--verbose",
                         action="store_true", help="be verbose")
+    parser.add_argument("-v", "--version", action="store_true", help="Print the version based on the latest Git tag")
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
     parser.add_argument("--evalue", default="1e-10", help="e-value threshold for all the runs but the final one")
     parser.add_argument("--lmin", default=50, help="esl-alimanip for v0 processing, default 50")
@@ -533,7 +550,12 @@ if __name__ == '__main__':
     nofiterations = args.iteractions
     dry = args.dry
     CPUs = args.cpus
-
+    args = parser.parse_args()
+    
+    if args.version:
+        print(f"{get_git_version()}")
+        sys.exit(0)
+        
     os.system('figlet -f smblock rnahub')
     RSCAPE_PATH = args.rscape_path if args.rscape_path else RSCAPE_PATH
 
