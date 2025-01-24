@@ -84,6 +84,7 @@ def get_parser():
     parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--repeatmasker", help="", action="store_true")
+    parser.add_argument("--utot", action="store_true", help="tell nhmmer that this is DNA sequence, and use U->T for repeatmasker")
     parser.add_argument("--job-folder", help="create a job folder based on the path to the input fasta sequence, by default 'jobs/'so with example/seq.fa, the job folder is going to be jobs/seq/seq.fa [and other files here]", default='')
     parser.add_argument("--dev-skip-search", help="skip v0..v3 all nhmmer searches", action="store_true")
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
@@ -111,6 +112,11 @@ def search(seq_path, seq_flanked_path = ''):
     query = seq_path
     print(f'query: {seq_path}')
     
+    dna = ''
+
+    if args.utot:
+        dna = '--dna'
+
     if args.flanked or args.flanks_in_header or args.flanks_start:
         def bp_col(alignment):
             # directory of alignment file that you provide, the output will go into there
@@ -249,10 +255,10 @@ def search(seq_path, seq_flanked_path = ''):
 
         # {j}/{fbase}.fa is causing missing organism problem
         if args.flanks_in_header or args.flanks_start:
-            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
+            cmd = f"cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
         else:
             # overwrite with seq_flanked_masked_path if needed
-            cmd = f"cat {db} | {nhmmer}  --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {j}/v0.out"            
+            cmd = f"cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {j}/v0.out"            
         #v0.sto is flanked.sto # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:
             exe(cmd, dry)
@@ -275,7 +281,7 @@ def search(seq_path, seq_flanked_path = ''):
             if i == args.iteractions:
                 evalue =  args.evalue_final
             #  {j}/{fbase}.fa
-            command = f"time cat {db} | {nhmmer} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+            command = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
 
             
@@ -660,18 +666,57 @@ if __name__ == '__main__':
             else:
                 raise Exception("Substring not found.")
 
+        if args.utot:
+            def replace_u_to_t_in_fasta(input_file, output_file):
+                """
+                Replace all occurrences of 'U' with 'T' in the sequences of a FASTA file.
+
+                Args:
+                    input_file (str): Path to the input FASTA file.
+                    output_file (str): Path to the output FASTA file.
+                """
+                with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
+                    for line in infile:
+                        if line.startswith('>'):
+                            # Write header lines as-is
+                            outfile.write(line)
+                        else:
+                            # Replace 'U' with 'T' in sequence lines
+                            outfile.write(line.replace('U', 'T'))
+
+            ext = os.path.splitext(seq_path)[1]
+            output_file = seq_path.replace(ext, '_utot' + ext)
+            replace_u_to_t_in_fasta(seq_path, output_file)
+            ic(seq_path, output_file, ext)
+            seq_path = output_file
+
         if args.repeatmasker:
             # cmd REPEAT_MASKER_PATH
+            # convert u to t
+
             cmd = f'{REPEAT_MASKER_PATH}/RepeatMasker {seq_path}'
-            print(cmd)
+            ic(cmd)
             exe(cmd)
             seq_masked_path = seq_path + '.masked'
-            print(seq_masked_path)
-            if not os.path.exists(seq_masked_path):
+            ic(seq_masked_path)
+
+            from Bio import SeqIO
+            def check_fasta_empty(file_path):
+                try:
+                    with open(file_path, "r") as file:
+                        for record in SeqIO.parse(file, "fasta"):
+                            if record.seq:  # Check if sequence is non-empty
+                                return False
+                    return True
+                except Exception as e:
+                    print(f"Error reading file: {e}")
+                    return False
+
+            if not os.path.exists(seq_masked_path) or check_fasta_empty(seq_masked_path):
                print('RepeatMasker: No repetitive sequences were detected in seq')
             else:
                print('RepeatMasker: Repetitive sequences were detected in seq')
-               query = seq_masked_path  
+               seq_path = seq_masked_path  
                print(open(seq_masked_path).read())
 
             if args.flanked:
