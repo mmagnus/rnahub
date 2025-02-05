@@ -16,10 +16,7 @@ Re-run it in given folder:
 """
 from __future__ import print_function
 import argparse
-from icecream import ic
 import sys
-ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
-ic.configureOutput(prefix='> ')
 import shutil
 import subprocess
 import sys
@@ -29,6 +26,14 @@ import logging
 
 # SLURM directives are not directly used in Python scripts.
 # Instead, configure your job submission script or environment accordingly.
+
+try:
+    from icecream import ic
+    ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
+    ic.configureOutput(prefix='> ')
+except ImportError:
+    ic = print
+    
 
 def now():
     import datetime
