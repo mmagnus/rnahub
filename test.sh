@@ -14,9 +14,21 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 #cd /home/rnahub/rnahub-web
-cd /home/rnahub/rnahub
+cd /home/rnahub/rnahub-dev/
+
+set -x
+
+#rm -r jobs/u6
+#python rnahub.py  --cpus 16 --repeatmasker  --input example/u6.fa --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa --job-folder jobs 
+
+cat jobs/u6/u6.fa
+python rnahub.py  --cpus 16 --repeatmasker  --input example/u6.fa --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa --job-folder jobs --utot # --dev-skip-search
+
+#python rnahub-dev/rnahub.py -v
+#--job-folder . --input example/xrrna_v1.sto --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa
 #blastn -num_threads 6 -db /home/rnahub/db/pdbnt/pdbnt -query /home/rnahub/rnahub-web/media/jobs//xrRNA-4488d320/seq.fa
-time python search_rfam.py ../rnahub-web/media/jobs/xrRNA-925d3bfd/seq.fa --job-path ../rnahub-web/media/jobs/xrRNA-925d3bfd
+#time python search_rfam.py ../rnahub-web/media/jobs/xrRNA-925d3bfd/seq.fa --job-path ../rnahub-web/media/jobs/xrRNA-925d3bfd
+#time python search_rfam.py ../rnahub-web/media/jobs/xrRNA-925d3bfd/seq.fa --job-path ../rnahub-web/media/jobs/xrRNA-925d3bfd
 #python daemon.py --debug xrRNA-d77b3fd7
 #cd /home/rnahub/rnahub-web/media/jobs/xrRNA_inferal_realig-d5291c8b #xrRNA-3505f7a5 # rnac_metagenomes-2961a93c
 #./search_rfam.py  example/xrrna.fa 
@@ -31,7 +43,7 @@ time python search_rfam.py ../rnahub-web/media/jobs/xrRNA-925d3bfd/seq.fa --job-
 #python ~/rnahub/rnahub.py --job-folder .
 #--dev-skip-nhmmer123 --rscape-path /home/rnahub/opt/rscape/rscape_v2.5.2/bin/R-scape
 
-#python ~/rnahub/rnahub.py --job-folder . --dev-skip-nhmmer123 --rscape-path /home/rnahub/opt/rscape/rscape_v2.5.2/bin/R-scape
+#ython ~/rnahub/rnahub.py --job-folder . --dev-skip-nhmmer123 --rscape-path /home/rnahub/opt/rscape/rscape_v2.5.2/bin/R-scape
 
 
 #python daemon.py --debug xrRNA_inferal_realig-d5291c8b #xrRNA-3505f7a5
@@ -40,7 +52,6 @@ time python search_rfam.py ../rnahub-web/media/jobs/xrRNA-925d3bfd/seq.fa --job-
 
 exit
 #--job-folder '/home/rnahub'
-#./rnahub.py  --cpus 16 --repeatmasker  /home/rnahub/rnahub-web/media/jobs//xrRNA-ba7a2235/seq.fa --db /home/rnahub/db/Riboviria_genome_db/20240826_all_Riboviria_db.fa # --dev-skip-search
 
 #python search_rfam.py example/example.fa example/gly1_query.fa example/xrrna.fa
 #python search_blast.py --db pdbnt example/gly1_query.fa example/u6.fa
