@@ -402,7 +402,7 @@ def rscape():
         os.makedirs(f'{job_path}/rscape_output')
     except FileExistsError:
        pass
-    exe(f"{RSCAPE_PATH} --outdir {job_path}/rscape_output --cacofold --outtree {job_path}/v{nofiterations}.sto | tee {job_path}/rscape_results.txt", dry)
+    exe(f"{RSCAPE_PATH} --outdir {job_path}/rscape_output --cacofold --outtree {job_path}/v{nofiterations}_rm.sto | tee {job_path}/rscape_results.txt", dry)
 
 def rscape_infernal():
     # Set up for R-scape analysis
