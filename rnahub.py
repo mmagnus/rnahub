@@ -286,7 +286,7 @@ def search(seq_path, seq_flanked_path = ''):
             if i == args.iteractions:
                 evalue =  args.evalue_final
             #  {j}/{fbase}.fa
-            command = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+            command = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
 
             
