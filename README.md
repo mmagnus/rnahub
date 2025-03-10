@@ -59,8 +59,8 @@ optional arguments:
 # Install
 Install 
 
-     $ python -m pip install icecream
-     
+     $ python -m pip install icecream # this way it will be install for given python that you are using
+
 Set up your local config; in the rnahub folder, create a new file, `config_local.py`, to set up paths to your HMMER, R-Scape, and INFERNAL.
 
     nhmmer = "/home/rnahub/opt/hmmer/hmmer-3.3.2/bin/nhmmer"

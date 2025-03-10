@@ -16,10 +16,7 @@ Re-run it in given folder:
 """
 from __future__ import print_function
 import argparse
-from icecream import ic
 import sys
-ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
-ic.configureOutput(prefix='> ')
 import shutil
 import subprocess
 import sys
@@ -29,6 +26,14 @@ import logging
 
 # SLURM directives are not directly used in Python scripts.
 # Instead, configure your job submission script or environment accordingly.
+
+try:
+    from icecream import ic
+    ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
+    ic.configureOutput(prefix='> ')
+except ImportError:
+    ic = print
+    
 
 def now():
     import datetime
@@ -77,6 +82,7 @@ def get_parser():
                         action="store_true", help="be verbose")
     parser.add_argument("-v", "--version", action="store_true", help="Print the version based on the latest Git tag")
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
+    parser.add_argument("--reporting-evalue", default="10", help="e-value threshold for hits to be reported")
     parser.add_argument("--evalue", default="1e-10", help="e-value threshold for all the runs but the final one")
     parser.add_argument("--lmin", default=50, help="esl-alimanip for v0 processing, default 50")
     parser.add_argument("--evalue-final", default="1e-5", help="e-value threshold for the final run")
@@ -281,7 +287,7 @@ def search(seq_path, seq_flanked_path = ''):
             if i == args.iteractions:
                 evalue =  args.evalue_final
             #  {j}/{fbase}.fa
-            command = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+            command = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
 
             
