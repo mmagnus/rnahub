@@ -261,10 +261,15 @@ def search(seq_path, seq_flanked_path = ''):
 
         # {j}/{fbase}.fa is causing missing organism problem
         if args.flanks_in_header or args.flanks_start:
-            cmd = f"cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
+            cmd = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
+            if '.gz' in db:
+                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
         else:
             # overwrite with seq_flanked_masked_path if needed
-            cmd = f"cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {j}/v0.out"            
+            cmd = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {job_path}/v0.out"
+            if '.gz' in db:
+                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {job_path}/v0.out"
+
         #v0.sto is flanked.sto # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:
             exe(cmd, dry)
@@ -287,7 +292,9 @@ def search(seq_path, seq_flanked_path = ''):
             if i == args.iteractions:
                 evalue =  args.evalue_final
             #  {j}/{fbase}.fa
-            command = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+            command = f"    time  cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+            if '.gz' in db:
+                command = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
 
             
