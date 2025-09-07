@@ -395,7 +395,10 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
                         if this_genome not in encountered_genomes: # save only the first instance
                             encountered_genomes.append(this_genome)
                             accessions_to_keep.append(this_accession)
-                    print(this_genome, this_accession)
+                    
+                    # Only print if we processed at least one sequence
+                    if num_seqs > 0:
+                        print(this_genome, this_accession)
             
     # Write the accessions to keep to a file
     with open(os.path.join(directory, output_file), "w") as f:
