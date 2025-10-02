@@ -23,7 +23,7 @@ import sys
 import os
 from config import RSCAPE_PATH, nhmmer, EASEL_PATH, RFAM_DB_PATH, REPEAT_MASKER_PATH, INFERNAL_PATH
 import logging
-
+import re
 # SLURM directives are not directly used in Python scripts.
 # Instead, configure your job submission script or environment accordingly.
 
@@ -34,7 +34,6 @@ try:
 except ImportError:
     ic = print
     
-
 def now():
     import datetime
     print(datetime.datetime.now())
@@ -376,6 +375,28 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
     encountered_genomes = [] # for keeping track of first instance of a genome
     accessions_to_keep = [] # and corresponding accession
 
+    def get_highest_version_sto(directory):
+        sto_files = []
+
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file.endswith(".sto"):
+                    match = re.match(r"v(\d+)\.sto$", file)
+                    if match:
+                        version = int(match.group(1))
+                        full_path = os.path.join(root, file)
+                        if os.path.getsize(full_path) > 0:  # Check if file is not empty
+                            sto_files.append((version, full_path))
+
+        if not sto_files:
+            return None  # No usable .sto files found
+
+        # Get the file with the highest version number
+        highest_version_file = max(sto_files, key=lambda x: x[0])[1]
+        return highest_version_file
+
+    global nofiterations
+    nofiterations = get_highest_version_sto(directory).split('v')[-1].split('.sto')[0]
     # Go through every file in the directory containing .sto files made by nhmmer
     for root, dirs, files in os.walk(directory):
         for file in files:
@@ -407,6 +428,7 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
     print(cmd)
     exe(cmd)
 
+    
 def rscape():
     # Set up for R-scape analysis
     #exe('rm -f rscape_results.txt')
@@ -751,7 +773,7 @@ if __name__ == '__main__':
         # Remove duplicate copies of genomes
         find_top_scoring_hits(job_path) # get v3_rm
         # statistics for v3
-        cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', job_path, '/v3_rm.sto > ', job_path, '/v3_rm_stats.txt'])
+        cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', job_path, f'/v{nofiterations}_rm.sto > ', job_path, '/v_last_stats.txt'])
         print(cmd)
         exe(cmd, dry) 
         if not args.dev_skip_rscape:
