@@ -29,8 +29,6 @@ import logging
 
 try:
     from icecream import ic
-    ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
-    ic.configureOutput(prefix='> ')
 except ImportError:
     ic = print
     
@@ -337,6 +335,7 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
         genome = [] # name of species in which the hit was found
         accession = [] # full accession number, includes coordinates
         print(alignment)
+        only_query = False
         with open(alignment, "r") as fh: # open the file (alignment) for reading
             for line in fh: # go through every line in the alignment
                 if line.startswith("#=GS"): # only consider lines of the alignment portion
@@ -355,7 +354,11 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
                         genome.append(this[5])
                         accession.append(this[1])
                     else:
-                        species = this[6]
+                        try:
+                            species = this[6]
+                        except IndexError:
+                            species = 'query'
+                            only_query = True
                         for character in genus:
                             if character.isalpha() == False:
                                 genus = genus.replace(character, '')
@@ -364,13 +367,14 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
                                 species = species.replace(character, '')
 
                         this_genome = genus + species
+                        print(this_genome)
                         this_accession = this[1]
 
                         # add to list2
                         genome.append(this_genome)
                         accession.append(this_accession)
 
-        return genome, accession
+        return genome, accession, only_query
 
     # Initialize lists to keep track of genomes and accessions
     encountered_genomes = [] # for keeping track of first instance of a genome
@@ -385,7 +389,7 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
             elif file.endswith(".sto"): # go through the .sto files
                 #v0.sto", "v1.sto", "v2.sto", 
                 if file in [f"v{nofiterations}.sto"]: # only consider the last iteration
-                    genomes, accessions = parse_last_iteration(os.path.join(root, file)) # parse
+                    genomes, accessions, only_query = parse_last_iteration(os.path.join(root, file)) # parse
                     num_seqs = len(genomes)
 
                     for j in range(num_seqs): # go through all the genomes in the alignment
@@ -406,8 +410,9 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
     cmd = f'{EASEL_PATH}/esl-alimanip --seq-k {directory}/accessions_to_keep.txt {directory}/v{nofiterations}.sto > {directory}/v{nofiterations}_rm.sto'
     print(cmd)
     exe(cmd)
+    return only_query
 
-def rscape():
+def rscape(only_query=False):
     # Set up for R-scape analysis
     #exe('rm -f rscape_results.txt')
     #exe('rm -rf rscape_output')
@@ -415,7 +420,11 @@ def rscape():
         os.makedirs(f'{job_path}/rscape_output')
     except FileExistsError:
        pass
-    exe(f"{RSCAPE_PATH} --outdir {job_path}/rscape_output --cacofold --outtree {job_path}/v{nofiterations}_rm.sto | tee {job_path}/rscape_results.txt", dry)
+
+    outtree = ' --outtree '
+    if only_query:
+        outtree = ''
+    exe(f"{RSCAPE_PATH} --outdir {job_path}/rscape_output --cacofold {outtree} {job_path}/v{nofiterations}_rm.sto | tee {job_path}/rscape_results.txt", dry)
 
 def rscape_infernal():
     # Set up for R-scape analysis
@@ -761,13 +770,13 @@ if __name__ == '__main__':
         nofiterations = _determine_last_iteration(job_path, nofiterations)
 
         # Remove duplicate copies of genomes
-        find_top_scoring_hits(job_path) # get v{nofiterations}_rm
+        only_query = find_top_scoring_hits(job_path) # get v{nofiterations}_rm
         # statistics for last iteration
         cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', job_path, f'/v{nofiterations}_rm.sto > ', job_path, f'/v{nofiterations}_rm_stats.txt'])
         print(cmd)
         exe(cmd, dry) 
         if not args.dev_skip_rscape:
-            rscape()
+            rscape(only_query)
         is_hit = is_hit()
         if is_hit:
             if not args.dev_skip_infernal:
