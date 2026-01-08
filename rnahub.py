@@ -783,6 +783,10 @@ if __name__ == '__main__':
                 f"{args.repeatmasker_n_threshold:.0%} threshold; stopping downstream processing.")
             logger.warning(warning_msg)
             print(warning_msg, flush=True)
+            logging.info('Normal termination of rnahub')
+            logger.info('Normal termination of rnahub')
+            print('Normal termination of rnahub', flush=True)
+            now()
             continue
 
         ic(seq_flanked_path)
