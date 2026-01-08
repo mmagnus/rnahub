@@ -88,6 +88,8 @@ def get_parser():
     parser.add_argument("--cpus", default=2, help="number of cpus for nhmmer", type=int)
     parser.add_argument("--dry", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--repeatmasker", help="", action="store_true")
+    parser.add_argument("--repeatmasker-n-threshold", type=float, default=0.8,
+                        help="Abort after RepeatMasker if the masked FASTA contains more than this fraction of Ns (default: 0.8)")
     parser.add_argument("--utot", action="store_true", help="tell nhmmer that this is DNA sequence, and use U->T for repeatmasker")
     parser.add_argument("--job-folder", help="create a job folder based on the path to the input fasta sequence, by default 'jobs/'so with example/seq.fa, the job folder is going to be jobs/seq/seq.fa [and other files here]", default='')
     parser.add_argument("--dev-skip-search", help="skip v0..v3 all nhmmer searches", action="store_true")
@@ -712,6 +714,7 @@ if __name__ == '__main__':
             ic(seq_path, output_file, ext)
             seq_path = output_file
 
+        high_n_warning = None
         if args.repeatmasker:
             # cmd REPEAT_MASKER_PATH
             # convert u to t
@@ -734,12 +737,31 @@ if __name__ == '__main__':
                     print(f"Error reading file: {e}")
                     return False
 
+            def detect_high_n_content(file_path, threshold):
+                """Return the first sequence whose N content exceeds threshold."""
+                try:
+                    for record in SeqIO.parse(file_path, "fasta"):
+                        sequence = str(record.seq).upper()
+                        total_length = len(sequence)
+                        if total_length == 0:
+                            continue
+                        fraction_n = sequence.count('N') / total_length
+                        if fraction_n >= threshold:
+                            return True, (record.id or 'unknown'), fraction_n
+                    return False, None, 0.0
+                except Exception as e:
+                    print(f"Error calculating N content: {e}")
+                    return False, None, 0.0
+
             if not os.path.exists(seq_masked_path) or check_fasta_empty(seq_masked_path):
                print('RepeatMasker: No repetitive sequences were detected in seq')
             else:
                print('RepeatMasker: Repetitive sequences were detected in seq')
                seq_path = seq_masked_path  
                print(open(seq_masked_path).read())
+               is_high_n, record_id, fraction_n = detect_high_n_content(seq_masked_path, args.repeatmasker_n_threshold)
+               if is_high_n:
+                   high_n_warning = (record_id, fraction_n)
 
             if args.flanked:
                 # cmd REPEAT_MASKER_PATH
@@ -753,6 +775,15 @@ if __name__ == '__main__':
                    print('y RepeatMasker: Repetitive sequences were detected in seq flanked')
                    seq_flanked_path = seq_flanked_masked_path
                    print(open(seq_flanked_masked_path).read())
+
+        if high_n_warning:
+            record_id, fraction_n = high_n_warning
+            warning_msg = (
+                f"RepeatMasker: Sequence '{record_id}' contains {fraction_n:.2%} Ns, exceeding the "
+                f"{args.repeatmasker_n_threshold:.0%} threshold; stopping downstream processing.")
+            logger.warning(warning_msg)
+            print(warning_msg, flush=True)
+            continue
 
         ic(seq_flanked_path)
         if not args.dev_skip_search:
