@@ -530,11 +530,11 @@ def infernal():
         print('db is missing!')
     # cmd = f'{INFERNAL_PATH}/cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {db}' against the tb
     # fasta
-    cmd = f'{EASEL_PATH}/esl-reformat fasta {job_path}/v3_rm.sto > {job_path}/v3_rm.fa'
+    cmd = f'{EASEL_PATH}/esl-reformat fasta {job_path}/v{nofiterations}_rm.sto > {job_path}/v{nofiterations}_rm.fa'
     print(cmd)
     exe(cmd, dry)
-    #cmd = f'{INFERNAL_PATH}/cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {job_path}/v3_rm.fa'
-    cmd = f'{INFERNAL_PATH}/cmalign {cm} {job_path}/v3_rm.fa > {job_path}/infernal.sto'
+    #cmd = f'{INFERNAL_PATH}/cmsearch -A {job_path}/infernal.sto -o {job_path}/cmsearch.out {cm} {job_path}/v{nofiterations}_rm.fa'
+    cmd = f'{INFERNAL_PATH}/cmalign {cm} {job_path}/v{nofiterations}_rm.fa > {job_path}/infernal.sto'
     print(cmd)
     exe(cmd, dry)
     rscape_infernal()
@@ -748,10 +748,22 @@ if __name__ == '__main__':
         ic(seq_flanked_path)
         if not args.dev_skip_search:
             search(seq_path, seq_flanked_path)
+        # determine the highest existing iteration to allow fallback if some are missing
+        def _determine_last_iteration(folder_path, max_iter):
+            try:
+                for i in range(int(max_iter), -1, -1):
+                    if os.path.exists(os.path.join(folder_path, f"v{i}.sto")):
+                        return i
+            except Exception:
+                pass
+            return max_iter
+
+        nofiterations = _determine_last_iteration(job_path, nofiterations)
+
         # Remove duplicate copies of genomes
-        find_top_scoring_hits(job_path) # get v3_rm
-        # statistics for v3
-        cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', job_path, '/v3_rm.sto > ', job_path, '/v3_rm_stats.txt'])
+        find_top_scoring_hits(job_path) # get v{nofiterations}_rm
+        # statistics for last iteration
+        cmd = ''.join([f'{EASEL_PATH}/esl-alistat ', job_path, f'/v{nofiterations}_rm.sto > ', job_path, f'/v{nofiterations}_rm_stats.txt'])
         print(cmd)
         exe(cmd, dry) 
         if not args.dev_skip_rscape:
