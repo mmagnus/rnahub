@@ -587,7 +587,9 @@ if __name__ == '__main__':
         sys.exit(0)
         
     os.system('figlet -f smblock rnahub')
+    now()
     print(f"version: {get_git_version()}")
+    print('command line:', ' '.join(sys.argv))
 
     RSCAPE_PATH = args.rscape_path if args.rscape_path else RSCAPE_PATH
 
@@ -618,8 +620,6 @@ if __name__ == '__main__':
                     shutil.copy(args.flanked, job_path + '/' + fbase + '_flanked.fa')
         else:
             job_path = os.path.dirname(f)  # the folder where the fasta file is
-
-        now()
 
         seq_path = job_path + '/' + seq_fn
         seq_flanked_path = job_path + '/' +  seq_fn.replace('.fa', '') + '_flanked.fa'
