@@ -807,7 +807,7 @@ if __name__ == '__main__':
         # Remove duplicate copies of genomes
         only_query = find_top_scoring_hits(job_path) # get v{nofiterations}_rm
         # statistics for last iteration
-        cmd = ' '.join([f'{EASEL_PATH}/esl-alistat ', job_path, f'/v{nofiterations}_rm.sto > ', job_path, f'/v_last_stats.txt'])
+        cmd = ' '.join([f'{EASEL_PATH}/esl-alistat {job_path}/v{nofiterations}_rm.sto > {job_path}/v_last_stats.txt'])
         exe(cmd, dry) 
         if not args.dev_skip_rscape:
             rscape(only_query)
