@@ -4,6 +4,8 @@ rnahub orchestrates iterative nhmmer/Infernal/R-Scape searches for discovering n
 
 The CLI wires common structural-RNA tools, organizes job folders, and captures diagnostics so you can re-run specific pipeline stages with minimal bookkeeping.
 
+For the webserver, go to http://rnahub.org
+
 (databases for now are not included)
 
 ## Highlights
