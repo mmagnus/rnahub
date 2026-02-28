@@ -63,7 +63,7 @@ python -m pip install --user icecream
 ```bash
 python rnahub.py \
   --input example/seq.fa \
-  --db db/fungi.cm \
+  --db db/fungi.fasta \
   --job-name seq_run \
   --job-folder jobs/seq_run \
   --cpus 8
