@@ -82,6 +82,8 @@ def get_parser():
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
     parser.add_argument("--reporting-evalue", default="10", help="e-value threshold for hits to be reported")
     parser.add_argument("--evalue", default="1e-10", help="e-value threshold for all the runs but the final one")
+    parser.add_argument("--evalue-for-flanking-search", default=None,
+                        help="e-value threshold for the flanking (v0) search; defaults to --evalue")
     parser.add_argument("--lmin", default=50, help="esl-alimanip for v0 processing, default 50")
     parser.add_argument("--evalue-final", default="1e-5", help="e-value threshold for the final run")
     parser.add_argument("--iteractions", default=3, help="number of iterations", type=int)
@@ -260,15 +262,16 @@ def search(seq_path, seq_flanked_path = ''):
         # nhmmer -E 1e-10 --cpu 64 -A tutorial/gly1_igr/flanked.sto --tblout tutorial/gly1_igr/flanked.hmmout tutorial/gly1_igr.fa ../../../db/1409_Acomycota_genomes-may19.fa#
 
         # {j}/{fbase}.fa is causing missing organism problem
+        flanking_evalue = args.evalue_for_flanking_search if args.evalue_for_flanking_search else args.evalue
         if args.flanks_in_header or args.flanks_start:
-            cmd = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
+            cmd = f"time cat {job_path}/{fbase}.fa {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
             if '.gz' in db:
-                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
+                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
         else:
             # overwrite with seq_flanked_masked_path if needed
-            cmd = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {job_path}/v0.out"
+            cmd = f"time cat {seq_flanked_path} {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {job_path}/v0.out"
             if '.gz' in db:
-                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {args.evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {job_path}/v0.out"
+                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {job_path}/v0.out"
 
         #v0.sto is flanked.sto # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:

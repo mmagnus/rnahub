@@ -89,7 +89,8 @@ Add flanks via either:
 ```
 $ python rnahub.py -h
 usage: rnahub.py [-h] [--db DB [DB ...]] [--job-name JOB_NAME] [--verbose] [-v] [--slurm]
-                 [--evalue EVALUE] [--lmin LMIN] [--evalue-final EVALUE_FINAL]
+                 [--evalue EVALUE] [--evalue-for-flanking-search EVALUE_FOR_FLANKING_SEARCH]
+                 [--lmin LMIN] [--evalue-final EVALUE_FINAL]
                  [--iteractions ITERACTIONS] [--cpus CPUS] [--dry] [--repeatmasker] [--utot]
                  [--job-folder JOB_FOLDER] [--dev-skip-search] [--dev-skip-nhmmer0]
                  [--dev-skip-nhmmer123] [--dev-skip-rscape] [--dev-skip-infernal]
@@ -105,6 +106,8 @@ optional arguments:
   -v, --version         print the version based on the latest Git tag
   --slurm               submit to SLURM instead of running locally
   --evalue EVALUE       e-value threshold for all runs except the final one
+  --evalue-for-flanking-search EVALUE_FOR_FLANKING_SEARCH
+                        e-value threshold for flanking (v0) search; defaults to --evalue
   --lmin LMIN           `esl-alimanip` minimum length (default 50)
   --evalue-final EVALUE_FINAL
                         e-value threshold for the last round
