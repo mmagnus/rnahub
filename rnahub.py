@@ -115,8 +115,25 @@ def clean():
         for pattern in ['v0*', 'v1*', 'v2*', 'v3*', 'rm_v3.sto']:#, './*.txt', './*/']:
             exe(f'rm -f {pattern}', dry)
 
+def count_stockholm_sequences(file_path):
+    """Return number of sequence entries in a Stockholm alignment."""
+    sequence_ids = set()
+    try:
+        with open(file_path, 'r') as sto_file:
+            for line in sto_file:
+                stripped = line.strip()
+                if not stripped or stripped.startswith('#') or stripped.startswith('//'):
+                    continue
+                seq_id = stripped.split()[0]
+                sequence_ids.add(seq_id)
+    except OSError as exc:
+        logging.warning(f'Unable to read {file_path}: {exc}')
+        return 0
+    return len(sequence_ids)
+
 def search(seq_path, seq_flanked_path = ''):
     """Return the last sto file generated"""
+    global nofiterations
     query = seq_path
     print(f'query: {seq_path}')
     
@@ -295,11 +312,25 @@ def search(seq_path, seq_flanked_path = ''):
             if i == args.iteractions:
                 evalue =  args.evalue_final
             #  {j}/{fbase}.fa
-            command = f"    time  cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
-            if '.gz' in db:
-                command = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+            if i == 1: # add seq only if first iteration
+                command = f" time cat {db} {input_file} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+            else:
+                command = f" time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+
+            # if '.gz' in db:
+            #     command = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
 
+            if i == 1 and not dry:
+                seqs_in_v1 = count_stockholm_sequences(os.path.join(job_path, sto_file))
+                ic(seqs_in_v1)
+                if seqs_in_v1 <= 1:
+                    msg = 'v1 contains only the query sequence; stopping nhmmer iterations.'
+                    print(msg)
+                    logging.info(msg)
+                    nofiterations = 1
+                    break
+                
             
 def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
     """
@@ -372,7 +403,6 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
                                 species = species.replace(character, '')
 
                         this_genome = genus + species
-                        print(this_genome)
                         this_accession = this[1]
 
                         # add to list2
@@ -795,6 +825,12 @@ if __name__ == '__main__':
         ic(seq_flanked_path)
         if not args.dev_skip_search:
             search(seq_path, seq_flanked_path)
+        v1_sto_path = os.path.join(job_path, 'v1.sto')
+        if not os.path.exists(v1_sto_path):
+            msg = f"Required file {v1_sto_path} not found; stopping."
+            logger.error(msg)
+            print(msg, flush=True)
+            sys.exit(1)
         # determine the highest existing iteration to allow fallback if some are missing
         def _determine_last_iteration(folder_path, max_iter):
             try:
