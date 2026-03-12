@@ -12,7 +12,7 @@ For the webserver, go to http://rnahub.org
  
 Magnus, M., Gao, W., Dutta, N., Vicens, Q., Rivas, E.  
 RNAhub - An automated pipeline to search and align RNA homologs with secondary structure assessment  
-[Nucleic Acids Res 2025](https://academic.oup.com/nar/article/49/11/6128/6292099)  
+[Nucleic Acids Res 2025](https://academic.oup.com/nar/article/53/W1/W496/8121641)
 
 ## Highlights
 - Launch nhmmer searches (v0–v3) with automatic job-folder management.
