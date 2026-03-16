@@ -80,7 +80,6 @@ def get_parser():
                         action="store_true", help="be verbose")
     parser.add_argument("-v", "--version", action="store_true", help="Print the version based on the latest Git tag")
     parser.add_argument("--slurm",  action="store_true", help="send it to slumrm")
-    parser.add_argument("--reporting-evalue", default="10", help="e-value threshold for hits to be reported")
     parser.add_argument("--evalue", default="1e-10", help="e-value threshold for all the runs but the final one")
     parser.add_argument("--evalue-for-flanking-search", default=None,
                         help="e-value threshold for the flanking (v0) search; defaults to --evalue")
@@ -313,12 +312,12 @@ def search(seq_path, seq_flanked_path = ''):
                 evalue =  args.evalue_final
             #  {j}/{fbase}.fa
             if i == 1: # add seq only if first iteration
-                command = f" time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+                command = f" time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             else:
-                command = f" time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+                command = f" time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
 
             # if '.gz' in db:
-            #     command = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} -E {args.reporting_evalue} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+            #     command = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
 
             if i == 1 and not dry:
