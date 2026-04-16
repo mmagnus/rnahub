@@ -37,9 +37,10 @@ def now():
     import datetime
     print(datetime.datetime.now())
 
-def exe(command, dry=False, logging=False):
+def exe(command, dry=False, logging=False, verbose=True):
     """Execute a shell command."""
-    print(f'cmd: {command}', flush=True)
+    if verbose:
+        print(f'cmd: {command}', flush=True)
     if logging:
         now()
         logger.info(command)
@@ -102,12 +103,24 @@ def get_parser():
     parser.add_argument("--rscape-path", help="overwrite rscape-path from config")
     parser.add_argument("--rscape", help="rscape only",
                         action="store_true")
-    parser.add_argument("--input", help=".fasta/.fa file with query seq or alignment .sto", default="", nargs='+')
+    parser.add_argument("--input", "--fasta", help=".fasta/.fa file with query seq or alignment .sto", default="", nargs='+')
     parser.add_argument("--flanked", help=".fa for now, don't use .fasta, flank the sequence including the query sequence")
     parser.add_argument("--flanks-in-header", action="store_true", help="run flanked mode (create extra v0 files), syntax in the fasta header '><seq_name> <start>-<end>, use this or --flanked fasta file")
     parser.add_argument("--flanks-start", help="start of flank")
     parser.add_argument("--flanks-end", help="end of flank")
-    
+
+    # minidb database preparation
+    parser.add_argument("--minidb-evalue", default="10",
+                        help="e-value threshold for minidb nhmmer search (default: 10)")
+    parser.add_argument("--minidb", action="store_true",
+                        help="build a mini custom DB from .naf genomes in --db before running the pipeline")
+    parser.add_argument("--minidb-jobs", default=1, type=int,
+                        help="number of genomes to process in parallel during --minidb (default: 1)")
+    parser.add_argument("--minidb-verbose", action="store_true",
+                        help="print nhmmer/esl-reformat commands during --minidb (hidden by default)")
+    parser.add_argument("--dev-skip-minidb", action="store_true",
+                        help="skip building the minidb and use --db as-is for debugging downstream steps")
+
     return parser
 
 def clean():
@@ -638,6 +651,123 @@ python {' '.join(sys.argv[:]).replace('--slurm', '')}
         os.chmod(f'{job_path}/run.slurm', 0o755) #mode=stat.S_IXUSR)
         os.system(f'sbatch {job_path}/run.slurm')
         
+def run_minidb(args):
+    """Build a mini search database from .naf genomes.
+
+    For each .naf genome in --db, runs nhmmer against the query,
+    reformats the resulting Stockholm alignment to FASTA, strips '[subseq from]'
+    from headers, writes a genome-hit table, and concatenates everything into
+    <OUTPUT_DIR>/<DB_NAME>.fasta which is then used as the rnahub search database.
+    """
+    import glob as _glob
+    import re as _re
+
+    input_dir   = args.db[0] if args.db else ''
+    output_dir  = args.job_folder or (os.path.dirname(args.input[0]) if args.input else '.')
+    eval_thresh = args.minidb_evalue
+    query       = args.input[0] if args.input else ''
+    query_name  = os.path.splitext(os.path.basename(query))[0]
+    db_name     = os.path.basename(input_dir.rstrip('/'))
+
+    # Locate genome files (mirrors prepare_db.py search logic)
+    genome_files = _glob.glob(os.path.join(input_dir, 'GC*', '*.naf'))
+    if not genome_files:
+        genome_files = _glob.glob(os.path.join(input_dir, '*.naf'))
+    if not genome_files:
+        raise FileNotFoundError(f"No input genomes (.naf) found in: {input_dir}")
+
+    genome_map = {
+        os.path.splitext(os.path.splitext(os.path.basename(p))[0])[0]: p
+        for p in genome_files
+    }
+
+    output_alignments     = os.path.join(output_dir, 'output_alignments')
+    output_aln_reformatted = os.path.join(output_dir, 'output_alignments_reformatted')
+    for d in (output_dir, output_alignments, output_aln_reformatted):
+        os.makedirs(d, exist_ok=True)
+
+    verbose = args.minidb_verbose
+
+    def _process_genome(genome_name, genome_path):
+        stem         = f"{genome_name}---{query_name}"
+        sto_path     = os.path.join(output_alignments,      f"{stem}.sto")
+        hmmout_path  = os.path.join(output_alignments,      f"{stem}.hmmout")
+        tblout_path  = os.path.join(output_alignments,      f"{stem}.tblout")
+        fasta_path   = os.path.join(output_aln_reformatted, f"{stem}.fasta")
+        cleaned_path = os.path.join(output_aln_reformatted, f"{stem}_cleaned.fasta")
+
+        if os.path.exists(tblout_path):
+            if verbose:
+                print(f'skipping {genome_name}: {tblout_path} already exists')
+        else:
+            exe(f"unnaf --fasta {genome_path} | {nhmmer}"
+                f" --cpu {args.cpus} --dna --incE {eval_thresh}"
+                f" -A {sto_path} --tblout {tblout_path} -o {hmmout_path}"
+                f" {query} -", dry, verbose=verbose)
+
+        exe(f"if [ -s {sto_path} ];"
+            f" then {EASEL_PATH}/esl-reformat fasta {sto_path} > {fasta_path};"
+            f" else touch {fasta_path}; fi", dry, verbose=verbose)
+
+        exe(f"if [ -s {fasta_path} ];"
+            f" then awk '{{if ($0 ~ /^>/) gsub(/\\[subseq from\\]/, \"\"); print}}'"
+            f" {fasta_path} > {cleaned_path};"
+            f" else touch {cleaned_path}; fi", dry, verbose=verbose)
+
+        return cleaned_path
+
+    try:
+        from tqdm import tqdm
+    except ImportError:
+        tqdm = None
+
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    cleaned_fastas = []
+    with ThreadPoolExecutor(max_workers=args.minidb_jobs) as pool:
+        futures = {pool.submit(_process_genome, name, path): name
+                   for name, path in genome_map.items()}
+        items = as_completed(futures)
+        if tqdm:
+            items = tqdm(items, total=len(futures), desc='minidb', unit='genome')
+        for f in items:
+            cleaned_fastas.append(f.result())
+
+    # Step 4: parse tblout files → genome hit table
+    genome_list_path = os.path.join(output_dir, f"genome_{db_name}_{eval_thresh}_list.txt")
+    with open(genome_list_path, 'w') as outfile:
+        outfile.write("Genome\tTarget_Name\te_value\tali_from\tali_to\tGenome_Path\n")
+        for genome_name, genome_path in genome_map.items():
+            tblout_path = os.path.join(output_alignments, f"{genome_name}---{query_name}.tblout")
+            if not os.path.exists(tblout_path):
+                continue
+            with open(tblout_path) as infile:
+                lines = infile.readlines()
+            target_file = None
+            for line in lines:
+                if line.startswith("# Target file:"):
+                    target_file = line.strip().split(":", 1)[1].strip()
+                    break
+            for line in lines:
+                if line.startswith("#") or not line.strip():
+                    continue
+                fields = _re.split(r"\s+", line.strip())
+                if len(fields) < 13:
+                    continue
+                try:
+                    outfile.write(
+                        f"{genome_name}\t{fields[0]}\t{float(fields[12])}\t"
+                        f"{fields[7]}\t{fields[8]}\t{target_file}\n"
+                    )
+                except ValueError:
+                    continue
+
+    # Step 5: concatenate cleaned FASTAs into the final database
+    db_fasta_path = os.path.join(output_dir, f"{db_name}.fasta")
+    exe(f"cat {' '.join(cleaned_fastas)} > {db_fasta_path}", dry)
+
+    return db_fasta_path
+
+
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
@@ -655,9 +785,18 @@ if __name__ == '__main__':
     os.system('figlet -f smblock rnahub')
     now()
     print(f"version: {get_git_version()}")
-    print('command line:', ' '.join(sys.argv))
+    print('cmd:', ' '.join(sys.argv))
 
     RSCAPE_PATH = args.rscape_path if args.rscape_path else RSCAPE_PATH
+
+    if args.minidb:
+        _input_dir  = args.db[0] if args.db else ''
+        _output_dir = args.job_folder or (os.path.dirname(args.input[0]) if args.input else '.')
+        _db_name    = os.path.basename(_input_dir.rstrip('/'))
+        sm_db_fasta = os.path.join(_output_dir, f"{_db_name}.fasta")
+        if not args.dev_skip_minidb:
+            sm_db_fasta = run_minidb(args)
+        args.db = [sm_db_fasta]
 
     if list != type(args.input):
         args.input = [args.input]
