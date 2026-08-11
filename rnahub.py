@@ -900,7 +900,7 @@ if __name__ == '__main__':
             if args.job_name:
                 job_path =  args.job_folder + '/' + args.job_name
             else:
-                job_path =  args.job_folder + '/'  + fbase
+                job_path =  args.job_folder
             ic(args.job_folder, args.job_name, job_path)
             try:
                 os.makedirs(f'{job_path}', exist_ok=True) 
