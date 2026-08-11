@@ -114,10 +114,14 @@ def get_parser():
                         help="e-value threshold for minidb nhmmer search (default: 10)")
     parser.add_argument("--minidb", action="store_true",
                         help="build a mini custom DB from .naf genomes in --db before running the pipeline")
-    parser.add_argument("--minidb-jobs", default=1, type=int,
-                        help="number of genomes to process in parallel during --minidb (default: 1)")
+    parser.add_argument("--minidb-jobs", default=7, type=int,
+                        help="number of genomes to process in parallel during --minidb (default: 7)")
     parser.add_argument("--minidb-verbose", action="store_true",
                         help="print nhmmer/esl-reformat commands during --minidb (hidden by default)")
+    parser.add_argument("--minidb-evalue-filter", default=None,
+                        help="e-value threshold for filtering hits into the final minidb fasta (default: same as --minidb-evalue)")
+    parser.add_argument("--minidb-force", action="store_true",
+                        help="force re-processing all genomes in --minidb, ignoring existing output files")
     parser.add_argument("--dev-skip-minidb", action="store_true",
                         help="skip building the minidb and use --db as-is for debugging downstream steps")
 
