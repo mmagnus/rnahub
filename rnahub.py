@@ -305,19 +305,29 @@ def search(seq_path, seq_flanked_path = ''):
 
         # {j}/{fbase}.fa is causing missing organism problem
         flanking_evalue = args.evalue_for_flanking_search if args.evalue_for_flanking_search else args.evalue
+        v0_out_path = f'{job_path}/v0.out'
         if args.flanks_in_header or args.flanks_start:
-            cmd = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
+            cmd = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto -o {v0_out_path} {job_path}/{fbase}.fa - "
             if '.gz' in db:
-                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto {job_path}/{fbase}.fa - "#| tee {j}/v0.out"
+                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto -o {v0_out_path} {job_path}/{fbase}.fa - "
         else:
             # overwrite with seq_flanked_masked_path if needed
-            cmd = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {job_path}/v0.out"
+            cmd = f"time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto -o {v0_out_path} {seq_flanked_path} - "
             if '.gz' in db:
-                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto {seq_flanked_path} - "#| tee {job_path}/v0.out"
+                cmd = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {flanking_evalue} -A {job_path}/v0.sto -o {v0_out_path} {seq_flanked_path} - "
 
         #v0.sto is flanked.sto # fa vs fasta #TODO
         if not args.dev_skip_nhmmer0:
             exe(cmd, dry)
+            if not dry and os.path.exists(v0_out_path):
+                with open(v0_out_path) as fh:
+                    lines = fh.readlines()
+                for line in lines[:20]:
+                    print(line, end='')
+                if len(lines) > 20:
+                    print('...')
+                    for line in lines[-20:]:
+                        print(line, end='')
         # subscripts/bp_col.sh tutorial/YAR014C_plus_IGR/flanked.sto S288C
         #cmd = f'{SCRIPTS_DIR}/bp_col.py {j}/flanked.sto S288C' #
         #dry = False
@@ -337,14 +347,24 @@ def search(seq_path, seq_flanked_path = ''):
             if i == args.iteractions:
                 evalue =  args.evalue_final
             #  {j}/{fbase}.fa
+            out_path = f'{job_path}/{output_file}'
             if i == 1: # add seq only if first iteration
-                command = f" time cat {input_file} {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+                command = f" time cat {input_file} {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} -o {out_path} {input_file} - "
             else:
-                command = f" time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
+                command = f" time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} -o {out_path} {input_file} - "
 
             # if '.gz' in db:
             #     command = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
             exe(command, dry)
+            if not dry and os.path.exists(out_path):
+                with open(out_path) as fh:
+                    lines = fh.readlines()
+                for line in lines[:10]:
+                    print(line, end='')
+                if len(lines) > 10:
+                    print('...')
+                    for line in lines[-10:]:
+                        print(line, end='')
 
             if i == 1 and not dry and not os.path.exists(os.path.join(job_path, sto_file)):
                 msg = 'No hits satisfy inclusion thresholds in v1; stopping after interaction #1 search.'
