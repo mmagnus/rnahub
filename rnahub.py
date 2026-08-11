@@ -765,6 +765,13 @@ def run_minidb(args):
     db_fasta_path = os.path.join(output_dir, f"{db_name}.fasta")
     exe(f"cat {' '.join(cleaned_fastas)} > {db_fasta_path}", dry)
 
+    # Step 6: drop per-genome intermediates now that the concatenated
+    # database and hit-list table exist; downstream stages (v1-v3
+    # alignments, R-scape, ...) never read output_alignments/output_alignments_reformatted.
+    if not dry:
+        shutil.rmtree(output_alignments, ignore_errors=True)
+        shutil.rmtree(output_aln_reformatted, ignore_errors=True)
+
     return db_fasta_path
 
 
