@@ -726,7 +726,11 @@ def run_minidb(args):
         fasta_path   = os.path.join(output_aln_reformatted, f"{stem}.fasta")
         cleaned_path = os.path.join(output_aln_reformatted, f"{stem}_cleaned.fasta")
 
-        if os.path.exists(tblout_path):
+        if not os.path.getsize(genome_path):
+            if verbose:
+                print(f'skipping {genome_name}: empty file')
+            return cleaned_path
+        if os.path.exists(tblout_path) and not args.minidb_force:
             if verbose:
                 print(f'skipping {genome_name}: {tblout_path} already exists')
         else:
