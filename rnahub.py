@@ -699,7 +699,12 @@ def run_minidb(args):
     if not genome_files:
         genome_files = _glob.glob(os.path.join(input_dir, '*.naf'))
     if not genome_files:
-        raise FileNotFoundError(f"No input genomes (.naf) found in: {input_dir}")
+        fasta_exts = ('*.fa', '*.fasta', '*.fna')
+        for ext in fasta_exts:
+            genome_files += _glob.glob(os.path.join(input_dir, 'GC*', ext))
+            genome_files += _glob.glob(os.path.join(input_dir, ext))
+    if not genome_files:
+        raise FileNotFoundError(f"No input genomes (.naf or .fa/.fasta/.fna) found in: {input_dir}")
 
     genome_map = {
         os.path.splitext(os.path.splitext(os.path.basename(p))[0])[0]: p
@@ -725,8 +730,12 @@ def run_minidb(args):
             if verbose:
                 print(f'skipping {genome_name}: {tblout_path} already exists')
         else:
-            exe(f"unnaf --fasta {genome_path} | {nhmmer}"
-                f" --cpu {args.cpus} --dna --incE {eval_thresh}"
+            if genome_path.endswith('.naf'):
+                decompress, tformat = "unnaf --fasta", "--tformat fasta"
+            else:
+                decompress, tformat = "cat", "--tformat fasta"
+            exe(f"{decompress} {genome_path} | {nhmmer}"
+                f" --cpu {args.cpus} --dna --incE {eval_thresh} {tformat}"
                 f" -A {sto_path} --tblout {tblout_path} -o {hmmout_path}"
                 f" {query} -", dry, verbose=verbose)
 
