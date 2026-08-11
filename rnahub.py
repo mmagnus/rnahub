@@ -690,6 +690,7 @@ def run_minidb(args):
     input_dir   = args.db[0] if args.db else ''
     output_dir  = args.job_folder or (os.path.dirname(args.input[0]) if args.input else '.')
     eval_thresh = args.minidb_evalue
+    filter_thresh = args.minidb_evalue_filter if args.minidb_evalue_filter else eval_thresh
     query       = args.input[0] if args.input else ''
     query_name  = os.path.splitext(os.path.basename(query))[0]
     db_name     = os.path.basename(input_dir.rstrip('/'))
@@ -799,11 +800,49 @@ def run_minidb(args):
                 except ValueError:
                     continue
 
-    # Step 5: concatenate cleaned FASTAs into the final database
-    db_fasta_path = os.path.join(output_dir, f"{db_name}.fasta")
-    exe(f"cat {' '.join(cleaned_fastas)} > {db_fasta_path}", dry)
+    # Step 5: collect base sequence IDs (without /start-end) that pass the e-value filter
+    passing_ids = set()
+    for genome_name in genome_map:
+        tblout_path = os.path.join(output_alignments, f"{genome_name}---{query_name}.tblout")
+        if not os.path.exists(tblout_path):
+            continue
+        with open(tblout_path) as fh:
+            for line in fh:
+                if line.startswith('#') or not line.strip():
+                    continue
+                fields = _re.split(r"\s+", line.strip())
+                if len(fields) < 13:
+                    continue
+                try:
+                    if float(fields[12]) <= float(filter_thresh):
+                        passing_ids.add(fields[0])  # bare seqname, no coords
+                except ValueError:
+                    continue
+    print(f"minidb: {len(passing_ids)} sequences pass e-value <= {filter_thresh}")
 
-    # Step 6: drop per-genome intermediates now that the concatenated
+    # Step 6: concatenate only passing sequences into the final database
+    # fasta headers from esl-reformat have seqname/start-end; match on base name
+    db_fasta_path = os.path.join(output_dir, f"{db_name}.fasta")
+    if not dry:
+        written = 0
+        with open(db_fasta_path, 'w') as out:
+            for fasta in cleaned_fastas:
+                if not os.path.exists(fasta):
+                    continue
+                with open(fasta) as fh:
+                    write = False
+                    for line in fh:
+                        if line.startswith('>'):
+                            seq_id = line[1:].split()[0]          # e.g. NC_001137.3/66799-67627
+                            base_id = seq_id.split('/')[0]        # e.g. NC_001137.3
+                            write = base_id in passing_ids
+                        if write:
+                            out.write(line)
+                            if line.startswith('>'):
+                                written += 1
+        print(f"minidb: wrote {written} sequences to {db_fasta_path}")
+
+    # Step 7: drop per-genome intermediates now that the concatenated
     # database and hit-list table exist; downstream stages (v1-v3
     # alignments, R-scape, ...) never read output_alignments/output_alignments_reformatted.
     if not dry:
@@ -841,6 +880,9 @@ if __name__ == '__main__':
         sm_db_fasta = os.path.join(_output_dir, f"{_db_name}.fasta")
         if not args.dev_skip_minidb:
             sm_db_fasta = run_minidb(args)
+        if not os.path.exists(sm_db_fasta) or os.path.getsize(sm_db_fasta) == 0:
+            print(f"Error: minidb produced an empty database ({sm_db_fasta}). No sequences passed the e-value filter. Exiting.")
+            sys.exit(1)
         args.db = [sm_db_fasta]
 
     if list != type(args.input):
