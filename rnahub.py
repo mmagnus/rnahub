@@ -347,8 +347,9 @@ def search(seq_path, seq_flanked_path = ''):
             if i == args.iteractions:
                 evalue =  args.evalue_final
             #  {j}/{fbase}.fa
+            flank_mode = args.flanked or args.flanks_in_header or args.flanks_start
             out_path = f'{job_path}/{output_file}'
-            if i == 1: # add seq only if first iteration
+            if i == 1 and not flank_mode: # add seq only if first iteration and not flank mode
                 command = f" time cat {input_file} {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} -o {out_path} {input_file} - "
             else:
                 command = f" time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} -o {out_path} {input_file} - "
