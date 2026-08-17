@@ -676,13 +676,18 @@ python {' '.join(sys.argv[:]).replace('--slurm', '')}
         os.chmod(f'{job_path}/run.slurm', 0o755) #mode=stat.S_IXUSR)
         os.system(f'sbatch {job_path}/run.slurm')
         
-def run_minidb(args):
+def run_minidb(args, query_path=None):
     """Build a mini search database from .naf genomes.
 
     For each .naf genome in --db, runs nhmmer against the query,
     reformats the resulting Stockholm alignment to FASTA, strips '[subseq from]'
     from headers, writes a genome-hit table, and concatenates everything into
     <OUTPUT_DIR>/<DB_NAME>.fasta which is then used as the rnahub search database.
+
+    query_path, when given, overrides args.input[0] as the query sequence -
+    pass the already utot-converted/RepeatMasker-masked path here so the
+    genomes that make it into the minidb are chosen using the same query
+    the downstream v0-v3 search will actually use.
     """
     import glob as _glob
     import re as _re
@@ -691,7 +696,7 @@ def run_minidb(args):
     output_dir  = args.job_folder or (os.path.dirname(args.input[0]) if args.input else '.')
     eval_thresh = args.minidb_evalue
     filter_thresh = args.minidb_evalue_filter if args.minidb_evalue_filter else eval_thresh
-    query       = args.input[0] if args.input else ''
+    query       = query_path if query_path else (args.input[0] if args.input else '')
     query_name  = os.path.splitext(os.path.basename(query))[0]
     db_name     = os.path.basename(input_dir.rstrip('/'))
 
@@ -873,27 +878,15 @@ if __name__ == '__main__':
 
     RSCAPE_PATH = args.rscape_path if args.rscape_path else RSCAPE_PATH
 
-    if args.minidb:
-        _input_dir  = args.db[0] if args.db else ''
-        _output_dir = args.job_folder or (os.path.dirname(args.input[0]) if args.input else '.')
-        _db_name    = os.path.basename(_input_dir.rstrip('/'))
-        sm_db_fasta = os.path.join(_output_dir, f"{_db_name}.fasta")
-        if not args.dev_skip_minidb:
-            sm_db_fasta = run_minidb(args)
-        if not os.path.exists(sm_db_fasta) or os.path.getsize(sm_db_fasta) == 0:
-            print(f"Error: minidb produced an empty database ({sm_db_fasta}). No sequences passed the e-value filter. Exiting.")
-            sys.exit(1)
-        args.db = [sm_db_fasta]
-
     if list != type(args.input):
         args.input = [args.input]
 
+    minidb_built = False
     for f in args.input:
         fbase = os.path.basename(f).replace('.fa', '').replace('.sto', '').replace('.fasta', '')
         seq_fn = os.path.basename(f)
         if args.db:
             dbbase = os.path.basename(args.db[0]).replace('.fa', '').replace('.sto', '').replace('.fasta', '')
-        db = ' '.join(args.db)
 
         if args.job_folder:
             print(args.job_folder)
@@ -1080,6 +1073,20 @@ if __name__ == '__main__':
             print('Normal termination of rnahub', flush=True)
             now()
             continue
+
+        if args.minidb and not minidb_built:
+            _output_dir = args.job_folder or os.path.dirname(f)
+            _db_name    = os.path.basename(args.db[0].rstrip('/')) if args.db else ''
+            sm_db_fasta = os.path.join(_output_dir, f"{_db_name}.fasta")
+            if not args.dev_skip_minidb:
+                sm_db_fasta = run_minidb(args, query_path=seq_path)
+            if not os.path.exists(sm_db_fasta) or os.path.getsize(sm_db_fasta) == 0:
+                print(f"Error: minidb produced an empty database ({sm_db_fasta}). No sequences passed the e-value filter. Exiting.")
+                sys.exit(1)
+            args.db = [sm_db_fasta]
+            minidb_built = True
+
+        db = ' '.join(args.db)
 
         ic(seq_flanked_path)
         search_completed = True
