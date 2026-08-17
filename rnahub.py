@@ -37,6 +37,21 @@ def now():
     import datetime
     print(datetime.datetime.now())
 
+def terminate_normally(msg=None):
+    """Log an optional explanation, then the 'Normal termination of rnahub'
+    marker daemon.py greps for to mark a job finished (as opposed to
+    finished with errors). Use this for any "ran fine, nothing to report"
+    outcome (no repeats found, zero hits, etc.) instead of sys.exit(1) or
+    just falling through - a missing marker makes a healthy job look failed.
+    """
+    if msg:
+        print(msg)
+        logging.info(msg)
+    logging.info('Normal termination of rnahub')
+    logger.info('Normal termination of rnahub')
+    print('Normal termination of rnahub', flush=True)
+    now()
+
 def exe(command, dry=False, logging=False, verbose=True):
     """Execute a shell command."""
     if verbose:
@@ -491,7 +506,6 @@ def find_top_scoring_hits(directory=None, output_file="accessions_to_keep.txt"):
                         if this_genome not in encountered_genomes: # save only the first instance
                             encountered_genomes.append(this_genome)
                             accessions_to_keep.append(this_accession)
-                    print(this_genome, this_accession)
             
     # Write the accessions to keep to a file
     with open(os.path.join(directory, output_file), "w") as f:
@@ -1068,10 +1082,7 @@ if __name__ == '__main__':
                 f"{args.repeatmasker_n_threshold:.0%} threshold; stopping downstream processing.")
             logger.warning(warning_msg)
             print(warning_msg, flush=True)
-            logging.info('Normal termination of rnahub')
-            logger.info('Normal termination of rnahub')
-            print('Normal termination of rnahub', flush=True)
-            now()
+            terminate_normally()
             continue
 
         if args.minidb and not minidb_built:
@@ -1082,12 +1093,7 @@ if __name__ == '__main__':
                 sm_db_fasta = run_minidb(args, query_path=seq_path)
             if not os.path.exists(sm_db_fasta) or os.path.getsize(sm_db_fasta) == 0:
                 msg = 'No hits satisfy inclusion thresholds in minidb; no sequences passed the e-value filter.'
-                print(msg)
-                logging.info(msg)
-                logging.info('Normal termination of rnahub')
-                logger.info('Normal termination of rnahub')
-                print('Normal termination of rnahub', flush=True)
-                now()
+                terminate_normally(msg)
                 continue
             args.db = [sm_db_fasta]
             minidb_built = True
@@ -1099,10 +1105,7 @@ if __name__ == '__main__':
         if not args.dev_skip_search:
             search_completed = search(seq_path, seq_flanked_path)
         if not search_completed:
-            logging.info('Normal termination of rnahub')
-            logger.info('Normal termination of rnahub')
-            print('Normal termination of rnahub', flush=True)
-            now()
+            terminate_normally()
             continue
         v1_sto_path = os.path.join(job_path, 'v1.sto')
         if not os.path.exists(v1_sto_path):
@@ -1122,6 +1125,12 @@ if __name__ == '__main__':
 
         nofiterations = _determine_last_iteration(job_path, nofiterations)
 
+        final_sto_path = os.path.join(job_path, f'v{nofiterations}.sto')
+        if not os.path.exists(final_sto_path) or os.path.getsize(final_sto_path) == 0:
+            msg = f'No hits in the final search iteration ({final_sto_path}); nothing to align.'
+            terminate_normally(msg)
+            continue
+
         # Remove duplicate copies of genomes
         only_query = find_top_scoring_hits(job_path) # get v{nofiterations}_rm
         # statistics for last iteration
@@ -1136,8 +1145,5 @@ if __name__ == '__main__':
         else:   
             logging.info('No Infernal')
         cleanup_r2r_outputs(job_path)
-        logging.info('Normal termination of rnahub')
-        logger.info('Normal termination of rnahub')
-        print('Normal termination of rnahub', flush=True)
-        now()
+        terminate_normally()
         
