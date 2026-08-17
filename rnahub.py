@@ -1081,8 +1081,14 @@ if __name__ == '__main__':
             if not args.dev_skip_minidb:
                 sm_db_fasta = run_minidb(args, query_path=seq_path)
             if not os.path.exists(sm_db_fasta) or os.path.getsize(sm_db_fasta) == 0:
-                print(f"Error: minidb produced an empty database ({sm_db_fasta}). No sequences passed the e-value filter. Exiting.")
-                sys.exit(1)
+                msg = 'No hits satisfy inclusion thresholds in minidb; no sequences passed the e-value filter.'
+                print(msg)
+                logging.info(msg)
+                logging.info('Normal termination of rnahub')
+                logger.info('Normal termination of rnahub')
+                print('Normal termination of rnahub', flush=True)
+                now()
+                continue
             args.db = [sm_db_fasta]
             minidb_built = True
 
