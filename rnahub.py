@@ -780,8 +780,17 @@ def run_minidb(args, query_path=None):
         tqdm = None
 
     from concurrent.futures import ThreadPoolExecutor, as_completed
+    # Each concurrent genome spawns its own `nhmmer --cpu {args.cpus}` process, so
+    # minidb_jobs * cpus threads get requested at once. Uncapped, this massively
+    # oversubscribes the machine's actual cores (e.g. minidb-jobs=7 * cpu=8 = 56
+    # threads on an 8-core box), which starves every process involved and can make
+    # a threaded nhmmer search silently return fewer/no hits instead of erroring.
+    max_workers = max(1, min(args.minidb_jobs, (os.cpu_count() or args.cpus) // max(1, args.cpus)))
+    if max_workers < args.minidb_jobs:
+        print(f"minidb: capping parallel genomes to {max_workers} (--minidb-jobs {args.minidb_jobs} x "
+              f"--cpu {args.cpus} would oversubscribe this {os.cpu_count()}-core machine)")
     cleaned_fastas = []
-    with ThreadPoolExecutor(max_workers=args.minidb_jobs) as pool:
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures = {pool.submit(_process_genome, name, path): name
                    for name, path in genome_map.items()}
         items = as_completed(futures)
