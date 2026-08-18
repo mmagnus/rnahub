@@ -873,9 +873,15 @@ def run_minidb(args, query_path=None):
     # Step 7: drop per-genome intermediates now that the concatenated
     # database and hit-list table exist; downstream stages (v1-v3
     # alignments, R-scape, ...) never read output_alignments/output_alignments_reformatted.
-    if not dry:
-        shutil.rmtree(output_alignments, ignore_errors=True)
-        shutil.rmtree(output_aln_reformatted, ignore_errors=True)
+    # TEMPORARILY DISABLED: suspected of racing with a concurrently-dispatched
+    # duplicate run of the same job (see daemon.py's unlocked check-then-run job
+    # selection) - one process's cleanup here can delete the other's
+    # in-progress output_alignments/output_alignments_reformatted mid-run,
+    # producing "touch: ... No such file or directory" and a false 0-hits result.
+    # Re-enable once the double-dispatch race in daemon.py is fixed.
+    # if not dry:
+    #     shutil.rmtree(output_alignments, ignore_errors=True)
+    #     shutil.rmtree(output_aln_reformatted, ignore_errors=True)
 
     return db_fasta_path
 
