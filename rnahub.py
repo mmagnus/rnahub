@@ -759,7 +759,7 @@ def run_minidb(args, query_path=None):
             else:
                 decompress, tformat = "cat", "--tformat fasta"
             exe(f"{decompress} {genome_path} | {nhmmer}"
-                f" --cpu {args.cpus} --dna --incE {eval_thresh} {tformat}"
+                f" --cpu 1 --dna --incE {eval_thresh} {tformat}"
                 f" -A {sto_path} --tblout {tblout_path} -o {hmmout_path}"
                 f" {query} -", dry, verbose=verbose)
 
@@ -780,15 +780,17 @@ def run_minidb(args, query_path=None):
         tqdm = None
 
     from concurrent.futures import ThreadPoolExecutor, as_completed
-    # Each concurrent genome spawns its own `nhmmer --cpu {args.cpus}` process, so
-    # minidb_jobs * cpus threads get requested at once. Uncapped, this massively
-    # oversubscribes the machine's actual cores (e.g. minidb-jobs=7 * cpu=8 = 56
-    # threads on an 8-core box), which starves every process involved and can make
-    # a threaded nhmmer search silently return fewer/no hits instead of erroring.
-    max_workers = max(1, min(args.minidb_jobs, (os.cpu_count() or args.cpus) // max(1, args.cpus)))
+    # Each genome's nhmmer runs single-threaded (--cpu 1, above) - matching how
+    # the old Snakemake prepare_db.py pipeline does it (threads: 1 per rule,
+    # parallelism from --cores N running multiple rule instances at once).
+    # args.cpus is the total core budget: it directly caps how many genomes run
+    # concurrently, one core each, instead of being multiplied against a
+    # separate --minidb-jobs knob (that used to let minidb-jobs * cpu threads
+    # get requested at once, e.g. 7 * 8 = 56 on an 8-core box).
+    max_workers = max(1, min(args.minidb_jobs, args.cpus, os.cpu_count() or args.cpus))
     if max_workers < args.minidb_jobs:
-        print(f"minidb: capping parallel genomes to {max_workers} (--minidb-jobs {args.minidb_jobs} x "
-              f"--cpu {args.cpus} would oversubscribe this {os.cpu_count()}-core machine)")
+        print(f"minidb: capping parallel genomes to {max_workers} (min of --minidb-jobs {args.minidb_jobs}, "
+              f"--cpu {args.cpus}, and this {os.cpu_count()}-core machine)")
     cleaned_fastas = []
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures = {pool.submit(_process_genome, name, path): name
