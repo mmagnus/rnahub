@@ -690,6 +690,12 @@ python {' '.join(sys.argv[:]).replace('--slurm', '')}
         os.chmod(f'{job_path}/run.slurm', 0o755) #mode=stat.S_IXUSR)
         os.system(f'sbatch {job_path}/run.slurm')
         
+def minidb_db_name(db_paths):
+    """Build the combined minidb database name from one or more --db paths,
+    used for the final <name>.fasta / genome_<name>_<evalue>_list.txt files.
+    Shared between run_minidb() and its caller so both agree on the name."""
+    return '+'.join(os.path.basename(d.rstrip('/')) for d in db_paths) if db_paths else ''
+
 def run_minidb(args, query_path=None):
     """Build a mini search database from .naf genomes.
 
@@ -706,30 +712,47 @@ def run_minidb(args, query_path=None):
     import glob as _glob
     import re as _re
 
-    input_dir   = args.db[0] if args.db else ''
+    input_dirs  = args.db if args.db else []
     output_dir  = args.job_folder or (os.path.dirname(args.input[0]) if args.input else '.')
     eval_thresh = args.minidb_evalue
     filter_thresh = args.minidb_evalue_filter if args.minidb_evalue_filter else eval_thresh
     query       = query_path if query_path else (args.input[0] if args.input else '')
     query_name  = os.path.splitext(os.path.basename(query))[0]
-    db_name     = os.path.basename(input_dir.rstrip('/'))
+    db_name     = minidb_db_name(input_dirs)
 
-    # Locate genome files (mirrors prepare_db.py search logic)
-    genome_files = _glob.glob(os.path.join(input_dir, 'GC*', '*.naf'))
+    # Locate genome files across every selected --db directory (mirrors
+    # prepare_db.py search logic, applied per-directory). Previously this
+    # only ever looked at input_dirs[0], so selecting multiple databases
+    # silently searched just the first one with no warning.
+    genome_files = []
+    for input_dir in input_dirs:
+        dir_files = _glob.glob(os.path.join(input_dir, 'GC*', '*.naf'))
+        if not dir_files:
+            dir_files = _glob.glob(os.path.join(input_dir, '*.naf'))
+        if not dir_files:
+            fasta_exts = ('*.fa', '*.fasta', '*.fna')
+            for ext in fasta_exts:
+                dir_files += _glob.glob(os.path.join(input_dir, 'GC*', ext))
+                dir_files += _glob.glob(os.path.join(input_dir, ext))
+        if not dir_files:
+            print(f"minidb: warning - no input genomes (.naf or .fa/.fasta/.fna) found in: {input_dir}")
+        genome_files += dir_files
     if not genome_files:
-        genome_files = _glob.glob(os.path.join(input_dir, '*.naf'))
-    if not genome_files:
-        fasta_exts = ('*.fa', '*.fasta', '*.fna')
-        for ext in fasta_exts:
-            genome_files += _glob.glob(os.path.join(input_dir, 'GC*', ext))
-            genome_files += _glob.glob(os.path.join(input_dir, ext))
-    if not genome_files:
-        raise FileNotFoundError(f"No input genomes (.naf or .fa/.fasta/.fna) found in: {input_dir}")
+        raise FileNotFoundError(f"No input genomes (.naf or .fa/.fasta/.fna) found in any of: {', '.join(input_dirs)}")
 
-    genome_map = {
-        os.path.splitext(os.path.splitext(os.path.basename(p))[0])[0]: p
-        for p in genome_files
-    }
+    # keyed by basename; if the same genome filename appears in more than one
+    # selected db (e.g. the same accession present in both vertebrates and
+    # mammals), disambiguate with the containing db dir so both occurrences
+    # are still searched, rather than the second silently overwriting the
+    # first in this dict
+    genome_map = {}
+    for p in genome_files:
+        key = os.path.splitext(os.path.splitext(os.path.basename(p))[0])[0]
+        if key in genome_map and genome_map[key] != p:
+            key = f"{key}__{os.path.basename(os.path.dirname(p.rstrip('/')))}"
+        genome_map[key] = p
+    print(f"minidb: searching {len(genome_map)} genome(s) across {len(input_dirs)} database(s): "
+          f"{', '.join(os.path.basename(d.rstrip('/')) for d in input_dirs)}")
 
     output_alignments     = os.path.join(output_dir, 'output_alignments')
     output_aln_reformatted = os.path.join(output_dir, 'output_alignments_reformatted')
@@ -1104,7 +1127,7 @@ if __name__ == '__main__':
 
         if args.minidb and not minidb_built:
             _output_dir = args.job_folder or os.path.dirname(f)
-            _db_name    = os.path.basename(args.db[0].rstrip('/')) if args.db else ''
+            _db_name    = minidb_db_name(args.db)
             sm_db_fasta = os.path.join(_output_dir, f"{_db_name}.fasta")
             if not args.dev_skip_minidb:
                 sm_db_fasta = run_minidb(args, query_path=seq_path)
