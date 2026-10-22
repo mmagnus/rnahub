@@ -913,6 +913,9 @@ def run_minidb(args, query_path=None):
 
 if __name__ == '__main__':
     parser = get_parser()
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(0)
     args = parser.parse_args()
     db = args.db
     evalue = args.evalue
