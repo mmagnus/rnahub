@@ -47,10 +47,22 @@ def terminate_normally(msg=None):
     if msg:
         print(msg)
         logging.info(msg)
+    if args.remove_intermediate and not args.dry:
+        remove_intermediate(job_path)
     logging.info('Normal termination of rnahub')
     logger.info('Normal termination of rnahub')
     print('Normal termination of rnahub', flush=True)
     now()
+
+def remove_intermediate(folder_path):
+    """Remove nhmmer outputs (v*.out) and alignments (v*.sto) from the job folder
+    to save disk space; rscape_output/ and the other result files are kept."""
+    for name in os.listdir(folder_path):
+        if name.startswith('v') and name.endswith(('.out', '.sto')):
+            file_path = os.path.join(folder_path, name)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+                print(f'removed: {file_path}')
 
 def exe(command, dry=False, logging=False, verbose=True):
     """Execute a shell command."""
@@ -109,6 +121,7 @@ def get_parser():
                         help="Abort after RepeatMasker if the masked FASTA contains more than this fraction of Ns (default: 0.8)")
     parser.add_argument("--utot", action="store_true", help="tell nhmmer that this is DNA sequence, and use U->T for repeatmasker")
     parser.add_argument("--job-folder", help="create a job folder based on the path to the input fasta sequence, by default 'jobs/'so with example/seq.fa, the job folder is going to be jobs/seq/seq.fa [and other files here]", default='')
+    parser.add_argument("--remove-intermediate", action="store_true", help="at the end of a run, remove nhmmer v*.out and v*.sto files from the job folder to save disk space")
     parser.add_argument("--dev-skip-search", help="skip v0..v3 all nhmmer searches", action="store_true")
     parser.add_argument("--dev-skip-nhmmer0", help="show all cmds, dont run them", action="store_true")
     parser.add_argument("--dev-skip-nhmmer123", help="show all cmds, dont run them", action="store_true")
