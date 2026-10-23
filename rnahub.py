@@ -49,6 +49,8 @@ def terminate_normally(msg=None):
         logging.info(msg)
     if args.remove_intermediate and not args.dry:
         remove_intermediate(job_path)
+    if not args.dry:
+        gzip_cacofold(job_path)
     logging.info('Normal termination of rnahub')
     logger.info('Normal termination of rnahub')
     print('Normal termination of rnahub', flush=True)
@@ -63,6 +65,14 @@ def remove_intermediate(folder_path):
             if os.path.isfile(file_path):
                 os.remove(file_path)
                 print(f'removed: {file_path}')
+
+def gzip_cacofold(folder_path):
+    """Compress R-scape *.cacofold.sto alignments (rscape_output/, rscape_infernal/)
+    at the end of a run; Infernal reads them uncompressed, so this must run last."""
+    import glob
+    for output_dir in ("rscape_output", "rscape_infernal"):
+        for sto_path in glob.glob(os.path.join(folder_path, output_dir, "*.cacofold.sto")):
+            exe(f'gzip -f {sto_path}')
 
 def exe(command, dry=False, logging=False, verbose=True):
     """Execute a shell command."""
