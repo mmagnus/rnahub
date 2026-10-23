@@ -364,10 +364,11 @@ def search(seq_path, seq_flanked_path = ''):
             #  {j}/{fbase}.fa
             flank_mode = args.flanked or args.flanks_in_header or args.flanks_start
             out_path = f'{job_path}/{output_file}'
+            cat_db = f"gzip -dc {db}" if '.gz' in db else f"cat {db}"
             if i == 1 and not flank_mode: # add seq only if first iteration and not flank mode
-                command = f" time cat {input_file} {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} -o {out_path} {input_file} - "
+                command = f" time ( cat {input_file}; {cat_db} ) | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} -o {out_path} {input_file} - "
             else:
-                command = f" time cat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} -o {out_path} {input_file} - "
+                command = f" time {cat_db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} -o {out_path} {input_file} - "
 
             # if '.gz' in db:
             #     command = f"time zcat {db} | {nhmmer} {dna} --noali --cpu {CPUs} --incE {evalue} -A {job_path}/{sto_file} {input_file} - "#| tee {j}/{output_file}"
